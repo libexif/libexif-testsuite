@@ -1,4 +1,51 @@
 		libexif-testsuite
 		-----------------
 
-FIXME: Write short intro.
+This is a testsuite for libexif and exif. Its usage requires the usual
+development enviroment to compile libexif, exif, and some testcases.
+
+
+Getting libexif-testsuite:
+--------------------------
+
+Get libexif-testsuite via CVS. Then
+
+    cd libexif-testsuite
+
+If you fetched libexif-testsuite from CVS, run
+
+    cd src
+    cvs -d $(cat ../CVS/Root) co libexif
+    cvs -d $(cat ../CVS/Root) co exif
+
+If you got libexif-testsuite from a tarball, get libexif and exif
+tarballs and extract them. Then move them to src/libexif and src/exif,
+respectively.
+
+
+Initialize the buildsystem:
+---------------------------
+
+Run
+
+    ./autogen.sh
+
+
+Configure the build system:
+---------------------------
+
+Run
+
+    ./configure
+
+with your favourite parameters.
+
+
+Run the tests:
+--------------
+
+Run
+
+    make check
+
+and hope for the best.
