@@ -13,6 +13,7 @@
 #
 # Known Bugs:
 # * A on-checked-out "." top-level directory is not handled correctly.
+# * Checking out modules sometimes messes up the directories
 #
 # If you run into a bug, use a shell, build-config.txt, and your brain.
 
