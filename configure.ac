@@ -6,6 +6,13 @@ AM_INIT_AUTOMAKE([gnu 1.8 dist-bzip2])
 GP_CONFIG_INIT
 GP_CONFIG_MSG([Source code location],[${srcdir}])
 
+if test "x${PKG_CONFIG_PATH}" = "x"; then
+	PKG_CONFIG_PATH="`pwd`/src/libexif/libexif"
+else
+	PKG_CONFIG_PATH="`pwd`/src/libexif/libexif:${PKG_CONFIG_PATH}"
+fi
+
+GP_PKG_CONFIG
 
 AC_PROG_CC
 AC_C_CONST
@@ -25,11 +32,18 @@ fi
 AC_SUBST([AM_CFLAGS])
 AC_SUBST([AM_LDFLAGS])
 
+
+dnl ---------------------------------------------------------------------------
+dnl Configure subtrees
+dnl ---------------------------------------------------------------------------
+dnl Yes, the sequence matters!
+AC_CONFIG_SUBDIRS([src/libexif])
+AC_CONFIG_SUBDIRS([src/exif])
+
+
 dnl ---------------------------------------------------------------------------
 dnl Output files
 dnl ---------------------------------------------------------------------------
-AC_CONFIG_SUBDIRS([src/libexif])
-AC_CONFIG_SUBDIRS([src/exif])
 AC_CONFIG_FILES([
   Makefile
   m4/Makefile
