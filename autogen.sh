@@ -5,11 +5,19 @@
 # print_help() function.
 
 
+if test "$(pwd)" != "`pwd`"
+then
+	echo "Urgh. Dinosaur shell, eh?"
+	exit 1
+fi
+
+
 ########################################################################
-# Initial values
+# Constant and initial values
 
 debug=false
 self="$(basename "$0")"
+autogen_version="0.3.0"
 
 
 ########################################################################
@@ -29,6 +37,8 @@ If there is no directory given, the location of $self is assumed.
 Commands:
     --help
         Print this help text
+    --version
+        Print the tool versions
     --verbose
         Verbose output
 
@@ -45,6 +55,22 @@ You may want to set AUTOCONF, AUTOHEADER, AUTOMAKE, ACLOCAL,
 AUTOPOINT, LIBTOOLIZE to use specific version of these tools, and
 AUTORECONF_OPTS to add options to the call to autoreconf.
 EOF
+}
+
+
+########################################################################
+# Print software versions
+
+print_versions() {
+    echo "${self} (ndim's autogen) ${autogen_version}"
+    for tool in \
+	"${AUTOCONF-autoconf}" \
+	"${AUTOMAKE-automake}" \
+	"${AUTOPOINT-autopoint}" \
+	"${LIBTOOLIZE-libtoolize}"
+    do
+    	"$tool" --version 2>&1 | sed '1q'
+    done
 }
 
 
@@ -253,6 +279,10 @@ for param in $@; do
 	    ;;
 	--verbose)
 	    debug="true"
+	    ;;
+	--version)
+	    print_versions
+	    exit 0
 	    ;;
 	-h|--help)
 	    print_help
