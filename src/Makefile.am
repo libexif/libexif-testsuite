@@ -1,4 +1,2 @@
-# "@substdirs@"
-# are the properly fixed subdirs configured via AC_CONFIG_SUBDIRS
-
-SUBDIRS = @substdirs@
+# Empty file.
+# The subdirectories are handled via the top-level Makefile.am

@@ -109,20 +109,16 @@ if test -d ${srcdir}/src/libexif-gtk; then
    fi
 fi
 
-# workaround, must be after all AC_CONFIG_SUBDIRS
-# recursive make, two-subdirs, and stuff.
-substdirs=""
-for subdir in ${subdirs}; do
-	if test "x$substdirs" = "x"; then
-		substdirs="\$(top_builddir)/${subdir}"
+GP_CONFIG_MSG()dnl
+_subdirs=""
+for sd in $subdirs; do
+	ssd="$(basename "$sd")"
+	if test "x$_subdirs" = "x"; then
+		_subdirs="$ssd";
 	else
-		substdirs="${substdirs} \$(top_builddir)/${subdir}"
+		_subdirs="$_subdirs $ssd"
 	fi
 done
-AC_SUBST([substdirs])
-
-GP_CONFIG_MSG()dnl
-_subdirs=$subdirs
 GP_CONFIG_MSG([Subprojects],[${_subdirs}])dnl
 
 
