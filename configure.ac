@@ -67,6 +67,9 @@ for subdir in ${subdirs}; do
 done
 AC_SUBST([substdirs])
 
+GP_CONFIG_MSG()dnl
+GP_CONFIG_MSG([Subprojects],[${substdirs}])dnl
+
 
 dnl ---------------------------------------------------------------------------
 dnl Output files
