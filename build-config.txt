@@ -14,4 +14,8 @@
 #./src/libexif-gtk	CVS	:pserver:anonymous@cvs.sourceforge.net:/cvsroot/libexif	libexif-gtk
 #./src/gexif		CVS	:pserver:anonymous@cvs.sourceforge.net:/cvsroot/libexif	gexif
 
+#./src/libgphoto2	CVS	:pserver:anonymous@cvs.sourceforge.net:/cvsroot/gphoto	libgphoto2
+#./src/gphoto2		CVS	:pserver:anonymous@cvs.sourceforge.net:/cvsroot/gphoto	gphoto2
+#./src/gtkam		CVS	:pserver:anonymous@cvs.sourceforge.net:/cvsroot/gphoto	gtkam
+
 # End of file `build-config.txt'.

@@ -11,17 +11,6 @@ GP_CONFIG_MSG([Source code location],[${srcdir}])
 
 
 dnl ---------------------------------------------------------------------------
-dnl PKG_CONFIG and PKG_CONFIG_PATH setup
-dnl ---------------------------------------------------------------------------
-if test "x${PKG_CONFIG_PATH}" = "x"; then
-	PKG_CONFIG_PATH="`pwd`/src/libexif/libexif"
-else
-	PKG_CONFIG_PATH="`pwd`/src/libexif/libexif:${PKG_CONFIG_PATH}"
-fi
-GP_PKG_CONFIG
-
-
-dnl ---------------------------------------------------------------------------
 dnl compiler stuff
 dnl ---------------------------------------------------------------------------
 AC_PROG_CC
@@ -72,43 +61,84 @@ AC_SUBST([AM_CFLAGS])
 AC_SUBST([AM_LDFLAGS])
 
 
+dnl ---------------------------------------------------------------------------
+dnl PKG_CONFIG and PKG_CONFIG_PATH setup
+dnl ---------------------------------------------------------------------------
+if test "x${PKG_CONFIG_PATH}" = "x"; then
+	PKG_CONFIG_PATH="`pwd`/src/libexif/libexif"
+else
+	PKG_CONFIG_PATH="`pwd`/src/libexif/libexif:${PKG_CONFIG_PATH}"
+fi
+GP_PKG_CONFIG
+
+
 # ---------------------------------------------------------------------------
 # Configure subtrees
 # ---------------------------------------------------------------------------
 dnl Yes, the sequence matters!
 
-AC_CONFIG_SUBDIRS([src/libexif])
+if test -d ${srcdir}/src/libexif && test -d ${srcdir}/src/exif; then
 
-# This kind of relative definition only works for subprojects located 
-# in src/subproj, so we have to stick to that pattern.
-LIBEXIF_LIBS="\$(top_builddir)/../../src/libexif/libexif/libexif.la"
-LIBEXIF_CFLAGS="-I\$(top_builddir)/../../src/libexif -I\$(top_srcdir)/../../src/libexif"
-export LIBEXIF_LIBS LIBEXIF_CFLAGS
+   AC_CONFIG_SUBDIRS([src/libexif])
 
-AC_CONFIG_SUBDIRS([src/exif])
+   # This kind of relative definition only works for subprojects located 
+   # in src/subproj, so we have to stick to that pattern.
+   LIBEXIF_LIBS="\$(top_builddir)/../../src/libexif/libexif/libexif.la"
+   LIBEXIF_CFLAGS="-I\$(top_builddir)/../../src/libexif -I\$(top_srcdir)/../../src/libexif"
+   export LIBEXIF_LIBS LIBEXIF_CFLAGS
 
-if test ! -f ${srcdir}/src/libexif/configure; then
-   AC_MSG_ERROR([
+   AC_CONFIG_SUBDIRS([src/exif])
+
+   if test ! -f ${srcdir}/src/libexif/configure; then
+      AC_MSG_ERROR([
 FATAL: ${PACKAGE_NAME} requires libexif source in src/libexif!
 ])
-fi
+   fi
 
-if test ! -f ${srcdir}/src/exif/configure; then
-   AC_MSG_ERROR([
+   if test ! -f ${srcdir}/src/exif/configure; then
+      AC_MSG_ERROR([
 FATAL: ${PACKAGE_NAME} requires exif source in src/exif!
+])
+   fi
+
+   if test -d ${srcdir}/src/libexif-gtk; then
+      AC_CONFIG_SUBDIRS([src/libexif-gtk])
+      LIBEXIF_GTK_LIBS="\$(top_builddir)/../../src/libexif-gtk/libexif-gtk/libexif-gtk.la"
+      LIBEXIF_GTK_CFLAGS="-I\$(top_builddir)/../../src/libexif-gtk -I\$(top_srcdir)/../../src/libexif-gtk"
+      export LIBEXIF_GTK_LIBS LIBEXIF_GTK_CFLAGS
+      if test -d ${srcdir}/src/gexif; then
+	 AC_CONFIG_SUBDIRS([src/gexif])
+      fi
+   fi
+
+   if test -d ${srcdir}/src/libusb; then
+      AC_CONFIG_SUBDIRS([src/libusb])
+      LIBUSB_LIBS="\$(top_builddir)/../../src/libusb/libusb.la"
+      LIBUSB_CFLAGS="-I\$(top_builddir)/../../src/libusb -I\$(top_srcdir)/../../src/libusb"
+      export LIBUSB_LIBS LIBUSB_CFLAGS
+      if test -d ${srcdir}/src/libgphoto2; then
+         AC_CONFIG_SUBDIRS([src/libgphoto2])
+         LIBGPHOTO2_LIBS="\$(top_builddir)/../../src/libgphoto2/libgphoto2/libgphoto2.la"
+         LIBGPHOTO2_CFLAGS="-I\$(top_builddir)/../../src/libgphoto2 -I\$(top_srcdir)/../../src/libgphoto2"
+         export LIBGPHOTO2_LIBS LIBGPHOTO2_CFLAGS
+         if test -d ${srcdir}/src/gphoto2; then
+            AC_CONFIG_SUBDIRS([src/gphoto2])
+         fi
+         if test -d ${srcdir}/src/libexif-gtk
+         then
+            AC_CONFIG_SUBDIRS([src/gtkam])      
+         fi
+      fi
+   fi
+
+else
+   AC_MSG_ERROR([
+FATAL: src/libexif and src/exif subdirectories not found.
+       The README file describes how to create them.
 ])
 fi
 
-if test -d ${srcdir}/src/libexif-gtk; then
-   AC_CONFIG_SUBDIRS([src/libexif-gtk])
-   LIBEXIF_GTK_LIBS="\$(top_builddir)/../../src/libexif-gtk/libexif-gtk/libexif-gtk.la"
-   LIBEXIF_GTK_CFLAGS="-I\$(top_builddir)/../../src/libexif-gtk -I\$(top_srcdir)/../../src/libexif-gtk"
-   export LIBEXIF_GTK_LIBS LIBEXIF_GTK_CFLAGS
-   if test -d ${srcdir}/src/gexif; then
-      AC_CONFIG_SUBDIRS([src/gexif])
-   fi
-fi
-
+# Message about configured subprojects
 GP_CONFIG_MSG()dnl
 _subdirs=""
 for sd in $subdirs; do
