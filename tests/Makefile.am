@@ -6,9 +6,11 @@
 SUBDIRS = images
 
 check_SCRIPTS = \
-	check-general-images.sh \
 	check-994706.sh \
 	check-1054321.sh check-1054322.sh check-1054323.sh
+	
+# This check script takes too long for too few benefits:
+#	check-general-images.sh
 
 EXTRA_DIST = \
 	check-general-images.in \
