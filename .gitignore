@@ -38,3 +38,5 @@ config.h.in
 config.rpath
 configure
 mkinstalldirs
+cvs2cl.usermap
+ChangeLog.cvs
