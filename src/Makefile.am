@@ -1,0 +1,1 @@
+SUBDIRS = libexif exif
