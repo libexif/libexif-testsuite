@@ -1,5 +1,8 @@
 AC_PREREQ(2.59)
-AC_INIT([libexif test suite],[0.6.13],[libexif-devel@lists.sourceforge.net],[libexif-testsuite])
+dnl Use a short version here, or "make dist" will fail packaging
+dnl .../libgphoto2_port/gphoto2-port-portability-os2.h
+dnl because tar only handles 99 chars per file path.
+AC_INIT([libexif test suite],[0.7],[libexif-devel@lists.sourceforge.net],[libexif-testsuite])
 AC_CONFIG_SRCDIR([tests/Makefile.am])
 AC_CONFIG_HEADERS([config.h])
 AM_INIT_AUTOMAKE([gnu 1.8 dist-bzip2])
