@@ -5,8 +5,6 @@ AC_CONFIG_HEADERS([config.h])
 AM_INIT_AUTOMAKE([gnu 1.8 dist-bzip2])
 
 GP_CHECK_SHELL_ENVIRONMENT
-
-GP_CONFIG_INIT
 GP_CONFIG_MSG([Source code location],[${srcdir}])
 
 
@@ -17,6 +15,8 @@ AC_PROG_CC
 AC_C_CONST
 AM_PROG_LIBTOOL
 AM_CFLAGS="$CFLAGS"
+AM_LDFLAGS="$LDFLAGS"
+AM_CPPFLAGS="$CPPFLAGS"
 GP_CONFIG_MSG([Compiler],[${CC}])
 
 
@@ -46,18 +46,18 @@ GP_GETTEXT_FLAGS()
 # We cannot use [AC_DEFINE_UNQUOTED()] for these definitions, as
 # we require make to do insert the proper $(datadir) value
 AC_SUBST([localedir],["\$(datadir)/locale"])
-AM_CFLAGS="$AM_CFLAGS -DLOCALEDIR=\\\"${localedir}\\\""
+AM_CPPFLAGS="$AM_CPPFLAGS -DLOCALEDIR=\\\"${localedir}\\\""
 
 
 # ---------------------------------------------------------------------------
 # Warnings: If we have GCC, be paranoid.
 # ---------------------------------------------------------------------------
 if test "x$GCC" = "xyes"; then
-    AM_CFLAGS="$AM_CFLAGS -Wall -Wchar-subscripts -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wpointer-arith"
+    AM_CPPFLAGS="$AM_CPPFLAGS -Wall -Wchar-subscripts -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wpointer-arith"
     AM_LDFLAGS="$AM_LDFLAGS -g -Wall"
 fi
 
-AC_SUBST([AM_CFLAGS])
+AC_SUBST([AM_CPPFLAGS])
 AC_SUBST([AM_LDFLAGS])
 
 
@@ -91,7 +91,7 @@ done
 
 # Configure subdirs.
 #   * take dependencies into account
-#   * set special variables (XXX_LIBS and XXX_CFLAGS)
+#   * set special variables (XXX_LIBS and XXX_CPPFLAGS)
 if test -d ${srcdir}/src/libexif; then
 
    AC_CONFIG_SUBDIRS([src/libexif])
@@ -108,8 +108,8 @@ if test -d ${srcdir}/src/libexif; then
    gp_top_builddir="$(pwd)"
    gp_top_srcdir="$(cd "${srcdir}" && pwd)"
 
-   LIBEXIF_LIBS="${gp_top_builddir}/src/libexif/libexif/libexif.la"
-   LIBEXIF_CFLAGS="-I${gp_top_builddir}/src/libexif -I${gp_top_srcdir}/src/libexif"
+   AC_SUBST([LIBEXIF_CFLAGS],["-I${gp_top_builddir}/src/libexif -I${gp_top_srcdir}/src/libexif"])
+   AC_SUBST([LIBEXIF_LIBS],["${gp_top_builddir}/src/libexif/libexif/libexif.la"])
    export LIBEXIF_LIBS LIBEXIF_CFLAGS
 
    if test ! -f ${srcdir}/src/libexif/configure; then
@@ -129,8 +129,8 @@ FATAL: ${PACKAGE_NAME} requires exif source in src/exif!
 
    if test -d ${srcdir}/src/libexif-gtk; then
       AC_CONFIG_SUBDIRS([src/libexif-gtk])
-      LIBEXIF_GTK_LIBS="${gp_top_builddir}/src/libexif-gtk/libexif-gtk/libexif-gtk.la"
-      LIBEXIF_GTK_CFLAGS="-I${gp_top_builddir}/src/libexif-gtk -I${gp_top_srcdir}/src/libexif-gtk"
+      AC_SUBST([LIBEXIF_GTK_CFLAGS],["-I${gp_top_builddir}/src/libexif-gtk -I${gp_top_srcdir}/src/libexif-gtk"])
+      AC_SUBST([LIBEXIF_GTK_LIBS],["${gp_top_builddir}/src/libexif-gtk/libexif-gtk/libexif-gtk.la"])
       export LIBEXIF_GTK_LIBS LIBEXIF_GTK_CFLAGS
       if test -d ${srcdir}/src/gexif; then
 	 AC_CONFIG_SUBDIRS([src/gexif])
@@ -143,13 +143,13 @@ FATAL: ${PACKAGE_NAME} requires exif source in src/exif!
       # Use absolute directory as workaround. LIBUSB_LIBS will be used
       # in libgphoto2_port, which is second-level [AC_CONFIG_SUBDIRS]
       # recursion.
-      LIBUSB_LIBS="${gp_top_builddir}/src/libusb/libusb.la"
-      LIBUSB_CFLAGS="-I${gp_top_builddir}/src/libusb -I${gp_top_srcdir}/src/libusb"
+      AC_SUBST([LIBUSB_CFLAGS],["-I${gp_top_builddir}/src/libusb -I${gp_top_srcdir}/src/libusb"])
+      AC_SUBST([LIBUSB_LIBS],["${gp_top_builddir}/src/libusb/libusb.la"])
       export LIBUSB_LIBS LIBUSB_CFLAGS
       if test -d ${srcdir}/src/libgphoto2; then
          AC_CONFIG_SUBDIRS([src/libgphoto2])
-         LIBGPHOTO2_LIBS="${gp_top_builddir}/src/libgphoto2/libgphoto2/libgphoto2.la"
-         LIBGPHOTO2_CFLAGS="-I${gp_top_builddir}/src/libgphoto2 -I${gp_top_srcdir}/src/libgphoto2"
+	 AC_SUBST([LIBGPHOTO2_CFLAGS],["-I${gp_top_builddir}/src/libgphoto2 -I${gp_top_builddir}/src/libgphoto2/gphoto2"])
+	 AC_SUBST([LIBGPHOTO2_LIBS],["${gp_top_builddir}/src/libgphoto2/libgphoto2/libgphoto2.la"])
          export LIBGPHOTO2_LIBS LIBGPHOTO2_CFLAGS
          if test -d ${srcdir}/src/gphoto2; then
             AC_CONFIG_SUBDIRS([src/gphoto2])
