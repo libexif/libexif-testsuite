@@ -10,7 +10,8 @@ Legal stuff:
 
 This testsuite consists of two parts: source code and testcase data files:
 
-  * The source code of this testsuite framework is licensed under GPL,
+  * The source code of this testsuite framework is licensed under GPL or
+    LGPL. See the respective sources in src/ for details.
 
   * The testcase data files are copyrighted by their respective copyright
     holders. These files are not licensed for anything else but use as
@@ -68,7 +69,8 @@ Run
 to get help on all the parameters for subprojects.
 
 Note that some subproject options will be automatically set by
-libexif-testsuite.
+libexif-testsuite. This mostly concerns the *_CFLAGS and *_LIBS
+for the libraries libexif-testsuite provides by itself.
 
 Then run (for an in-tree build)
 
@@ -91,3 +93,14 @@ Run
     make check
 
 and examine the output.
+
+
+Check the distribution mechanism:
+---------------------------------
+
+Run
+
+    make distcheck
+
+and see whether it finishes without errors.
+
