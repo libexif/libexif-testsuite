@@ -78,6 +78,10 @@ init_vars() {
     fi
 
     echo -n "Initializing variables for \`${dir}'..."
+    # FIXME: Just getting those directories and cleaning them isn't enough.
+    #        OK, the "init" part is done recursively by autopoint, so that is easy.
+    #        But the cleaning should also work recursively, but that is difficult
+    #        with the current structure of the script.
     AG_SUBDIRS="$(for k in $(sed -n 's/^AC_CONFIG_SUBDIRS(\[\{0,1\}\([^])]*\).*/\1/p' configure.ac); do echo "${dir}/${k}"; done)"
     AG_AUX="$(sed -n 's/^AC_CONFIG_AUX_DIR(\[\{0,1\}\([^])]*\).*/\1/p' < "$CONFIGURE_AC")"
     if test "x$AG_AUX" = "x"; then
