@@ -64,11 +64,17 @@ AC_SUBST([AM_LDFLAGS])
 dnl ---------------------------------------------------------------------------
 dnl PKG_CONFIG and PKG_CONFIG_PATH setup
 dnl ---------------------------------------------------------------------------
-if test "x${PKG_CONFIG_PATH}" = "x"; then
-	PKG_CONFIG_PATH="`pwd`/src/libexif/libexif"
-else
-	PKG_CONFIG_PATH="`pwd`/src/libexif/libexif:${PKG_CONFIG_PATH}"
-fi
+pwd="$(pwd)"
+for dir in libexif/libexif libgphoto2/libgphoto2 libusb
+do
+	tmp="${pwd}/src/${dir}"
+	if test "x${PKG_CONFIG_PATH}" = "x"; then
+	   PKG_CONFIG_PATH="${tmp}"
+	else
+	   PKG_CONFIG_PATH="${tmp}:${PKG_CONFIG_PATH}"
+	fi
+done
+export PKG_CONFIG_PATH
 GP_PKG_CONFIG
 
 
