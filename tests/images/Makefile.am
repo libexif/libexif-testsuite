@@ -8,6 +8,6 @@ EXTRA_DIST = $(images)
 upload: libexif-test-image-list
 	rsync -avz libexif-test-image-list h:es/
 
-libexif-test-image-list: .
-	ls -1 *.jpg *.tif > $@ || true
+libexif-test-image-list: $(srcdir)
+	(cd $(srcdir) && ls -1 *.jpg *.tif) > $@ || true
 	chmod 0644 $@
