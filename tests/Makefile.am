@@ -12,6 +12,7 @@ TESTS = $(check_SCRIPTS)
 CLEANFILES = $(check_SCRIPTS) *.out.jpg
 
 %.sh: %.in Makefile
-	sed 's|@exif\@|$(top_builddir)/src/exif/exif/exif|g;s|@srcdir\@|$(srcdir)|g' < $< > $@
-	chmod +x $@
+	@echo "Creating $@"
+	@sed 's|@exif\@|$(top_builddir)/src/exif/exif/exif|g;s|@srcdir\@|$(srcdir)|g' < $< > $@
+	@chmod +x $@
 
