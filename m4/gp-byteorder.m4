@@ -1,5 +1,4 @@
 dnl AC_NEED_BYTEORDER_H ( HEADER-TO-GENERATE )
-dnl $Id: byteorder.m4,v 1.8 2002/11/02 14:47:16 hun Exp $
 dnl Copyright 2001-2002 by Dan Fandrich <dan@coneharvesters.com>
 dnl This file may be copied and used freely without restrictions.  No warranty
 dnl is expressed or implied.
