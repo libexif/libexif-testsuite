@@ -31,6 +31,18 @@ AM_CFLAGS="$CFLAGS"
 GP_CONFIG_MSG([Compiler],[${CC}])
 
 
+# ---------------------------------------------------------------------------
+# Our tests require diff
+# ---------------------------------------------------------------------------
+AC_PATH_PROG([DIFF],[diff],[false])
+if test "x$DIFF" = "xfalse"; then
+	AC_MSG_ERROR([
+* FATAL: ${PACKAGE_NAME} requires diff to work.
+])
+fi
+AC_SUBST([DIFF])
+
+
 dnl ---------------------------------------------------------------------------
 dnl Warnings: If we have GCC, be paranoid.
 dnl ---------------------------------------------------------------------------

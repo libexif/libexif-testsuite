@@ -23,6 +23,6 @@ CLEANFILES = $(check_SCRIPTS) *.out.jpg
 
 %.sh: %.in Makefile
 	@echo "Creating $@"
-	@sed 's|@exif\@|$(top_builddir)/src/exif/exif/exif|g;s|@top_srcdir\@|$(top_srcdir)|g;s|@srcdir\@|$(srcdir)|g' < $< > $@
+	@sed 's|@exif\@|$(top_builddir)/src/exif/exif/exif|g;s|@top_srcdir\@|$(top_srcdir)|g;s|@srcdir\@|$(srcdir)|g;s|@diff\@|$(DIFF)|g' < $< > $@
 	@chmod +x $@
 
