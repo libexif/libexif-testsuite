@@ -48,7 +48,15 @@ dnl Configure subtrees
 dnl ---------------------------------------------------------------------------
 dnl Yes, the sequence matters!
 
+
 AC_CONFIG_SUBDIRS([src/libexif])
+
+# This kind of relative definition only works for subprojects located 
+# in src/subproj, so we have to stick to that pattern.
+LIBEXIF_LIBS="\$(top_builddir)/../../src/libexif/libexif/libexif.la"
+LIBEXIF_CFLAGS="-I\$(top_builddir)/../../src/libexif -I\$(top_srcdir)/../../src/libexif"
+export LIBEXIF_LIBS LIBEXIF_CFLAGS
+
 AC_CONFIG_SUBDIRS([src/exif])
 
 # workaround, must be after all AC_CONFIG_SUBDIRS
@@ -68,6 +76,7 @@ AC_CONFIG_FILES([
   m4/Makefile
   src/Makefile
   tests/Makefile
+  tests/images/Makefile
 ])
 AC_OUTPUT
 
