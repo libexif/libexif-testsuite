@@ -7,13 +7,15 @@ SUBDIRS = images
 
 check_SCRIPTS = \
 	check-994706.sh \
-	check-1054321.sh check-1054322.sh check-1054323.sh
+	check-1054321.sh check-1054322.sh check-1054323.sh \
+	check-general-images.sh
 
 EXTRA_DIST = \
 	check-994706.in \
 	check-1054321.in 1054321.jpg \
 	check-1054322.in 1054322.jpg \
-	check-1054323.in 1054323.jpg
+	check-1054323.in 1054323.jpg \
+	check-general-images.in
 
 TESTS = $(check_SCRIPTS)
 
@@ -21,6 +23,6 @@ CLEANFILES = $(check_SCRIPTS) *.out.jpg
 
 %.sh: %.in Makefile
 	@echo "Creating $@"
-	@sed 's|@exif\@|$(top_builddir)/src/exif/exif/exif|g;s|@srcdir\@|$(srcdir)|g' < $< > $@
+	@sed 's|@exif\@|$(top_builddir)/src/exif/exif/exif|g;s|@top_srcdir\@|$(top_srcdir)|g;s|@srcdir\@|$(srcdir)|g' < $< > $@
 	@chmod +x $@
 
