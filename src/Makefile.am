@@ -24,17 +24,27 @@ install-data-local:
 install-exec-local:
 	$(MAKE) TARGET=$@ recurse-to-subproject
 
+# Recursing for "make dist" doesn't work.
+#
+#distdir-local:
+#	$(MAKE) TARGET=$@ recurse-to-subproject
+#
+#dist-hook:
+#	$(MAKE) TARGET=$@ recurse-to-subproject
+
 recurse-to-subproject:
-	@target="$$(echo "$(TARGET)" | sed 's|-local$$||g')"; \
+	@target="$$(echo "$(TARGET)" | sed 's,-\(local\|hook\)$$,,g')"; \
 	export target; \
+	top_builddir="$$(cd "$(top_builddir)" && pwd)"; \
+	top_srcdir="$$(cd "$(top_srcdir)" && pwd)"; \
 	for subdir in $(subdirs); do \
 		params=""; \
 		case "$${subdir}" in \
 		*/exif)	\
-			params="$${params} LIBEXIF_LIBS='$$(pwd)/$(top_builddir)/src/libexif/libexif/libexif.la'"; \
-			params="$${params} LIBEXIF_CFLAGS='-I$$(pwd)/$(top_srcdir)/src/libexif'"; \
+			params="$${params} LIBEXIF_LIBS='$${top_builddir}/src/libexif/libexif/libexif.la'"; \
+			params="$${params} LIBEXIF_CFLAGS='-I$${top_srcdir}/src/libexif'"; \
 			;; \
 		esac; \
-		echo "### Making $${target} in $${subdir} ###"; \
+		echo "### Making \`$${target}' in \`$${subdir}' ###"; \
 		(cd "$${subdir}" && $(MAKE) $${params} $${target}) || exit $$?; \
 	done

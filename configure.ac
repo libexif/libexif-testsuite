@@ -6,6 +6,7 @@ AM_INIT_AUTOMAKE([gnu 1.8 dist-bzip2])
 GP_CONFIG_INIT
 GP_CONFIG_MSG([Source code location],[${srcdir}])
 
+
 dnl ---------------------------------------------------------------------------
 dnl PKG_CONFIG and PKG_CONFIG_PATH setup
 dnl ---------------------------------------------------------------------------
