@@ -24,21 +24,30 @@ That is probably not proper legalese, but you get the idea.
 Getting libexif-testsuite:
 --------------------------
 
-Get libexif-testsuite via CVS. Then
+If you happen to have a personal access method to the CVS of some
+module mentioned in build-config.txt, you may want to add a line
+"${anonymous_cvsroot} ${your_cvsroot} to build-config.cvsroot.map.
 
+Get libexif-testsuite via CVS and change into its directory:
+
+    cvs -z3 -d :pserver:anonymous@cvs.sourceforge.net:/cvsroot/libexif \
+	checkout -P libexif-testsuite
     cd libexif-testsuite
 
-If you fetched libexif-testsuite from CVS, run
+Then run
+
+    ./build-config.sh
+
+or, if that fails,
 
     cd src
-    cvs -d $(cat ../CVS/Root) co -P libexif
-    cvs -d $(cat ../CVS/Root) co -P exif
-    cvs -d:pserver:anonymous@cvs.sourceforge.net:/cvsroot/pel \
-    	co -P pel/test/image-tests -d pel-test-images
 
-If you got libexif-testsuite from a tarball, get libexif and exif
-tarballs and extract them. Then move them to src/libexif and src/exif,
-respectively.
+and check out the other modules according to the definitions from
+build-config.txt.
+
+If you got libexif-testsuite from a tarball, the source subdirectories
+should already be there. To get the missing subdirectories, you can
+also run build-config.sh.
 
 
 Initialize the buildsystem:
@@ -54,9 +63,24 @@ Configure the build system:
 
 Run
 
+    ./configure --help=recursive
+
+to get help on all the parameters for subprojects.
+
+Note that some subproject options will be automatically set by
+libexif-testsuite.
+
+Then run (for an in-tree build)
+
     ./configure
 
-with your favourite parameters.
+with your favourite configure parameters. Or, for an out-of-tree build:
+
+    mkdir ../libexif-testsuite-build
+    cd ../libexif-testsuite-build
+    ../libexif-testsuite/configure
+
+with your favourite configure parameters.
 
 
 Run the tests:
@@ -66,4 +90,4 @@ Run
 
     make check
 
-and hope for the best.
+and examine the output.

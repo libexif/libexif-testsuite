@@ -1,0 +1,17 @@
+# build-config.txt - What source code to place in what directory
+#
+# Line syntax, general:
+# Directory             Method	<Method specific stuff>
+#
+# Line syntax, Method CVS:
+# Directory		Method	CVSROOT							Module			<CVS Tag>
+
+.			CVS	:pserver:anonymous@cvs.sourceforge.net:/cvsroot/libexif	libexif-testsuite
+./src/libexif		CVS	:pserver:anonymous@cvs.sourceforge.net:/cvsroot/libexif	libexif
+./src/exif		CVS	:pserver:anonymous@cvs.sourceforge.net:/cvsroot/libexif	exif
+./src/pel-images	CVS	:pserver:anonymous@cvs.sourceforge.net:/cvsroot/pel	pel/test/image-tests
+
+#./src/libexif-gtk	CVS	:pserver:anonymous@cvs.sourceforge.net:/cvsroot/libexif	libexif-gtk
+#./src/gexif		CVS	:pserver:anonymous@cvs.sourceforge.net:/cvsroot/libexif	gexif
+
+# End of file `build-config.txt'.
