@@ -91,7 +91,7 @@ while read rdir method restofline <&5; do
 			    exit 1
 			fi
 			echo "(cd $dir && cvs -z3 update -P ${tag})"
-			#(cd "$dir" && cvs -z3 update -P ${tag})
+			(cd "$dir" && cvs -z3 update -P ${tag})
 		elif test -d "$dir"; then
 			echo "#            exists, but not from CVS. Assuming tarball, doing nothing."
 		        echo "$self: Directory \`$dir' exists, but is no CVS directory." >&2
