@@ -23,7 +23,7 @@ EXTRA_DIST = \
 
 TESTS = $(check_SCRIPTS)
 
-CLEANFILES = $(check_SCRIPTS) *.out.jpg
+CLEANFILES = $(check_SCRIPTS) *.out.jpg *.dst.txt *.src.txt *.modified.jpeg *.a.patch *.xpatch
 
 %.sh: %.in Makefile
 	@echo "Creating $@"
