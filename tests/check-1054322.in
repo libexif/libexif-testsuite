@@ -1,4 +1,29 @@
 #!/bin/sh
-set -x
-@exif@ --remove-thumbnail --output ./1054322-1.out.jpg @srcdir@/1054322.jpg || exit $?
-@exif@ --remove-thumbnail --output ./1054323-2.out.jpg ./this-file-does-not-exist.jpg || exit $?
+
+result="`@exif@ --remove-thumbnail --output ./1054322-1.out.jpg @srcdir@/1054322.jpg 2>&1`"
+s=$?
+echo "$result"
+if echo "$result" | grep "The data supplied does not seem to contain EXIF data." > /dev/null; then
+	:
+elif test "$s" -eq 0; then
+	echo "Exit code $s reading EXIF from an HTML file? That must be wrong."
+	exit 1
+else
+	echo "Exit code $s"
+	exit 1
+fi
+
+result="`@exif@ --remove-thumbnail --output ./1054323-2.out.jpg ./this-file-does-not-exist.jpg 2>&1`"
+s=$?
+echo "$result"
+if echo "$result" | grep "does not contain EXIF data" > /dev/null; then
+	:
+elif test "$s" -eq 0; then
+	echo "Exit code $s reading EXIF from a nonexisting file? That must be wrong."
+	exit 1
+else
+	echo "Exit code $s"
+	exit 1
+fi
+
+exit 0
