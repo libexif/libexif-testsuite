@@ -2,4 +2,4 @@
 echo "We need a test image with a MakerNote for this test for #994706"
 set -x
 @exif@ --ifd=EXIF --tag="MakerNote" --remove \
-    -out ./994706.jpg.modified.jpeg @srcdir@/images/canon-powershot-a400-001.jpg 2>&1
+    -out "./994706.jpg.modified.jpeg" "@srcdir@/images/canon-powershot-g2-001.jpg" 2>&1
