@@ -1,0 +1,5 @@
+#!/bin/sh
+set -x
+@exif@ --ifd=EXIF --tag="MakerNote" --remove \
+    -out 994706.jpg.modified.jpeg 1054323.jpg
+

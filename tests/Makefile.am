@@ -4,7 +4,7 @@
 # https://sourceforge.net/tracker/index.php?func=detail&aid=NNNNNN&group_id=12272&atid=112272
 
 check_SCRIPTS = \
-	check-1054321.sh check-1054322.sh check-1054323.sh
+	check-994706.sh check-1054321.sh check-1054322.sh check-1054323.sh
 
 TESTS = $(check_SCRIPTS)
 
