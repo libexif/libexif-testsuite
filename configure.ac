@@ -130,7 +130,6 @@ AC_CONFIG_FILES([
   Makefile
   m4/Makefile
   testlib/Makefile
-  src/Makefile
   tests/Makefile
   tests/images/Makefile
 ])
