@@ -6,16 +6,16 @@
 SUBDIRS = images
 
 check_SCRIPTS = \
+	check-general-images.sh \
 	check-994706.sh \
-	check-1054321.sh check-1054322.sh check-1054323.sh \
-	check-general-images.sh
+	check-1054321.sh check-1054322.sh check-1054323.sh
 
 EXTRA_DIST = \
+	check-general-images.in \
 	check-994706.in \
 	check-1054321.in 1054321.jpg \
 	check-1054322.in 1054322.jpg \
-	check-1054323.in 1054323.jpg \
-	check-general-images.in
+	check-1054323.in 1054323.jpg
 
 TESTS = $(check_SCRIPTS)
 
