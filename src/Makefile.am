@@ -38,13 +38,16 @@ recurse-to-subproject:
 	top_builddir="$$(cd "$(top_builddir)" && pwd)"; \
 	top_srcdir="$$(cd "$(top_srcdir)" && pwd)"; \
 	for subdir in $(subdirs); do \
-		params=""; \
 		case "$${subdir}" in \
 		*/exif)	\
-			params="$${params} LIBEXIF_LIBS='$${top_builddir}/src/libexif/libexif/libexif.la'"; \
-			params="$${params} LIBEXIF_CFLAGS='-I$${top_srcdir}/src/libexif'"; \
+			LIBEXIF_LIBS="$${top_builddir}/src/libexif/libexif/libexif.la"; \
+			LIBEXIF_CFLAGS="-I$${top_srcdir}/src/libexif -I$${top_builddir}/src/libexif"; \
 			;; \
+		*) \
+			LIBEXIF_LIBS=""; \
+			LIBEXIF_CFLAGS=""; \
 		esac; \
 		echo "### Making \`$${target}' in \`$${subdir}' ###"; \
-		(cd "$${subdir}" && $(MAKE) $${params} $${target}) || exit $$?; \
+		for ppp in $${params}; do echo "    $${ppp}"; done; \
+		(cd "$${subdir}" && $(MAKE) "$${LIBEXIF_LIBS+LIBEXIF_LIBS="$${LIBEXIF_LIBS}"}" "$${LIBEXIF_CFLAGS+LIBEXIF_CFLAGS="$${LIBEXIF_CFLAGS}"}" "$${target}") || exit $$?; \
 	done

@@ -1,5 +1,5 @@
 #!/bin/sh
-echo "We need a test image with a MakerNote for this test"
+echo "We need a test image with a MakerNote for this test for #994706"
 set -x
 @exif@ --ifd=EXIF --tag="MakerNote" --remove \
-    -out 994706.jpg.modified.jpeg 1054323.jpg 2>&1
+    -out ./994706.jpg.modified.jpeg @srcdir@/1054323.jpg 2>&1

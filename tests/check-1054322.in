@@ -1,3 +1,4 @@
 #!/bin/sh
 set -x
-@exif@ -r 1054322.jpg
+@exif@ -r -o ./1054322.out.jpg @srcdir@/1054322.jpg || exit $?
+@exif@ -r -o ./1054323-2.out.jpg ./this-file-does-not-exist.jpg || exit $?

@@ -1,3 +1,3 @@
 #!/bin/sh
 set -x
-@exif@ -r 1054323.jpg
+@exif@ -r -o ./1054323.out.jpg @srcdir@/1054323.jpg
