@@ -4,4 +4,8 @@ exif
 gexif
 libexif
 libexif-gtk
+libgphoto2
+gphoto2
+gtkam
+libusb
 pel-images
