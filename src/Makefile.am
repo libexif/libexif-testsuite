@@ -32,6 +32,13 @@ install-exec-local:
 #dist-hook:
 #	$(MAKE) TARGET=$@ recurse-to-subproject
 
+# A few notes about this:
+# - The different sub-projects need to know about the other subprojects.
+#   This is what the conditional make variable definitions are for.
+# - We serialize compilation on purpose here. Thus, "make -j" on
+#   libexif-testsuite will still have the subprojects built in the
+#   required sequence, but the subprojects themselves can be parallel
+#   compiled. And that is a lot of fun on a Quad-Opteron :-)
 recurse-to-subproject:
 	@target="$$(echo "$(TARGET)" | sed 's,-\(local\|hook\)$$,,g')"; \
 	export target; \
@@ -51,3 +58,4 @@ recurse-to-subproject:
 		for ppp in $${params}; do echo "    $${ppp}"; done; \
 		(cd "$${subdir}" && $(MAKE) "$${LIBEXIF_LIBS+LIBEXIF_LIBS="$${LIBEXIF_LIBS}"}" "$${LIBEXIF_CFLAGS+LIBEXIF_CFLAGS="$${LIBEXIF_CFLAGS}"}" "$${target}") || exit $$?; \
 	done
+
