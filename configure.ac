@@ -83,17 +83,34 @@ GP_PKG_CONFIG
 # ---------------------------------------------------------------------------
 dnl Yes, the sequence matters!
 
-if test -d ${srcdir}/src/libexif && test -d ${srcdir}/src/exif; then
+# Initialize have_subdir_XXX variables
+all_subdirs="libexif exif libexif-gtk gexif libusb libgphoto2 gphoto2 gtkam"
+for sub in ${all_subdirs}; do
+	eval "have_subdir_$(echo "$sub" | sed 'y/-/_/')=no"
+done
+
+# Configure subdirs.
+#   * take dependencies into account
+#   * set special variables (XXX_LIBS and XXX_CFLAGS)
+if test -d ${srcdir}/src/libexif; then
 
    AC_CONFIG_SUBDIRS([src/libexif])
 
    # This kind of relative definition only works for subprojects located 
    # in src/subproj, so we have to stick to that pattern.
-   LIBEXIF_LIBS="\$(top_builddir)/../../src/libexif/libexif/libexif.la"
-   LIBEXIF_CFLAGS="-I\$(top_builddir)/../../src/libexif -I\$(top_srcdir)/../../src/libexif"
-   export LIBEXIF_LIBS LIBEXIF_CFLAGS
+   # Oh, and additionally, it works only with first level [AC_CONFIG_SUBDIRS]
+   # calls, not on higher recursion levels. So there is a problem with
+   # libgphoto2_port.
+   # Relative
+   gp_top_builddir="\$(top_builddir)/../.."
+   gp_top_srcdir="\$(top_srcdir)/../.."
+   # Absolute
+   gp_top_builddir="$(pwd)"
+   gp_top_srcdir="$(cd "${srcdir}" && pwd)"
 
-   AC_CONFIG_SUBDIRS([src/exif])
+   LIBEXIF_LIBS="${gp_top_builddir}/src/libexif/libexif/libexif.la"
+   LIBEXIF_CFLAGS="-I${gp_top_builddir}/src/libexif -I${gp_top_srcdir}/src/libexif"
+   export LIBEXIF_LIBS LIBEXIF_CFLAGS
 
    if test ! -f ${srcdir}/src/libexif/configure; then
       AC_MSG_ERROR([
@@ -101,16 +118,19 @@ FATAL: ${PACKAGE_NAME} requires libexif source in src/libexif!
 ])
    fi
 
-   if test ! -f ${srcdir}/src/exif/configure; then
-      AC_MSG_ERROR([
+   if test -d ${srcdir}/src/exif; then
+      AC_CONFIG_SUBDIRS([src/exif])
+      if test ! -f ${srcdir}/src/exif/configure; then
+         AC_MSG_ERROR([
 FATAL: ${PACKAGE_NAME} requires exif source in src/exif!
 ])
+      fi
    fi
 
    if test -d ${srcdir}/src/libexif-gtk; then
       AC_CONFIG_SUBDIRS([src/libexif-gtk])
-      LIBEXIF_GTK_LIBS="\$(top_builddir)/../../src/libexif-gtk/libexif-gtk/libexif-gtk.la"
-      LIBEXIF_GTK_CFLAGS="-I\$(top_builddir)/../../src/libexif-gtk -I\$(top_srcdir)/../../src/libexif-gtk"
+      LIBEXIF_GTK_LIBS="${gp_top_builddir}/src/libexif-gtk/libexif-gtk/libexif-gtk.la"
+      LIBEXIF_GTK_CFLAGS="-I${gp_top_builddir}/src/libexif-gtk -I${gp_top_srcdir}/src/libexif-gtk"
       export LIBEXIF_GTK_LIBS LIBEXIF_GTK_CFLAGS
       if test -d ${srcdir}/src/gexif; then
 	 AC_CONFIG_SUBDIRS([src/gexif])
@@ -119,18 +139,22 @@ FATAL: ${PACKAGE_NAME} requires exif source in src/exif!
 
    if test -d ${srcdir}/src/libusb; then
       AC_CONFIG_SUBDIRS([src/libusb])
-      LIBUSB_LIBS="\$(top_builddir)/../../src/libusb/libusb.la"
-      LIBUSB_CFLAGS="-I\$(top_builddir)/../../src/libusb -I\$(top_srcdir)/../../src/libusb"
+      # LIBUSB_LIBS="\$(top_builddir)/../../src/libusb/libusb.la"
+      # Use absolute directory as workaround. LIBUSB_LIBS will be used
+      # in libgphoto2_port, which is second-level [AC_CONFIG_SUBDIRS]
+      # recursion.
+      LIBUSB_LIBS="${gp_top_builddir}/src/libusb/libusb.la"
+      LIBUSB_CFLAGS="-I${gp_top_builddir}/src/libusb -I${gp_top_srcdir}/src/libusb"
       export LIBUSB_LIBS LIBUSB_CFLAGS
       if test -d ${srcdir}/src/libgphoto2; then
          AC_CONFIG_SUBDIRS([src/libgphoto2])
-         LIBGPHOTO2_LIBS="\$(top_builddir)/../../src/libgphoto2/libgphoto2/libgphoto2.la"
-         LIBGPHOTO2_CFLAGS="-I\$(top_builddir)/../../src/libgphoto2 -I\$(top_srcdir)/../../src/libgphoto2"
+         LIBGPHOTO2_LIBS="${gp_top_builddir}/src/libgphoto2/libgphoto2/libgphoto2.la"
+         LIBGPHOTO2_CFLAGS="-I${gp_top_builddir}/src/libgphoto2 -I${gp_top_srcdir}/src/libgphoto2"
          export LIBGPHOTO2_LIBS LIBGPHOTO2_CFLAGS
          if test -d ${srcdir}/src/gphoto2; then
             AC_CONFIG_SUBDIRS([src/gphoto2])
          fi
-         if test -d ${srcdir}/src/libexif-gtk
+         if test -d ${srcdir}/src/libexif-gtk && test -d ${srcdir}/src/gtkam
          then
             AC_CONFIG_SUBDIRS([src/gtkam])      
          fi
@@ -139,8 +163,8 @@ FATAL: ${PACKAGE_NAME} requires exif source in src/exif!
 
 else
    AC_MSG_ERROR([
-FATAL: src/libexif and src/exif subdirectories not found.
-       The README file describes how to create them.
+FATAL: src/libexif subproject subdirectory not found.
+       The README file describes how to create subproject subdirs.
 ])
 fi
 
@@ -156,6 +180,13 @@ for sd in $subdirs; do
 	fi
 done
 GP_CONFIG_MSG([Subprojects],[${_subdirs}])dnl
+
+# set variables depending on subdirs
+for sd in ${subdirs}; do
+	varname="have_subdir_$(basename "$sd" | sed 'y/-/_/')"
+	eval "${varname}=yes"
+done
+AM_CONDITIONAL([HAVE_SUBDIR_EXIF],[test "x$have_subdir_exif" = "xyes"])
 
 
 dnl ---------------------------------------------------------------------------
