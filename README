@@ -31,8 +31,10 @@ Get libexif-testsuite via CVS. Then
 If you fetched libexif-testsuite from CVS, run
 
     cd src
-    cvs -d $(cat ../CVS/Root) co libexif
-    cvs -d $(cat ../CVS/Root) co exif
+    cvs -d $(cat ../CVS/Root) co -P libexif
+    cvs -d $(cat ../CVS/Root) co -P exif
+    cvs -d:pserver:anonymous@cvs.sourceforge.net:/cvsroot/pel \
+    	co -P pel/test/image-tests -d pel-test-images
 
 If you got libexif-testsuite from a tarball, get libexif and exif
 tarballs and extract them. Then move them to src/libexif and src/exif,
