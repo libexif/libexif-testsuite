@@ -14,7 +14,7 @@ check_SCRIPTS = \
 
 EXTRA_DIST = \
 	check-general-images.in \
-	check-994706.in \
+	check-994706.in check-994706.b.xpatch \
 	check-1054321.in 1054321.jpg \
 	check-1054322.in 1054322.jpg \
 	check-1054323.in 1054323.jpg
