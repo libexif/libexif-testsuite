@@ -6,14 +6,20 @@ AM_INIT_AUTOMAKE([gnu 1.8 dist-bzip2])
 GP_CONFIG_INIT
 GP_CONFIG_MSG([Source code location],[${srcdir}])
 
+dnl ---------------------------------------------------------------------------
+dnl PKG_CONFIG and PKG_CONFIG_PATH setup
+dnl ---------------------------------------------------------------------------
 if test "x${PKG_CONFIG_PATH}" = "x"; then
 	PKG_CONFIG_PATH="`pwd`/src/libexif/libexif"
 else
 	PKG_CONFIG_PATH="`pwd`/src/libexif/libexif:${PKG_CONFIG_PATH}"
 fi
-
 GP_PKG_CONFIG
 
+
+dnl ---------------------------------------------------------------------------
+dnl compiler stuff
+dnl ---------------------------------------------------------------------------
 AC_PROG_CC
 AC_C_CONST
 AM_PROG_LIBTOOL
@@ -37,8 +43,17 @@ dnl ---------------------------------------------------------------------------
 dnl Configure subtrees
 dnl ---------------------------------------------------------------------------
 dnl Yes, the sequence matters!
+
 AC_CONFIG_SUBDIRS([src/libexif])
 AC_CONFIG_SUBDIRS([src/exif])
+
+# workaround, must be after all AC_CONFIG_SUBDIRS
+# recursive make, two-subdirs, and stuff.
+substdirs=""
+for subdir in ${subdirs}; do
+    substdirs="${substdirs} \$(top_builddir)/${subdir}"
+done
+AC_SUBST([substdirs])
 
 
 dnl ---------------------------------------------------------------------------
