@@ -1,0 +1,3 @@
+#!/bin/sh
+set -x
+@exif@ -r 1054323.jpg
