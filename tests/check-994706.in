@@ -7,11 +7,11 @@ dstimg="./${bug}.jpg.modified.jpeg"
 @exif@ "--ifd=EXIF" "--tag=Maker Note" --remove --output "$dstimg" "$srcimg" > /dev/null 2>&1
 
 # List all tags
-@exif@ --list-tags "$srcimg" | sed '1d' > "check-${bug}.src.txt"
-@exif@ --list-tags "$dstimg" | sed '1d' > "check-${bug}.dst.txt"
+@exif@ --list-tags "$srcimg" | sed '1d' > "./check-${bug}.src.txt"
+@exif@ --list-tags "$dstimg" | sed '1d' > "./check-${bug}.dst.txt"
 
 # Find different tags in source and destination image
-@diff@ -u "check-${bug}.src.txt" "check-${bug}.dst.txt" > "./check-${bug}.a.patch"
+@diff@ -u "./check-${bug}.src.txt" "./check-${bug}.dst.txt" > "./check-${bug}.a.patch"
 
 # Canonicalize diff files
 sed '1,3 d' <        "./check-${bug}.a.patch" > "./check-${bug}.a.xpatch"
