@@ -7,7 +7,8 @@ SUBDIRS = images
 
 check_SCRIPTS = \
 	check-994706.sh \
-	check-1054321.sh check-1054322.sh check-1054323.sh
+	check-1054321.sh check-1054322.sh check-1054323.sh \
+	check-1169170.sh
 	
 # This check script takes too long for too few benefits:
 #	check-general-images.sh
@@ -17,7 +18,8 @@ EXTRA_DIST = \
 	check-994706.in check-994706.b.patch \
 	check-1054321.in 1054321.jpg \
 	check-1054322.in 1054322.jpg \
-	check-1054323.in 1054323.jpg
+	check-1054323.in 1054323.jpg \
+	check-1169170.in
 
 TESTS = $(check_SCRIPTS)
 
