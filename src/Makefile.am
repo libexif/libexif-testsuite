@@ -7,28 +7,34 @@
 subdirs = @substdirs@
 
 all-local:
-	@for subdir in $(subdirs); do \
+	$(MAKE) TARGET=$@ recurse-to-subproject
+
+check-local:
+	$(MAKE) TARGET=$@ recurse-to-subproject
+
+clean-local:
+	$(MAKE) TARGET=$@ recurse-to-subproject
+
+distclean-local:
+	$(MAKE) TARGET=$@ recurse-to-subproject
+
+install-data-local:
+	$(MAKE) TARGET=$@ recurse-to-subproject
+
+install-exec-local:
+	$(MAKE) TARGET=$@ recurse-to-subproject
+
+recurse-to-subproject:
+	@target="$$(echo "$(TARGET)" | sed 's|-local$$||g')"; \
+	export target; \
+	for subdir in $(subdirs); do \
 		params=""; \
-		case "$$subdir" in \
+		case "$${subdir}" in \
 		*/exif)	\
 			params="$${params} LIBEXIF_LIBS='$$(pwd)/$(top_builddir)/src/libexif/libexif/libexif.la'"; \
 			params="$${params} LIBEXIF_CFLAGS='-I$$(pwd)/$(top_srcdir)/src/libexif'"; \
 			;; \
 		esac; \
-		(cd "$$subdir" && $(MAKE) $${params} all) || exit $$?; \
-	done
-
-check-local:
-	@for subdir in $(subdirs); do \
-		(cd "$$subdir" && $(MAKE) check) || exit $$?; \
-	done
-
-clean-local:
-	@for subdir in $(subdirs); do \
-		(cd "$$subdir" && $(MAKE) clean) || exit $$?; \
-	done
-
-distclean-local:
-	@for subdir in $(subdirs); do \
-		(cd "$$subdir" && $(MAKE) distclean) || exit $$?; \
+		echo "### Making $${target} in $${subdir} ###"; \
+		(cd "$${subdir}" && $(MAKE) $${params} $${target}) || exit $$?; \
 	done
