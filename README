@@ -5,6 +5,22 @@ This is a testsuite for libexif and exif. Its usage requires the usual
 development enviroment to compile libexif, exif, and some testcases.
 
 
+Legal stuff:
+------------
+
+This testsuite consists of two parts: source code and testcase data files:
+
+  * The source code of this testsuite framework is licensed under GPL,
+
+  * The testcase data files are copyrighted by their respective copyright
+    holders. These files are not licensed for anything else but use as
+    test data in their respective testcase.
+    For all other uses, contact the respective copyright holders for
+    license modalities.
+
+That is probably not proper legalese, but you get the idea.
+
+
 Getting libexif-testsuite:
 --------------------------
 
