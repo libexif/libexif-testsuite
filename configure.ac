@@ -3,6 +3,9 @@ AC_INIT([libexif test suite],[0.6.12],[libexif-devel@lists.sourceforge.net],[lib
 AC_CONFIG_SRCDIR([tests/Makefile.am])
 AC_CONFIG_HEADERS([config.h])
 AM_INIT_AUTOMAKE([gnu 1.8 dist-bzip2])
+
+GP_CHECK_SHELL_ENVIRONMENT
+
 GP_CONFIG_INIT
 GP_CONFIG_MSG([Source code location],[${srcdir}])
 
