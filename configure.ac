@@ -43,9 +43,26 @@ fi
 AC_SUBST([DIFF])
 
 
-dnl ---------------------------------------------------------------------------
-dnl Warnings: If we have GCC, be paranoid.
-dnl ---------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
+# i18n support
+# ---------------------------------------------------------------------------
+GP_GETTEXT_HACK([${PACKAGE}],[Hans Ulrich Niedermann])
+ALL_LINGUAS="de"
+AM_GNU_GETTEXT_VERSION(0.14.1)
+AM_GNU_GETTEXT([external])
+AM_PO_SUBDIRS()
+AM_ICONV()
+GP_GETTEXT_FLAGS()
+
+# We cannot use [AC_DEFINE_UNQUOTED()] for these definitions, as
+# we require make to do insert the proper $(datadir) value
+AC_SUBST([localedir],["\$(datadir)/locale"])
+AM_CFLAGS="$AM_CFLAGS -DLOCALEDIR=\\\"${localedir}\\\""
+
+
+# ---------------------------------------------------------------------------
+# Warnings: If we have GCC, be paranoid.
+# ---------------------------------------------------------------------------
 if test "x$GCC" = "xyes"; then
     AM_CFLAGS="$AM_CFLAGS -Wall -Wchar-subscripts -Wmissing-declarations -Wmissing-prototypes -Wnested-externs -Wpointer-arith"
     AM_LDFLAGS="$AM_LDFLAGS -g -Wall"
@@ -55,11 +72,10 @@ AC_SUBST([AM_CFLAGS])
 AC_SUBST([AM_LDFLAGS])
 
 
-dnl ---------------------------------------------------------------------------
-dnl Configure subtrees
-dnl ---------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
+# Configure subtrees
+# ---------------------------------------------------------------------------
 dnl Yes, the sequence matters!
-
 
 AC_CONFIG_SUBDIRS([src/libexif])
 
@@ -71,24 +87,53 @@ export LIBEXIF_LIBS LIBEXIF_CFLAGS
 
 AC_CONFIG_SUBDIRS([src/exif])
 
+if test ! -f ${srcdir}/src/libexif/configure; then
+   AC_MSG_ERROR([
+FATAL: ${PACKAGE_NAME} requires libexif source in src/libexif!
+])
+fi
+
+if test ! -f ${srcdir}/src/exif/configure; then
+   AC_MSG_ERROR([
+FATAL: ${PACKAGE_NAME} requires exif source in src/exif!
+])
+fi
+
+if test -d ${srcdir}/src/libexif-gtk; then
+   AC_CONFIG_SUBDIRS([src/libexif-gtk])
+   LIBEXIF_GTK_LIBS="\$(top_builddir)/../../src/libexif-gtk/libexif-gtk/libexif-gtk.la"
+   LIBEXIF_GTK_CFLAGS="-I\$(top_builddir)/../../src/libexif-gtk -I\$(top_srcdir)/../../src/libexif-gtk"
+   export LIBEXIF_GTK_LIBS LIBEXIF_GTK_CFLAGS
+   if test -d ${srcdir}/src/gexif; then
+      AC_CONFIG_SUBDIRS([src/gexif])
+   fi
+fi
+
 # workaround, must be after all AC_CONFIG_SUBDIRS
 # recursive make, two-subdirs, and stuff.
 substdirs=""
 for subdir in ${subdirs}; do
-    substdirs="${substdirs} \$(top_builddir)/${subdir}"
+	if test "x$substdirs" = "x"; then
+		substdirs="\$(top_builddir)/${subdir}"
+	else
+		substdirs="${substdirs} \$(top_builddir)/${subdir}"
+	fi
 done
 AC_SUBST([substdirs])
 
 GP_CONFIG_MSG()dnl
-GP_CONFIG_MSG([Subprojects],[${substdirs}])dnl
+_subdirs=$subdirs
+GP_CONFIG_MSG([Subprojects],[${_subdirs}])dnl
 
 
 dnl ---------------------------------------------------------------------------
 dnl Output files
 dnl ---------------------------------------------------------------------------
 AC_CONFIG_FILES([
+  po/Makefile.in
   Makefile
   m4/Makefile
+  testlib/Makefile
   src/Makefile
   tests/Makefile
   tests/images/Makefile

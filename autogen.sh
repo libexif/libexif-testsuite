@@ -108,7 +108,7 @@ init_vars() {
     #        OK, the "init" part is done recursively by autopoint, so that is easy.
     #        But the cleaning should also work recursively, but that is difficult
     #        with the current structure of the script.
-    AG_SUBDIRS="$(for k in $(sed -n 's/^AC_CONFIG_SUBDIRS(\[\{0,1\}\([^])]*\).*/\1/p' "$CONFIGURE_AC"); do echo "${dir}/${k}"; done)"
+    AG_SUBDIRS="$(for k in $(sed -n 's/^[[:space:]]*AC_CONFIG_SUBDIRS(\[\{0,1\}\([^])]*\).*/\1/p' "$CONFIGURE_AC"); do echo "${dir}/${k}"; done)"
     AG_AUX="$(sed -n 's/^AC_CONFIG_AUX_DIR(\[\{0,1\}\([^])]*\).*/\1/p' < "$CONFIGURE_AC")"
     if test "x$AG_AUX" = "x"; then
 	AG_AUX="."

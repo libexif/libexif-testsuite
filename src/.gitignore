@@ -1,2 +1,7 @@
+Makefile
+Makefile.in
 exif
+gexif
 libexif
+libexif-gtk
+pel-images

@@ -1,4 +1,4 @@
-SUBDIRS = m4 src tests
+SUBDIRS = m4 po testlib src tests
 
 EXTRA_DIST = autogen.sh build-config.sh build-config.txt
 
