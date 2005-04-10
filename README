@@ -85,6 +85,37 @@ with your favourite configure parameters. Or, for an out-of-tree build:
 with your favourite configure parameters.
 
 
+Cross-compilation:
+------------------
+
+This is an example using "i586-mingw32msvc" as the system for which
+you want to compile (i.e. i586-mingw32msvc-gcc will be the compiler).
+The build system is i686-pc-linux (you can run config.guess to
+determine the build system).
+
+Cross-compile popt-1.7 and install it:
+
+    cd popt-1.7
+    mkdir _win32 && cd _win32
+    ../configure --prefix="$HOME/root/i586-mingw32msv" \
+         --host=i586-mingw32msvc --build=i686-pc-linux
+    make all
+    make install
+
+Then you can build libexif-testsuite for that platform by running:
+
+    mkdir _win32 && cd _win32
+    ../configure --prefix=/tmp/lt-win32-inst \
+        --host=i586-mingw32msvc --build=i686-pc-linux \
+        POPT_LIBS="-L$HOME/root/i586-mingw32msvc/lib -lpopt" \
+	POPT_CFLAGS="-I$HOME/root/i586-mingw32msvc/include"
+    make all
+    make install
+
+If you have an emulator properly installed for the binaries, even
+"make check" will give results.
+
+
 Run the tests:
 --------------
 
