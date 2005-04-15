@@ -5,14 +5,6 @@
 
 SUBDIRS = images
 
-check_SCRIPTS = \
-	check-994706.sh \
-	check-1054321.sh check-1054322.sh check-1054323.sh \
-	check-1169170.sh
-	
-# This check script takes too long for too few benefits:
-#	check-general-images.sh
-
 EXTRA_DIST = \
 	check-general-images.in \
 	check-994706.in check-994706.b.patch \
@@ -21,7 +13,18 @@ EXTRA_DIST = \
 	check-1054323.in 1054323.jpg \
 	check-1169170.in
 
+if HAVE_EXIF_CLI
+
+check_SCRIPTS = \
+	check-994706.sh \
+	check-1054321.sh check-1054322.sh check-1054323.sh \
+	check-1169170.sh
+# This check script takes too long for too few benefits:
+#	check-general-images.sh
+
 TESTS = $(check_SCRIPTS)
+
+endif
 
 CLEANFILES = $(check_SCRIPTS) *.out.jpg *.dst.txt *.src.txt *.modified.jpeg *.a.patch *.xpatch
 

@@ -8,4 +8,5 @@ libgphoto2
 gphoto2
 gtkam
 libusb
+libusb-win32
 pel-images

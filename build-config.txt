@@ -20,4 +20,8 @@
 #./src/gphoto2		CVS	:pserver:anonymous@cvs.sourceforge.net:/cvsroot/gphoto	gphoto2
 #./src/gtkam		CVS	:pserver:anonymous@cvs.sourceforge.net:/cvsroot/gphoto	gtkam
 
+# FIXME:
+# - Add a few libraries like popt here, and use our version if none is
+#   found on the system.
+
 # End of file `build-config.txt'.

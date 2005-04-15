@@ -1,13 +1,15 @@
 AC_PREREQ(2.59)
-dnl Use a short version here, or "make dist" will fail packaging
-dnl .../libgphoto2_port/gphoto2-port-portability-os2.h
-dnl because tar only handles 99 chars per file path.
-AC_INIT([libexif test suite],[0.7],[libexif-devel@lists.sourceforge.net],[libexif-testsuite])
+dnl Use a short version and package name here, or "make dist" will fail
+dnl packaging [...]/libgphoto2_port/gphoto2-port-portability-os2.h
+dnl because tar only handles 99 chars per file path. Oh, and GNU tar 1.13
+dnl will fail silently.
+AC_INIT([libexif test suite],[0.7.3],[libexif-devel@lists.sourceforge.net],[lets])
 AC_CONFIG_SRCDIR([tests/Makefile.am])
 AC_CONFIG_HEADERS([config.h])
 AM_INIT_AUTOMAKE([gnu 1.8 dist-bzip2])
 
 GP_CHECK_SHELL_ENVIRONMENT
+GP_CONFIG_MSG([Build])
 GP_CONFIG_MSG([Source code location],[${srcdir}])
 
 
@@ -33,6 +35,9 @@ if test "x$DIFF" = "xfalse"; then
 ])
 fi
 AC_SUBST([DIFF])
+
+
+GP_CONFIG_MSG([Features])
 
 
 # ---------------------------------------------------------------------------
@@ -82,6 +87,42 @@ GP_PKG_CONFIG
 
 
 # ---------------------------------------------------------------------------
+# We check for GTK here so we can not configure the subdirs requiring
+# GTK if it is missing.
+# ---------------------------------------------------------------------------
+PKG_CHECK_MODULES([GTK],[gtk+-2.0],[have_gtk=:],[have_gtk=false])
+GP_CHECK_POPT([default-enabled])
+if test "x$have_popt" = "xyes"; then
+	have_popt=:
+else
+	have_popt=false
+fi
+
+# FIXME: Actually run test compilations to make sure that
+#        we're catching the cross-compile case when the header/libs are
+#        available for the build system, but not for the host system.
+
+case "$host" in
+*-linux*)
+	have_libusb_system=:
+	;;
+*-freebsd*|*-openbsd*|*-netbsd*)
+	have_libusb_system=:
+	;;
+*-darwin*)
+	have_libusb_system=:
+	;;
+*-mingw32*)
+	have_libusb_system=false
+	have_gtk=false
+	;;
+*)
+	have_libusb_system=false
+	;;
+esac
+
+
+# ---------------------------------------------------------------------------
 # Configure subtrees
 # ---------------------------------------------------------------------------
 dnl Yes, the sequence matters!
@@ -95,6 +136,7 @@ done
 # Configure subdirs.
 #   * take dependencies into account
 #   * set special variables (XXX_LIBS and XXX_CPPFLAGS)
+#   * FIXME: Add --disable-PACKAGE options to purposely disable certain ones.
 if test -d ${srcdir}/src/libexif; then
 
    AC_CONFIG_SUBDIRS([src/libexif])
@@ -121,26 +163,21 @@ FATAL: ${PACKAGE_NAME} requires libexif source in src/libexif!
 ])
    fi
 
-   if test -d ${srcdir}/src/exif; then
+   if "$have_popt" && test -d ${srcdir}/src/exif; then
       AC_CONFIG_SUBDIRS([src/exif])
-      if test ! -f ${srcdir}/src/exif/configure; then
-         AC_MSG_ERROR([
-FATAL: ${PACKAGE_NAME} requires exif source in src/exif!
-])
-      fi
    fi
 
-   if test -d ${srcdir}/src/libexif-gtk; then
+   if "$have_gtk" && test -d ${srcdir}/src/libexif-gtk; then
       AC_CONFIG_SUBDIRS([src/libexif-gtk])
       AC_SUBST([LIBEXIF_GTK_CFLAGS],["-I${gp_top_builddir}/src/libexif-gtk -I${gp_top_srcdir}/src/libexif-gtk"])
       AC_SUBST([LIBEXIF_GTK_LIBS],["${gp_top_builddir}/src/libexif-gtk/libexif-gtk/libexif-gtk.la"])
       export LIBEXIF_GTK_LIBS LIBEXIF_GTK_CFLAGS
       if test -d ${srcdir}/src/gexif; then
-	 AC_CONFIG_SUBDIRS([src/gexif])
+         AC_CONFIG_SUBDIRS([src/gexif])
       fi
    fi
 
-   if test -d ${srcdir}/src/libusb; then
+   if "$have_libusb_system" && test -d ${srcdir}/src/libusb; then
       AC_CONFIG_SUBDIRS([src/libusb])
       # LIBUSB_LIBS="\$(top_builddir)/../../src/libusb/libusb.la"
       # Use absolute directory as workaround. LIBUSB_LIBS will be used
@@ -149,18 +186,19 @@ FATAL: ${PACKAGE_NAME} requires exif source in src/exif!
       AC_SUBST([LIBUSB_CFLAGS],["-I${gp_top_builddir}/src/libusb -I${gp_top_srcdir}/src/libusb"])
       AC_SUBST([LIBUSB_LIBS],["${gp_top_builddir}/src/libusb/libusb.la"])
       export LIBUSB_LIBS LIBUSB_CFLAGS
-      if test -d ${srcdir}/src/libgphoto2; then
-         AC_CONFIG_SUBDIRS([src/libgphoto2])
-	 AC_SUBST([LIBGPHOTO2_CFLAGS],["-I${gp_top_builddir}/src/libgphoto2 -I${gp_top_builddir}/src/libgphoto2/gphoto2"])
-	 AC_SUBST([LIBGPHOTO2_LIBS],["${gp_top_builddir}/src/libgphoto2/libgphoto2/libgphoto2.la"])
-         export LIBGPHOTO2_LIBS LIBGPHOTO2_CFLAGS
-         if test -d ${srcdir}/src/gphoto2; then
-            AC_CONFIG_SUBDIRS([src/gphoto2])
-         fi
-         if test -d ${srcdir}/src/libexif-gtk && test -d ${srcdir}/src/gtkam
-         then
-            AC_CONFIG_SUBDIRS([src/gtkam])      
-         fi
+   fi
+
+   if test -d ${srcdir}/src/libgphoto2; then
+      AC_CONFIG_SUBDIRS([src/libgphoto2])
+      AC_SUBST([LIBGPHOTO2_CFLAGS],["-I${gp_top_builddir}/src/libgphoto2 -I${gp_top_builddir}/src/libgphoto2/gphoto2"])
+      AC_SUBST([LIBGPHOTO2_LIBS],["${gp_top_builddir}/src/libgphoto2/libgphoto2/libgphoto2.la"])
+      export LIBGPHOTO2_LIBS LIBGPHOTO2_CFLAGS
+      if test -d ${srcdir}/src/gphoto2; then
+         AC_CONFIG_SUBDIRS([src/gphoto2])
+      fi
+      if "$have_gtk" && test -d ${srcdir}/src/libexif-gtk && test -d ${srcdir}/src/gtkam
+      then
+         AC_CONFIG_SUBDIRS([src/gtkam])      
       fi
    fi
 
@@ -171,18 +209,7 @@ FATAL: src/libexif subproject subdirectory not found.
 ])
 fi
 
-# Message about configured subprojects
-GP_CONFIG_MSG()dnl
-_subdirs=""
-for sd in $subdirs; do
-	ssd="$(basename "$sd")"
-	if test "x$_subdirs" = "x"; then
-		_subdirs="$ssd";
-	else
-		_subdirs="$_subdirs $ssd"
-	fi
-done
-GP_CONFIG_MSG([Subprojects],[${_subdirs}])dnl
+AM_CONDITIONAL([HAVE_EXIF_CLI],[ test -f "$srcdir/src/exif/configure" ])
 
 # set variables depending on subdirs
 for sd in ${subdirs}; do
@@ -198,7 +225,7 @@ dnl ---------------------------------------------------------------------------
 AC_CONFIG_FILES([
   po/Makefile.in
   Makefile
-  m4/Makefile
+  m4m/Makefile
   testlib/Makefile
   tests/Makefile
   tests/images/Makefile
