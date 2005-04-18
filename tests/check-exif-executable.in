@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if test -x "@exif@"; then
+	echo "exif executable \`@exif@' is executable. Good."
+else
+	echo "exif executable \`@exif@' is NOT executable. Bad."
+	exit 1
+fi

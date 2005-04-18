@@ -6,6 +6,7 @@
 SUBDIRS = images
 
 EXTRA_DIST = \
+	check-exif-executable.in \
 	check-general-images.in \
 	check-994706.in check-994706.b.patch \
 	check-1054321.in 1054321.jpg \
@@ -16,6 +17,7 @@ EXTRA_DIST = \
 if HAVE_EXIF_CLI
 
 check_SCRIPTS = \
+	check-exif-executable.sh \
 	check-994706.sh \
 	check-1054321.sh check-1054322.sh check-1054323.sh \
 	check-1169170.sh
