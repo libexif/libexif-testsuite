@@ -1,3 +1,7 @@
 #!/bin/sh
-set -x
-@exif@ -m -o ./1054321.out.jpg @srcdir@/1054321.jpg | tail
+result_file="result-1054321.tmp"
+#set -x
+@exif@ -m -o ./1054321.out.jpg @srcdir@/1054321.jpg > "$result_file" 2>&1
+s="$?"
+tail "$result_file"
+exit "$s"

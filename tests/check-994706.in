@@ -4,6 +4,7 @@ srcimg="@srcdir@/images/canon-powershot-g2-001.jpg"
 dstimg="./${bug}.jpg.modified.jpeg"
 
 # Remove Maker Note
+echo "Removing EXIF Maker Note"
 @exif@ "--ifd=EXIF" "--tag=Maker Note" --remove --output "$dstimg" "$srcimg" > /dev/null 2>&1
 
 # List all tags
@@ -19,3 +20,8 @@ sed '1,3 d' < "@srcdir@/check-${bug}.b.patch" > "./check-${bug}.b.xpatch"
 
 # Compare diff files; they should be equal.
 @diff@ -u "./check-${bug}.a.xpatch" "./check-${bug}.b.xpatch"
+s="$?"
+if test "$s" -ne 0; then
+	echo "The Maker Note should have been removed. Bad."
+fi
+exit "$s"

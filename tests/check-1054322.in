@@ -1,7 +1,9 @@
 #!/bin/sh
 
-result="`@exif@ --remove-thumbnail --output ./1054322-1.out.jpg @srcdir@/1054322.jpg 2>&1`"
-s=$?
+result_file="result-1054322-1.tmp"
+@exif@ --remove-thumbnail --output ./1054322-1.out.jpg @srcdir@/1054322.jpg > ${result_file} 2>&1
+result="`cat ${result_file}`"
+s="$?"
 echo "$result"
 if echo "$result" | grep "The data supplied does not seem to contain EXIF data." > /dev/null; then
 	:
@@ -13,8 +15,10 @@ else
 	exit 1
 fi
 
-result="`@exif@ --remove-thumbnail --output ./1054323-2.out.jpg ./this-file-does-not-exist.jpg 2>&1`"
-s=$?
+result_file="result-1054322-2.tmp"
+@exif@ --remove-thumbnail --output ./1054323-2.out.jpg ./this-file-does-not-exist.jpg > ${result_file} 2>&1
+result="`cat ${result_file}`"
+s="$?"
 echo "$result"
 if echo "$result" | grep "does not contain EXIF data" > /dev/null; then
 	:

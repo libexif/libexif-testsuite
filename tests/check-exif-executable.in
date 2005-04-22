@@ -2,7 +2,9 @@
 
 if test -x "@exif@"; then
 	echo "exif executable \`@exif@' is executable. Good."
+	ls -l "@exif@"
 else
 	echo "exif executable \`@exif@' is NOT executable. Bad."
+	ls -l "@exif@"
 	exit 1
 fi

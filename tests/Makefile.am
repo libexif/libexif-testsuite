@@ -28,10 +28,12 @@ TESTS = $(check_SCRIPTS)
 
 endif
 
-CLEANFILES = $(check_SCRIPTS) *.out.jpg *.dst.txt *.src.txt *.modified.jpeg *.a.patch *.xpatch
+CLEANFILES = $(check_SCRIPTS) *.out.jpg *.dst.txt *.src.txt *.modified.jpeg *.a.patch *.xpatch *.tmp
 
+# The embedded script for @exif@ is supposed to run at the time the
+# .sh file is running.
 %.sh: %.in Makefile
 	@echo "Creating $@"
-	@sed 's|@exif\@|$(top_builddir)/src/exif/exif/exif|g;s|@top_srcdir\@|$(top_srcdir)|g;s|@srcdir\@|$(srcdir)|g;s|@diff\@|$(DIFF)|g' < $< > $@
+	@sed 's|@exif\@|`if test -x "$(top_builddir)/src/exif/exif/exif"; then echo "$(top_builddir)/src/exif/exif/exif"; elif test -x "$(bindir)/exif"; then echo "$(bindir)/exif"; else echo "Neither $(top_builddir)/src/exif/exif/exif nor $(bindir)/exif are executable." >&2; echo false; exit 1; fi`|g;s|@top_srcdir\@|$(top_srcdir)|g;s|@srcdir\@|$(srcdir)|g;s|@diff\@|$(DIFF)|g' < $< > $@
 	@chmod +x $@
 
