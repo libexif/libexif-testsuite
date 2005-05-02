@@ -3,7 +3,7 @@ dnl Use a short version and package name here, or "make dist" will fail
 dnl packaging [...]/libgphoto2_port/gphoto2-port-portability-os2.h
 dnl because tar only handles 99 chars per file path. Oh, and GNU tar 1.13
 dnl will fail silently.
-AC_INIT([libexif test suite],[0.7.3],[libexif-devel@lists.sourceforge.net],[lets])
+AC_INIT([libexif test suite],[0.7.5.5],[libexif-devel@lists.sourceforge.net],[lets])
 AC_CONFIG_SRCDIR([tests/Makefile.am])
 AC_CONFIG_HEADERS([config.h])
 AM_INIT_AUTOMAKE([gnu 1.8 dist-bzip2])
@@ -118,6 +118,13 @@ case "$host" in
 	;;
 *)
 	have_libusb_system=false
+	AC_MSG_WARN([
+Warning:
+
+This system does not seem to be supported by libusb.
+There will be *NO* support for USB cameras on this system!
+
+])
 	;;
 esac
 
@@ -128,10 +135,25 @@ esac
 dnl Yes, the sequence matters!
 
 # Initialize have_subdir_XXX variables
-all_subdirs="libexif exif libexif-gtk gexif libusb libgphoto2 gphoto2 gtkam"
-for sub in ${all_subdirs}; do
-	eval "have_subdir_$(echo "$sub" | sed 'y/-/_/')=no"
-done
+AC_DEFUN([GP_SUBMODULE],[dnl
+AC_ARG_ENABLE([--disable-submodule-][$1],
+	[AS_HELP_STRING([--disable-submodule-][$1],[disable ][$1][ submodule])],
+[
+	eval "enable_submod_$(echo "[$1]" | sed 'y/-/_/')=${enableval}"
+],[
+	eval "enable_submod_$(echo "[$1]" | sed 'y/-/_/')=yes"
+])
+eval "have_subdir_$(echo "[$1]" | sed 'y/-/_/')=no"
+])dnl
+GP_SUBMODULE([libexif])
+GP_SUBMODULE([exif])
+GP_SUBMODULE([libexif-gtk])
+GP_SUBMODULE([gexif])
+GP_SUBMODULE([libusb])
+GP_SUBMODULE([libgphoto2])
+GP_SUBMODULE([gphoto2])
+GP_SUBMODULE([gtkam])
+
 
 # Configure subdirs.
 #   * take dependencies into account
@@ -191,7 +213,7 @@ FATAL: ${PACKAGE_NAME} requires libexif source in src/libexif!
    if test -d ${srcdir}/src/libgphoto2; then
       AC_CONFIG_SUBDIRS([src/libgphoto2])
       AC_SUBST([LIBGPHOTO2_CFLAGS],["-I${gp_top_builddir}/src/libgphoto2 -I${gp_top_builddir}/src/libgphoto2/gphoto2"])
-      AC_SUBST([LIBGPHOTO2_LIBS],["${gp_top_builddir}/src/libgphoto2/libgphoto2/libgphoto2.la"])
+      AC_SUBST([LIBGPHOTO2_LIBS],["${gp_top_builddir}/src/libgphoto2/libgphoto2/libgphoto2.la ${gp_top_builddir}/src/libgphoto2/libgphoto2_port/libgphoto2_port/libgphoto2_port.la"])
       export LIBGPHOTO2_LIBS LIBGPHOTO2_CFLAGS
       if test -d ${srcdir}/src/gphoto2; then
          AC_CONFIG_SUBDIRS([src/gphoto2])
