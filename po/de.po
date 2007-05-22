@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: libexif-testsuite de\n"
-"Report-Msgid-Bugs-To: libexif-devel@lists.sourceforge.net\n"
-"POT-Creation-Date: 2005-04-11 20:04+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2007-05-23 01:21+0200\n"
 "PO-Revision-Date: 2005-03-24 01:42+0100\n"
 "Last-Translator: Hans Ulrich Niedermann <gp@n-dimensional.de>\n"
 "Language-Team: deutsch <de@li.org>\n"
@@ -15,6 +15,6 @@ msgstr ""
 "Content-Type: text/plain; charset=us-ascii\n"
 "Content-Transfer-Encoding: 7bit\n"
 
-#: testlib/testlib.c:5
+#: testlib/testlib.c:7
 msgid "This is the dummy library"
 msgstr "Dies ist die Dummy-Bibliothek"
