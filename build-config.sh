@@ -59,6 +59,15 @@ while read rdir method restofline <&5; do
 	dir="${topdir}${rdir}"
 	echo "# Directory: \`$dir' (\`$topdir', \`$rdir')"
 	case "$method" in
+	SVN)
+		# Parse rest of line (just use it)
+		svn_url="$restofline"
+		if test -f "$dir/.svn/entries"; then
+			(cd "$dir" && svn up)
+		else
+			svn checkout "$svn_url" "$dir"
+		fi
+		;;
 	CVS)
 		# Parse rest of line
 		anoncvsroot="$(echo "$restofline" | (read cvsroot mod tag rest; echo "${cvsroot}"))"
@@ -130,6 +139,10 @@ while read rdir method restofline <&5; do
 			echo "${cvsroot}" | \
 				sed "s,${sedrexp},${dir}        \1://\2\3/${module}${cmtag},g" >&3
 		fi
+		;;
+	*)
+		echo "Unhandled method: '$method'. Aborting." >&2
+		exit 13
 		;;
 	esac
 done 3>> "$cm_config" 5< "$config"

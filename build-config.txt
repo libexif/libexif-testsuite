@@ -6,19 +6,23 @@
 # Line syntax, Method CVS:
 # Directory		Method	CVSROOT							Module			<CVS Tag>
 
-.			CVS	:pserver:anonymous@cvs.sourceforge.net:/cvsroot/libexif	libexif-testsuite
-./src/libexif		CVS	:pserver:anonymous@cvs.sourceforge.net:/cvsroot/libexif	libexif
-./src/exif		CVS	:pserver:anonymous@cvs.sourceforge.net:/cvsroot/libexif	exif
-./src/pel-images	CVS	:pserver:anonymous@cvs.sourceforge.net:/cvsroot/pel	pel/test/image-tests
+./src/pel-images	SVN	https://pel.svn.sourceforge.net/svnroot/pel/trunk/test/image-tests
 
-#./src/libexif-gtk	CVS	:pserver:anonymous@cvs.sourceforge.net:/cvsroot/libexif	libexif-gtk
-#./src/gexif		CVS	:pserver:anonymous@cvs.sourceforge.net:/cvsroot/libexif	gexif
+.			CVS	:pserver:anonymous@libexif.cvs.sourceforge.net:/cvsroot/libexif	libexif-testsuite
+./src/libexif		CVS	:pserver:anonymous@libexif.cvs.sourceforge.net:/cvsroot/libexif	libexif
+./src/exif		CVS	:pserver:anonymous@libexif.cvs.sourceforge.net:/cvsroot/libexif	exif
+
+#./src/pel-images	CVS	:pserver:anonymous@pel.cvs.sourceforge.net:/cvsroot/pel	pel/test/image-tests
+
+#./src/libexif-gtk	CVS	:pserver:anonymous@libexif.cvs.sourceforge.net:/cvsroot/libexif	libexif-gtk
+#./src/gexif		CVS	:pserver:anonymous@libexif.cvs.sourceforge.net:/cvsroot/libexif	gexif
 
 #./src/libusb-win32	CVS	:pserver:anonymous@cvs.sourceforge.net:/cvsroot/libusb-win32	libusb
 #./src/libusb		CVS	:pserver:anonymous@cvs.sourceforge.net:/cvsroot/libusb	libusb
 #./src/libgphoto2	CVS	:pserver:anonymous@cvs.sourceforge.net:/cvsroot/gphoto	libgphoto2
 #./src/gphoto2		CVS	:pserver:anonymous@cvs.sourceforge.net:/cvsroot/gphoto	gphoto2
 #./src/gtkam		CVS	:pserver:anonymous@cvs.sourceforge.net:/cvsroot/gphoto	gtkam
+
 
 # FIXME:
 # - Add a few libraries like popt here, and use our version if none is

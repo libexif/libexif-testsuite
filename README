@@ -56,7 +56,7 @@ Initialize the buildsystem:
 
 Run
 
-    ./autogen.sh
+    autoreconf -vis
 
 
 Configure the build system:

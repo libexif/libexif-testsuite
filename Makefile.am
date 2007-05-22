@@ -1,9 +1,9 @@
 # @subdirs@ are the configured subproject directories
 SUBDIRS = m4m po testlib @subdirs@ tests
 
-EXTRA_DIST = autogen.sh build-config.sh build-config.txt
+EXTRA_DIST = build-config.sh build-config.txt
 
-ACLOCAL_AMFLAGS = -I m4m
+ACLOCAL_AMFLAGS = -I auto-m4 -I m4m
 
 #######################################################################
 # Help for the maintainer

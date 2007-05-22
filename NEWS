@@ -1,0 +1,6 @@
+New in 0.7.12:
+  * Added build-config.sh SVN support.
+  * Fetch pel (PHP Exif Library) test images via SVN.
+  * Get rid of autogen.sh.
+  * Always check PEL images.
+  * Use auto-m4 for autoreconf-provided *.m4 files.
