@@ -1,6 +1,8 @@
 #!/bin/sh
 # Execute a number of common sense checks on "real" images
 # (not specially prepared images)
+#
+# FIXME: Properly handle images without any EXIF information.
 
 tmpfile="./output.tmp"
 
