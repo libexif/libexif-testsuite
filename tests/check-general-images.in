@@ -1,8 +1,9 @@
 #!/bin/sh
 # Execute a number of common sense checks on "real" images
 # (not specially prepared images)
-#
-# FIXME: Properly handle images without any EXIF information.
+
+# |-separated list of test suite images that don't contain EXIF tags
+NOEXIFLIST='*canon-powershot-a400-001.jpg'
 
 tmpfile="./output.tmp"
 
@@ -13,10 +14,27 @@ total_img=0
 for img in @top_srcdir@/src/pel-images/*.jpg @srcdir@/images/*.jpg
 do
 	test -f "$img" || continue
+
+	# Test images without EXIF tags
+	case "$img" in 
+		*-thumb* | *no-exif* | $NOEXIFLIST)
+			echo -n "Attempting list of nonexistent EXIF data from \`${img}'..."
+			@exif@ "${img}" > "$tmpfile" 2>&1
+			s="$?"
+			if test "$s" -eq 1; then
+				echo " ok."
+			else
+				echo " FAILED (${s})."
+				errors=$(expr $errors + 1)
+				cat "$tmpfile"
+			fi
+			continue
+			;;
+	esac
 	total_img=$(expr $total_img + 1)
 
 	# Check that listing EXIF info works
-	echo -n "Listing EXIF  info from \`${img}'..."
+	echo -n "Listing EXIF info from \`${img}'..."
 	@exif@ "${img}" > "$tmpfile" 2>&1
 	s="$?"
 	if test "$s" -eq 0; then
