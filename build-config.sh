@@ -99,8 +99,8 @@ while read rdir method restofline <&5; do
 			    echo "$self: Aborting." >&2
 			    exit 1
 			fi
-			echo "(cd $dir && cvs -z3 update -P ${tag})"
-			(cd "$dir" && cvs -z3 update -P ${tag})
+			echo "(cd $dir && cvs -z3 update -dPR ${tag})"
+			(cd "$dir" && cvs -z3 update -dPR ${tag})
 		elif test -d "$dir"; then
 			echo "#            exists, but not from CVS. Assuming tarball, doing nothing."
 		        echo "$self: Directory \`$dir' exists, but is no CVS directory." >&2
