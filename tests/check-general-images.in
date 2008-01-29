@@ -6,6 +6,11 @@
 NOEXIFLIST='*canon-powershot-a400-001.jpg'
 
 tmpfile="./output.tmp"
+tmpimg="./output.jpg"
+
+EXIFEXE=@exif@
+
+echo Testing "$EXIFEXE"
 
 errors=0
 total=0
@@ -14,12 +19,14 @@ total_img=0
 for img in @top_srcdir@/src/pel-images/*.jpg @srcdir@/images/*.jpg
 do
 	test -f "$img" || continue
+	total_img=$(expr $total_img + 1)
+	echo \#${total_img}
 
 	# Test images without EXIF tags
 	case "$img" in 
 		*-thumb* | *no-exif* | $NOEXIFLIST)
 			echo -n "Attempting list of nonexistent EXIF data from \`${img}'..."
-			@exif@ "${img}" > "$tmpfile" 2>&1
+			"$EXIFEXE" "${img}" > "$tmpfile" 2>&1
 			s="$?"
 			if test "$s" -eq 1; then
 				echo " ok."
@@ -31,11 +38,11 @@ do
 			continue
 			;;
 	esac
-	total_img=$(expr $total_img + 1)
 
 	# Check that listing EXIF info works
 	echo -n "Listing EXIF info from \`${img}'..."
-	@exif@ "${img}" > "$tmpfile" 2>&1
+	# Run this in the C locale so the messages are known
+	env LANG=C LANGUAGE=C "$EXIFEXE" "${img}" > "$tmpfile" 2>&1
 	s="$?"
 	if test "$s" -eq 0; then
 		echo " ok."
@@ -47,13 +54,15 @@ do
 	fi
 	total=$(expr $total + 1)
 
-	check_makernote=false
-	grep "^Maker Note" < "$tmpfile" > /dev/null && check_makernote=:
+	check_makernote=
+	grep "^Maker Note" < "$tmpfile" > /dev/null && check_makernote=true
+	check_thumbnail=
+	grep "^EXIF data contains a thumbnail" < "$tmpfile" > /dev/null && check_thumbnail=true
 	rm -f "$tmpfile"
 
 	# Check that listing the makernote works
 	echo -n "Listing MNote info from \`${img}'..."
-	@exif@ --show-mnote "${img}" > "$tmpfile" 2>&1
+	"$EXIFEXE" --show-mnote "${img}" > "$tmpfile" 2>&1
 	s="$?"
 	if test "$s" -eq 0; then
 		echo " ok."
@@ -64,25 +73,64 @@ do
 	fi
 	total=$(expr $total + 1)
 
-	continue
+	# Check that removing a tag works
+	echo -n "Removing tag from \`${img}'..."
+	"$EXIFEXE" --tag=DateTime --remove "${img}" -o "$tmpimg" > "$tmpfile" 2>&1
+	s="$?"
+	if test "$s" -eq 0; then
+		echo " ok."
+	else
+		echo " FAILED (${s})."
+		errors=$(expr $errors + 1)
+		cat "$tmpfile"
+	fi
+	total=$(expr $total + 1)
+
+	# Check that listing EXIF info still works
+	echo -n "Listing EXIF info from \`${tmpimg}'..."
+	"$EXIFEXE" "${tmpimg}" > "$tmpfile" 2>&1
+	s="$?"
+	if test "$s" -eq 0; then
+		echo " ok."
+	else
+		echo " FAILED (${s})."
+		errors=$(expr $errors + 1)
+		cat "$tmpfile"
+	fi
+	total=$(expr $total + 1)
+
+	# Check that listing the makernote still works
+	echo -n "Listing MNote info from \`${tmpimg}'..."
+	"$EXIFEXE" --show-mnote "${tmpimg}" > "$tmpfile" 2>&1
+	s="$?"
+	if test "$s" -eq 0; then
+		echo " ok."
+	else
+		echo " FAILED (${s})."
+		errors=$(expr $errors + 1)
+		cat "$tmpfile"
+	fi
+	total=$(expr $total + 1)
 
 	# Check that extracting thumbnail works
-	# FIXME: Only do this when there actually *is* a thumbnail to extract.
-	echo -n "Extracting thumbnail from ${img}"
-	thumb="./$(basename "$img").check-general-images.thumb.out.jpg"
-	@exif@ -e -o "$thumb" "$img" > "$tmpfile" 2>&1
-	s="$?"
-	if test "$s" -eq 0; then
-		echo " ok."
-		errors=$(expr $errors + 1)
+	if [ "$check_thumbnail" ] ; then
+		echo -n "Extracting thumbnail from ${img}"
+		thumb="./$(basename "$img").check-general-images.thumb.out.jpg"
+		"$EXIFEXE" -e -o "$thumb" "$img" > "$tmpfile" 2>&1
+		s="$?"
+		if test "$s" -eq 0; then
+			echo " ok."
+		else
+			echo " FAILED (${s})."
+			errors=$(expr $errors + 1)
+			cat "$tmpfile"
+		fi
+		rm -f "$tmpfile"
+		total=$(expr $total + 1)
 	else
-		echo " FAILED (${s})."
-		cat "$tmpfile"
+		echo "Skipping extract thumbnail test on ${img}"
 	fi
-	rm -f "$tmpfile"
-	total=$(expr $total + 1)
 
-	outimg="./$(basename "$img").check-general-images.out.jpg"
 done
 
 self="$(basename "$0")"
