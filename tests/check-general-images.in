@@ -86,6 +86,19 @@ do
 	fi
 	total=$(expr $total + 1)
 
+	# Check that the tag is removed
+	echo -n "Listing tag from \`${tmpimg}'..."
+	"$EXIFEXE" --tag=DateTime "${tmpimg}" > "$tmpfile" 2>&1
+	s="$?"
+	if test "$s" -eq 1; then
+		echo " ok."
+	else
+		echo " FAILED (${s})."
+		errors=$(expr $errors + 1)
+		cat "$tmpfile"
+	fi
+	total=$(expr $total + 1)
+
 	# Check that listing EXIF info still works
 	echo -n "Listing EXIF info from \`${tmpimg}'..."
 	"$EXIFEXE" "${tmpimg}" > "$tmpfile" 2>&1
