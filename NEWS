@@ -1,3 +1,7 @@
+New in ?:
+  * Additional tests on pel images
+  * Fixed build-config.sh to properly update CVS repositories
+
 New in 0.7.12:
   * Added build-config.sh SVN support.
   * Fetch pel (PHP Exif Library) test images via SVN.
