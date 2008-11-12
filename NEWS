@@ -1,4 +1,5 @@
-New in ?:
+New in 0.7.13:
+  * Working with libexif and exif ver. 0.6.17
   * Additional tests on pel images
   * Fixed build-config.sh to properly update CVS repositories
 
