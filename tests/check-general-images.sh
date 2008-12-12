@@ -8,7 +8,7 @@
 NOEXIFLIST='*canon-powershot-a400-001.jpg'
 
 tmpfile="./output.tmp"
-tmpimg="./output.jpg"
+tmpimg="./general.out.jpg"
 
 echo Testing "$EXIFEXE"
 
