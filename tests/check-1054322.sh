@@ -1,7 +1,7 @@
 #!/bin/sh
-
+. check-vars.sh
 result_file="result-1054322-1.tmp"
-@exif@ --remove-thumbnail --output ./1054322-1.out.jpg @srcdir@/1054322.jpg > ${result_file} 2>&1
+"$EXIFEXE" --remove-thumbnail --output ./1054322-1.out.jpg "$SRCDIR"/1054322.jpg > ${result_file} 2>&1
 result="`cat ${result_file}`"
 s="$?"
 echo "$result"
@@ -16,7 +16,7 @@ else
 fi
 
 result_file="result-1054322-2.tmp"
-@exif@ --remove-thumbnail --output ./1054323-2.out.jpg ./this-file-does-not-exist.jpg > ${result_file} 2>&1
+"$EXIFEXE" --remove-thumbnail --output ./1054323-2.out.jpg ./this-file-does-not-exist.jpg > ${result_file} 2>&1
 result="`cat ${result_file}`"
 s="$?"
 echo "$result"

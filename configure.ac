@@ -253,6 +253,7 @@ AC_CONFIG_FILES([
   m4m/Makefile
   testlib/Makefile
   tests/Makefile
+  tests/check-vars.sh
   tests/images/Makefile
 ])
 AC_OUTPUT

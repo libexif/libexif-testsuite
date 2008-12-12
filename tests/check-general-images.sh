@@ -2,13 +2,13 @@
 # Execute a number of common sense checks on "real" images
 # (not specially prepared images)
 
+. check-vars.sh
+
 # |-separated list of test suite images that don't contain EXIF tags
 NOEXIFLIST='*canon-powershot-a400-001.jpg'
 
 tmpfile="./output.tmp"
 tmpimg="./output.jpg"
-
-EXIFEXE=@exif@
 
 echo Testing "$EXIFEXE"
 
@@ -16,7 +16,7 @@ errors=0
 total=0
 total_img=0
 
-for img in @top_srcdir@/src/pel-images/*.jpg @srcdir@/images/*.jpg
+for img in "$TOPSRCDIR"/src/pel-images/*.jpg "$SRCDIR"/images/*.jpg
 do
 	test -f "$img" || continue
 	total_img=$(expr $total_img + 1)
