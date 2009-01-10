@@ -26,6 +26,6 @@ if test "$s" -ne 0; then
 	echo "The Maker Note should have been removed. Bad."
 fi
 
-rm -f "$dstimg" "./check-${bug}.src.txt" "./check-${bug}.dst.txt" "./check-${bug}.a.xpatch" "./check-${bug}.b.xpatch"
+rm -f "$dstimg" "./check-${bug}.src.txt" "./check-${bug}.dst.txt" "./check-${bug}.a.patch" "./check-${bug}.a.xpatch" "./check-${bug}.b.xpatch"
 
 exit "$s"
