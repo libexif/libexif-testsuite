@@ -6,11 +6,11 @@ dstimg="./${bug}.jpg.modified.jpeg"
 
 # Remove Maker Note
 echo "Removing EXIF Maker Note"
-"$EXIFEXE" "--ifd=EXIF" "--tag=Maker Note" --remove --output "$dstimg" "$srcimg" > /dev/null 2>&1
+"$EXIFEXE" "--ifd=EXIF" "--tag=MakerNote" --remove --output "$dstimg" "$srcimg" > /dev/null 2>&1
 
 # List all tags
-"$EXIFEXE" --list-tags "$srcimg" | sed '1d' > "./check-${bug}.src.txt"
-"$EXIFEXE" --list-tags "$dstimg" | sed '1d' > "./check-${bug}.dst.txt"
+env LANG=C LANGUAGE=C "$EXIFEXE" --list-tags "$srcimg" | sed '1d' > "./check-${bug}.src.txt"
+env LANG=C LANGUAGE=C "$EXIFEXE" --list-tags "$dstimg" | sed '1d' > "./check-${bug}.dst.txt"
 
 # Find different tags in source and destination image
 "$DIFFEXE" -u "./check-${bug}.src.txt" "./check-${bug}.dst.txt" > "./check-${bug}.a.patch"
@@ -25,4 +25,7 @@ s="$?"
 if test "$s" -ne 0; then
 	echo "The Maker Note should have been removed. Bad."
 fi
+
+rm -f "$dstimg" "./check-${bug}.src.txt" "./check-${bug}.dst.txt" "./check-${bug}.a.xpatch" "./check-${bug}.b.xpatch"
+
 exit "$s"
