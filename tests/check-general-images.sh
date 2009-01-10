@@ -138,13 +138,15 @@ do
 			errors=$(expr $errors + 1)
 			cat "$tmpfile"
 		fi
-		rm -f "$tmpfile"
+		rm -f "$tmpfile" "$thumb"
 		total=$(expr $total + 1)
 	else
 		echo "Skipping extract thumbnail test on ${img}"
 	fi
 
 done
+
+rm "$tmpimg"
 
 self="$(basename "$0")"
 echo "$self: Performed $total checks on $total_img images."
