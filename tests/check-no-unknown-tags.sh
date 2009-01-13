@@ -3,9 +3,6 @@
 
 . check-vars.sh
 
-# |-separated list of test suite images that don't contain EXIF tags
-NOEXIFLIST='*canon-powershot-a400-001.jpg'
-
 tmpfile="./output.tmp"
 
 # Display ok or FAILED depending on the result code
@@ -31,17 +28,13 @@ errors=0
 total=0
 total_img=0
 
-for img in "$TOPSRCDIR"/src/pel-images/*.jpg "$SRCDIR"/images/*.jpg
+for img in $ALLFILES
 do
 	test -f "$img" || continue
 
-	# Test images without EXIF tags
-	case "$img" in 
-		*-thumb* | *no-exif* | $NOEXIFLIST)
-			# skip image
-			continue
-			;;
-	esac
+	if noexiftags "$img" ; then
+		continue # skip image
+	fi
 
 	total_img=$(expr $total_img + 1)
 	echo -n "#${total_img} "

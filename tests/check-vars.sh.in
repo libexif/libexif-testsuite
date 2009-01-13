@@ -8,3 +8,17 @@ TOPSRCDIR=@top_srcdir@
 TOPBLDDIR=@top_builddir@
 EXIFEXE=`if test -x "$TOPBLDDIR/src/exif/exif/exif"; then echo "$TOPBLDDIR/src/exif/exif/exif"; elif test -x "$BINDIR/exif"; then echo "$BINDIR/exif"; else echo "Neither $TOPBLDDIR/src/exif/exif/exif nor $BINDIR/exif are executable." >&2; echo false; exit 1; fi`
 DIFFEXE=@DIFF@
+
+# space-separated list of all JPEG images to test
+ALLFILES="$TOPSRCDIR/src/pel-images/*.jpg $SRCDIR/images/*.jpg"
+
+# Function that returns true when the given file contains no EXIF tags
+noexiftags () {
+	# Test images without EXIF tags
+	case "$1" in 
+		 *-thumb* | *no-exif* | *canon-powershot-a400-001.jpg)
+			return 0 # No EXIF tags in this image
+			;;
+	esac
+	return 1 # normal image with EXIF tags
+}

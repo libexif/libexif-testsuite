@@ -4,9 +4,6 @@
 
 . check-vars.sh
 
-# |-separated list of test suite images that don't contain EXIF tags
-NOEXIFLIST='*canon-powershot-a400-001.jpg'
-
 tmpfile="./output.tmp"
 tmpimg="./general.out.jpg"
 
@@ -16,28 +13,26 @@ errors=0
 total=0
 total_img=0
 
-for img in "$TOPSRCDIR"/src/pel-images/*.jpg "$SRCDIR"/images/*.jpg
+for img in $ALLFILES
 do
 	test -f "$img" || continue
 	total_img=$(expr $total_img + 1)
 	echo \#${total_img}
 
 	# Test images without EXIF tags
-	case "$img" in 
-		*-thumb* | *no-exif* | $NOEXIFLIST)
-			echo -n "Attempting list of nonexistent EXIF data from \`${img}'..."
-			"$EXIFEXE" "${img}" > "$tmpfile" 2>&1
-			s="$?"
-			if test "$s" -eq 1; then
-				echo " ok."
-			else
-				echo " FAILED (${s})."
-				errors=$(expr $errors + 1)
-				cat "$tmpfile"
-			fi
-			continue
-			;;
-	esac
+	if noexiftags "$img" ; then
+		echo -n "Attempting list of nonexistent EXIF data from \`${img}'..."
+		"$EXIFEXE" "${img}" > "$tmpfile" 2>&1
+		s="$?"
+		if test "$s" -eq 1; then
+			echo " ok."
+		else
+			echo " FAILED (${s})."
+			errors=$(expr $errors + 1)
+			cat "$tmpfile"
+		fi
+		continue
+	fi
 
 	# Check that listing EXIF info works
 	echo -n "Listing EXIF info from \`${img}'..."
