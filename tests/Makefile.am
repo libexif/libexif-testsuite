@@ -9,6 +9,7 @@ SUBDIRS = images
 EXTRA_DIST = \
 	check-exif-executable.sh \
 	check-general-images.sh \
+	check-no-unknown-tags.sh \
 	check-994706.sh check-994706.b.patch \
 	check-1054321.sh 1054321.jpg \
 	check-1054322.sh 1054322.jpg \
@@ -24,7 +25,8 @@ check_SCRIPTS = \
 	check-1169170.sh
 
 # This check script may take a little long - but it is invaluable. :)
-check_SCRIPTS += check-general-images.sh
+check_SCRIPTS += check-general-images.sh \
+	check-no-unknown-tags.sh
 
 TESTS = $(check_SCRIPTS)
 

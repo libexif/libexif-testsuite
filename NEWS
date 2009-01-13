@@ -2,6 +2,8 @@ New in 0.7.x:
   * Created check-vars.sh script to eliminate the need to generate all
     the tests scripts at build time
   * Made the tests work in non-English locales
+  * Added check-no-unknown-tags.sh test to ensure that all EXIF tags are
+    recognized
 
 New in 0.7.13:
   * Working with libexif and exif ver. 0.6.17
