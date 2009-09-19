@@ -9,6 +9,7 @@ SUBDIRS = images
 EXTRA_DIST = \
 	check-exif-executable.sh \
 	check-general-images.sh \
+	check-readwrite-identity.sh \
 	check-no-unknown-tags.sh \
 	check-all-mandatory-tags.sh \
 	check-994706.sh check-994706.b.patch \
@@ -22,11 +23,14 @@ if HAVE_EXIF_CLI
 check_SCRIPTS = \
 	check-exif-executable.sh \
 	check-994706.sh \
-	check-1054321.sh check-1054322.sh check-1054323.sh \
+	check-1054321.sh \
+	check-1054322.sh \
+	check-1054323.sh \
 	check-1169170.sh
 
-# This check script may take a little long - but it is invaluable. :)
+# These check scripts may take a little long - but are invaluable. :)
 check_SCRIPTS += check-general-images.sh \
+	check-readwrite-identity.sh \
 	check-no-unknown-tags.sh \
 	check-all-mandatory-tags.sh
 

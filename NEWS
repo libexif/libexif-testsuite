@@ -6,6 +6,9 @@ New in 0.7.x:
     recognized
   * Added check-all-mandatory-tags.sh test to ensure that no EXIF tags need
     to be added because they are mandatory
+  * Added check-readwrite-identity.sh test that passes each JPEG image
+    through a read/write/read pass to ensure that the final written tags equal
+    the originals
 
 New in 0.7.13:
   * Working with libexif and exif ver. 0.6.17
