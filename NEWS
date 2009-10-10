@@ -1,3 +1,5 @@
+New in 0.7.x:
+
 New in 0.7.14:
   * Working with libexif and exif ver. 0.6.18
   * Created check-vars.sh script to eliminate the need to generate all
