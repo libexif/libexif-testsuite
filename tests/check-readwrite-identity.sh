@@ -36,7 +36,7 @@ canonicalize () {
 	  "$1"
 }
 
-echo Testing "$EXIFEXE"
+echo Testing "$EXIFEXE" "$@"
 
 errors=0
 total=0
@@ -56,19 +56,19 @@ do
 	# Create a copy of the image that has been processed by exif
 	# Force this by attempting deleting a nonexistent tag
 	echo -n "Copying image \`${img}'..."
-	"$EXIFEXE" --remove --tag=0xbeef --output="${tmpimg}" "${img}" > "$tmpfile" 2>&1
+	"$EXIFEXE" "$@" --remove --tag=0xbeef --output="${tmpimg}" "${img}" > "$tmpfile" 2>&1
 	check_result
 
 	# Listing original EXIF info
 	echo -n "Listing EXIF info..."
 	# Run this in the C language locale so the messages are known
-	env LANG=C LANGUAGE=C "$EXIFEXE" --ids "${img}" > "$tmpfile" 2>&1
+	env LANG=C LANGUAGE=C "$EXIFEXE" "$@" --ids "${img}" > "$tmpfile" 2>&1
 	check_result
 
 	# Listing copied EXIF info
 	echo -n "Listing EXIF info..."
 	# Run this in the C language locale so the messages are known
-	env LANG=C LANGUAGE=C "$EXIFEXE" --ids "${tmpimg}" > "$tmpfile2" 2>&1
+	env LANG=C LANGUAGE=C "$EXIFEXE" "$@" --ids "${tmpimg}" > "$tmpfile2" 2>&1
 	check_result $tmpfile2
 
 	canonicalize "$tmpfile"
@@ -80,13 +80,13 @@ do
 	# Listing original MakerNote info
 	echo -n "Listing MakerNote info..."
 	# Run this in the C language locale so the messages are known
-	env LANG=C LANGUAGE=C "$EXIFEXE" --ids --show-mnote "${img}" > "$tmpfile" 2>&1
+	env LANG=C LANGUAGE=C "$EXIFEXE" "$@" --ids --show-mnote "${img}" > "$tmpfile" 2>&1
 	check_result
 
 	# Listing copied MakerNote info
 	echo -n "Listing MakerNote info..."
 	# Run this in the C language locale so the messages are known
-	env LANG=C LANGUAGE=C "$EXIFEXE" --ids --show-mnote "${tmpimg}" > "$tmpfile2" 2>&1
+	env LANG=C LANGUAGE=C "$EXIFEXE" "$@" --ids --show-mnote "${tmpimg}" > "$tmpfile2" 2>&1
 	check_result $tmpfile2
 
 	canonicalize "$tmpfile"

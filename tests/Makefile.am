@@ -10,6 +10,7 @@ EXTRA_DIST = \
 	check-exif-executable.sh \
 	check-general-images.sh \
 	check-readwrite-identity.sh \
+	check-readwrite-identity-nofixup.sh \
 	check-no-unknown-tags.sh \
 	check-all-mandatory-tags.sh \
 	check-994706.sh check-994706.b.patch \
@@ -31,6 +32,7 @@ check_SCRIPTS = \
 # These check scripts may take a little long - but are invaluable. :)
 check_SCRIPTS += check-general-images.sh \
 	check-readwrite-identity.sh \
+	check-readwrite-identity-nofixup.sh \
 	check-no-unknown-tags.sh \
 	check-all-mandatory-tags.sh
 
