@@ -62,15 +62,18 @@ do
 	# Listing original EXIF info
 	echo -n "Listing EXIF info..."
 	# Run this in the C language locale so the messages are known
-	env LANG=C LANGUAGE=C "$EXIFEXE" "$@" --ids "${img}" > "$tmpfile" 2>&1
+	env LANG=C LANGUAGE=C "$EXIFEXE" "$@" --ids --width 999 "${img}" > "$tmpfile" 2>&1
 	check_result
 
 	# Listing copied EXIF info
 	echo -n "Listing EXIF info..."
 	# Run this in the C language locale so the messages are known
-	env LANG=C LANGUAGE=C "$EXIFEXE" "$@" --ids "${tmpimg}" > "$tmpfile2" 2>&1
+	env LANG=C LANGUAGE=C "$EXIFEXE" "$@" --ids --width 999 "${tmpimg}" > "$tmpfile2" 2>&1
 	check_result $tmpfile2
 
+	# Compare the tag output of the original and copied files.
+	# A difference here could simply be due to the sort order, which
+	# could be due to the original EXIF file being corrupt.
 	canonicalize "$tmpfile"
 	canonicalize "$tmpfile2"
 	echo -n "Comparing before and after..."
@@ -80,13 +83,13 @@ do
 	# Listing original MakerNote info
 	echo -n "Listing MakerNote info..."
 	# Run this in the C language locale so the messages are known
-	env LANG=C LANGUAGE=C "$EXIFEXE" "$@" --ids --show-mnote "${img}" > "$tmpfile" 2>&1
+	env LANG=C LANGUAGE=C "$EXIFEXE" "$@" --ids --show-mnote --width 999 "${img}" > "$tmpfile" 2>&1
 	check_result
 
 	# Listing copied MakerNote info
 	echo -n "Listing MakerNote info..."
 	# Run this in the C language locale so the messages are known
-	env LANG=C LANGUAGE=C "$EXIFEXE" "$@" --ids --show-mnote "${tmpimg}" > "$tmpfile2" 2>&1
+	env LANG=C LANGUAGE=C "$EXIFEXE" "$@" --ids --show-mnote --width 999 "${tmpimg}" > "$tmpfile2" 2>&1
 	check_result $tmpfile2
 
 	canonicalize "$tmpfile"
