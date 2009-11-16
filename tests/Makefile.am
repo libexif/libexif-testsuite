@@ -17,7 +17,8 @@ EXTRA_DIST = \
 	check-1054321.sh 1054321.jpg \
 	check-1054322.sh 1054322.jpg \
 	check-1054323.sh 1054323.jpg \
-	check-1169170.sh
+	check-1169170.sh \
+	check-bid37022.sh bid37022.jpg
 
 if HAVE_EXIF_CLI
 
@@ -27,7 +28,8 @@ check_SCRIPTS = \
 	check-1054321.sh \
 	check-1054322.sh \
 	check-1054323.sh \
-	check-1169170.sh
+	check-1169170.sh \
+	check-bid37022.sh
 
 # These check scripts may take a little long - but are invaluable. :)
 check_SCRIPTS += check-general-images.sh \

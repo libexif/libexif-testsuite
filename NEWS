@@ -1,6 +1,10 @@
-New in 0.7.x:
+New in 0.7.15:
+  * Working with libexif and exif ver. 0.6.19
   * Added check-readwrite-identity-nofixup.sh that uses --no-fixup on the
     check-readwrite-identity.sh tests
+  * Added --width option to allow more text to be compared
+  * Added check-2009fixupoverflow.sh to test for the fixed libexif heap
+    overflow
 
 New in 0.7.14:
   * Working with libexif and exif ver. 0.6.18
