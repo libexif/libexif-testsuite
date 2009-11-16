@@ -1,3 +1,6 @@
+New in 0.7.x:
+
+
 New in 0.7.15:
   * Working with libexif and exif ver. 0.6.19
   * Added check-readwrite-identity-nofixup.sh that uses --no-fixup on the
