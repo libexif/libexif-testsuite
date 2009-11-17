@@ -1,4 +1,5 @@
 New in 0.7.x:
+  * Added check-tag-description.sh to test proper lookup of tag documentation
 
 
 New in 0.7.15:
