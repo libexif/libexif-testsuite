@@ -22,6 +22,9 @@ TESTTAGS_0=$TESTTAGS_0" 0x8769" # entry for a sub-IFD
 				# This currently prints an empty description,
 				# which is really a bug in libexif.
 
+TESTTAGS_0=$TESTTAGS_0" 0xbbbb" # not in table, but between two that are
+TESTTAGS_0=$TESTTAGS_0" 0xfffe" # second-largest possible number (not in table)
+
 TESTTAGS_1="0x0201"             # only exists in IFD 1
 
 TESTTAGS_EXIF=$TESTTAGS_EXIF" 0x0201" # only exists in IFD 1, not EXIF IFD
@@ -44,6 +47,8 @@ Tag '' (0x0001, ''):
 Tag 'Image Width' (0x0100, 'ImageWidth'): The number of columns of image data, equal to the number of pixels per row. In JPEG compressed data a JPEG marker is used instead of this tag.
 Tag 'New Subfile Type' (0x00fe, 'NewSubfileType'): A general indication of the kind of data contained in this subfile.
 Tag '' (0x8769, ''): 
+Tag '' (0xbbbb, ''): 
+Tag '' (0xfffe, ''): 
 Tag 'JPEG Interchange Format' (0x0201, 'JPEGInterchangeFormat'): The offset to the start byte (SOI) of JPEG compressed thumbnail data. This is not used for primary image JPEG data.
 Tag '' (0x0201, ''): 
 Tag 'Image Unique ID' (0xa420, 'ImageUniqueID'): This tag indicates an identifier assigned uniquely to each image. It is recorded as an ASCII string equivalent to hexadecimal notation and 128-bit fixed length.
