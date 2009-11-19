@@ -1,7 +1,11 @@
-# Those numbers are the issue IDs from the sourceforge.net bug tracker.
+# Those numbers are the issue IDs from the sourceforge.net bug tracker or
+# the BugTraq ID number.
 #
 # To get more info about NNNNNN, go visit
 # https://sourceforge.net/tracker/index.php?func=detail&aid=NNNNNN&group_id=12272&atid=112272
+#
+# To get more info about bidNNNNN, go visit
+# https://www.securityfocus.com/bid/NNNNN
 
 SUBDIRS = images
 
@@ -44,5 +48,5 @@ TESTS = $(check_SCRIPTS)
 
 endif
 
-CLEANFILES = *.out.jpg *.dst.txt *.src.txt *.modified.jpeg *.a.patch *.xpatch *.tmp
+CLEANFILES = *.out.jpg *.tmp
 
