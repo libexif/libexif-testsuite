@@ -1,11 +1,11 @@
 --- check-994706.src.txt	2005-03-23 23:16:11.000000000 +0100
 +++ check-994706.dst.txt	2005-03-23 23:16:11.000000000 +0100
 @@ -71,7 +71,7 @@
-   0x920a Focal Length                    -      -      *      -      -   
-   0x9214 Subject Area                    -      -      -      -      -   
-   0x9216 TIFF/EP Standard ID             -      -      -      -      -   
--  0x927c Maker Note                      -      -      *      -      -   
-+  0x927c Maker Note                      -      -      -      -      -   
-   0x9286 User Comment                    -      -      *      -      -   
-   0x9290 SubsecTime                      -      -      -      -      -   
-   0x9291 SubSecTimeOriginal              -      -      -      -      -   
+ 0x920a Focal Length                            -      -      *      -      -   
+ 0x9214 Subject Area                            -      -      -      -      -   
+ 0x9216 TIFF/EP Standard ID                     -      -      -      -      -   
+-0x927c Maker Note                              -      -      *      -      -   
++0x927c Maker Note                              -      -      -      -      -   
+ 0x9286 User Comment                            -      -      *      -      -   
+ 0x9290 SubsecTime                              -      -      -      -      -   
+ 0x9291 SubSecTimeOriginal                      -      -      -      -      -   

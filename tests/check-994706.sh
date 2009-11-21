@@ -7,10 +7,11 @@ dstimg="./${bug}.jpg.out.jpg"
 # Remove Maker Note
 echo "Removing EXIF Maker Note"
 "$EXIFEXE" "--ifd=EXIF" "--tag=MakerNote" --remove --output "$dstimg" "$srcimg" > /dev/null 2>&1
+test "$?" -eq 0
 
 # List all tags
-env LANG=C LANGUAGE=C "$EXIFEXE" --list-tags "$srcimg" | sed '1d' > "./check-${bug}.src.tmp"
-env LANG=C LANGUAGE=C "$EXIFEXE" --list-tags "$dstimg" | sed '1d' > "./check-${bug}.dst.tmp"
+env LANG=C LANGUAGE=C "$EXIFEXE" --list-tags --width=80 "$srcimg" | sed '1d' > "./check-${bug}.src.tmp"
+env LANG=C LANGUAGE=C "$EXIFEXE" --list-tags --width=80 "$dstimg" | sed '1d' > "./check-${bug}.dst.tmp"
 
 # Find different tags in source and destination image
 "$DIFFEXE" -u "./check-${bug}.src.tmp" "./check-${bug}.dst.tmp" > "./check-${bug}.a.patch.tmp"
