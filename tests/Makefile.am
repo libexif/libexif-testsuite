@@ -23,7 +23,10 @@ EXTRA_DIST = \
 	check-1054323.sh 1054323.jpg \
 	check-1169170.sh \
 	check-bid37022.sh bid37022.jpg \
-	check-tag-description.sh
+	check-tag-description.sh \
+	check-add-tags.sh \
+	check-create-tags.sh \
+	check-remove-tags.sh
 
 if HAVE_EXIF_CLI
 
@@ -34,15 +37,18 @@ check_SCRIPTS = \
 	check-1054322.sh \
 	check-1054323.sh \
 	check-1169170.sh \
-	check-bid37022.sh
+	check-bid37022.sh \
+	check-tag-description.sh \
+	check-add-tags.sh \
+	check-create-tags.sh \
+	check-remove-tags.sh
 
 # These check scripts may take a little longer - but are invaluable. :)
 check_SCRIPTS += check-general-images.sh \
 	check-readwrite-identity.sh \
 	check-readwrite-identity-nofixup.sh \
 	check-no-unknown-tags.sh \
-	check-all-mandatory-tags.sh \
-	check-tag-description.sh
+	check-all-mandatory-tags.sh
 
 TESTS = $(check_SCRIPTS)
 

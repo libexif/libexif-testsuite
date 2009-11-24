@@ -1,7 +1,8 @@
 images = \
 	canon-digital-rebel-001.jpg	\
 	canon-powershot-g2-001.jpg	\
-	canon-powershot-a400-001.jpg
+	canon-powershot-a400-001.jpg	\
+	no-exif.jpg
 
 EXTRA_DIST = $(images)
 

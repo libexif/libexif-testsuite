@@ -1,6 +1,8 @@
 New in 0.7.x:
   * Added check-tag-description.sh to test proper lookup of tag documentation
-
+  * Added check-add-tags.sh to test correct adding of new tags
+  * Added check-create-tags.sh to test correct creation of an EXIF tag block
+  * Added check-remove-tags.sh to test correct removal of tags
 
 New in 0.7.15:
   * Working with libexif and exif ver. 0.6.19
