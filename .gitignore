@@ -35,8 +35,12 @@ build-config.cm
 build-config.cvsroot*
 config.h
 config.h.in
+config.log
+config.status
 config.rpath
 configure
+libtool
 mkinstalldirs
+stamp-h1
 cvs2cl.usermap
 ChangeLog.cvs
