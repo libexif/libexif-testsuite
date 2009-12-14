@@ -29,7 +29,7 @@ TESTTAGS_1="0x0201"             # only exists in IFD 1
 
 TESTTAGS_EXIF=$TESTTAGS_EXIF" 0x0201" # only exists in IFD 1, not EXIF IFD
 TESTTAGS_EXIF=$TESTTAGS_EXIF" 0xa420" # last in table associated with an IFD
-TESTTAGS_EXIF=$TESTTAGS_EXIF" 0xc4a5" # last in table (not associated with IFD)
+TESTTAGS_EXIF=$TESTTAGS_EXIF" 0xea1c" # last in table (not associated with IFD)
 
 for ifd in GPS Interoperability 0 1 EXIF; do
 	TESTTAGS=`eval echo \\$TESTTAGS_${ifd}`
@@ -52,7 +52,7 @@ Tag '' (0xfffe, ''):
 Tag 'JPEG Interchange Format' (0x0201, 'JPEGInterchangeFormat'): The offset to the start byte (SOI) of JPEG compressed thumbnail data. This is not used for primary image JPEG data.
 Tag '' (0x0201, ''): 
 Tag 'Image Unique ID' (0xa420, 'ImageUniqueID'): This tag indicates an identifier assigned uniquely to each image. It is recorded as an ASCII string equivalent to hexadecimal notation and 128-bit fixed length.
-Tag 'PRINT Image Matching' (0xc4a5, 'PrintImageMatching'): Related to Epson's PRINT Image Matching technology
+Tag 'Padding' (0xea1c, 'Padding'): This tag reserves space that can be reclaimed later when additional metadata are added. New metadata can be written in place by replacing this tag with a smaller data element and using the reclaimed space to store the new or expanded metadata tags.
 EOF
 s="$?"
 
