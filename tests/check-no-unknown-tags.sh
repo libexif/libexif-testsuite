@@ -1,5 +1,6 @@
 #!/bin/sh
 # Run all test images through exif and ensure that all the tags are known.
+# This is as much a test of the images as of exif itself.
 
 . check-vars.sh
 
@@ -33,6 +34,11 @@ do
 	test -f "$img" || continue
 
 	if noexiftags "$img" ; then
+		continue # skip image
+	fi
+
+	if unknowntags "$img" ; then
+		echo "Skipping $img due to known, unknown tags"
 		continue # skip image
 	fi
 

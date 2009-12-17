@@ -72,10 +72,15 @@ do
 	check_result $tmpfile2
 
 	# Compare the tag output of the original and copied files.
-	# A difference here could simply be due to the sort order, which
-	# could be due to the original EXIF file being corrupt.
 	canonicalize "$tmpfile"
 	canonicalize "$tmpfile2"
+	if unsortedtags "${img}"; then
+		# If input file is not to spec and its tags are not sorted,
+		# sort the before and after files so they will compare equal
+		echo Sorting tags on out-of-spec image
+		sort -o "$tmpfile" "$tmpfile"
+		sort -o "$tmpfile2" "$tmpfile2"
+	fi
 	echo -n "Comparing before and after..."
 	"$DIFFEXE" "$tmpfile" "$tmpfile2"
 	check_result

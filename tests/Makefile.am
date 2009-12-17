@@ -11,6 +11,7 @@ SUBDIRS = images
 
 # check-vars.sh.in is automatically included
 EXTRA_DIST = \
+	image-info.sh \
 	check-exif-executable.sh \
 	check-general-images.sh \
 	check-readwrite-identity.sh \

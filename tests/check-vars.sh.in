@@ -12,13 +12,5 @@ DIFFEXE=@DIFF@
 # space-separated list of all JPEG images to test
 ALLFILES="$TOPSRCDIR/src/pel-images/*.jpg $SRCDIR/images/*.jpg"
 
-# Function that returns true when the given file contains no EXIF tags
-noexiftags () {
-	# Test images without EXIF tags
-	case "$1" in 
-		 *-thumb* | *no-exif* | *canon-powershot-a400-001.jpg)
-			return 0 # No EXIF tags in this image
-			;;
-	esac
-	return 1 # normal image with EXIF tags
-}
+# Load functions that determine characteristics of the $ALLFILES test images
+. image-info.sh
