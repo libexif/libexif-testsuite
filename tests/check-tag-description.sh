@@ -39,20 +39,19 @@ for ifd in GPS Interoperability 0 1 EXIF; do
 	done
 done
 
+# Test --machine-readable, using first mandatory tag
+env LANG=C LANGUAGE=C "$EXIFEXE" --tag=0x11a --ifd=0 -m -s >>"$tmpfile"
+
 "$DIFFEXE" "$tmpfile" - <<EOF
 Tag 'GPS tag version' (0x0000, 'GPSVersionID'): Indicates the version of <GPSInfoIFD>. The version is given as 2.0.0.0. This tag is mandatory when <GPSInfo> tag is present. (Note: The <GPSVersionID> tag is given in bytes, unlike the <ExifVersion> tag. When the version is 2.0.0.0, the tag value is 02000000.H).
 Tag 'North or South Latitude' (0x0001, 'GPSLatitudeRef'): Indicates whether the latitude is north or south latitude. The ASCII value 'N' indicates north latitude, and 'S' is south latitude.
 Tag 'Interoperability Index' (0x0001, 'InteroperabilityIndex'): Indicates the identification of the Interoperability rule. Use "R98" for stating ExifR98 Rules. Four bytes used including the termination code (NULL). see the separate volume of Recommended Exif Interoperability Rules (ExifR98) for other tags used for ExifR98.
-Tag '' (0x0001, ''): 
 Tag 'Image Width' (0x0100, 'ImageWidth'): The number of columns of image data, equal to the number of pixels per row. In JPEG compressed data a JPEG marker is used instead of this tag.
 Tag 'New Subfile Type' (0x00fe, 'NewSubfileType'): A general indication of the kind of data contained in this subfile.
-Tag '' (0x8769, ''): 
-Tag '' (0xbbbb, ''): 
-Tag '' (0xfffe, ''): 
 Tag 'JPEG Interchange Format' (0x0201, 'JPEGInterchangeFormat'): The offset to the start byte (SOI) of JPEG compressed thumbnail data. This is not used for primary image JPEG data.
-Tag '' (0x0201, ''): 
 Tag 'Image Unique ID' (0xa420, 'ImageUniqueID'): This tag indicates an identifier assigned uniquely to each image. It is recorded as an ASCII string equivalent to hexadecimal notation and 128-bit fixed length.
 Tag 'Padding' (0xea1c, 'Padding'): This tag reserves space that can be reclaimed later when additional metadata are added. New metadata can be written in place by replacing this tag with a smaller data element and using the reclaimed space to store the new or expanded metadata tags.
+0x011a	XResolution	x-Resolution	The number of pixels per <ResolutionUnit> in the <ImageWidth> direction. When the image resolution is unknown, 72 [dpi] is designated.
 EOF
 s="$?"
 
