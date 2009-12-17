@@ -3,6 +3,7 @@ New in 0.7.x:
   * Added check-add-tags.sh to test correct adding of new tags
   * Added check-create-tags.sh to test correct creation of an EXIF tag block
   * Added check-remove-tags.sh to test correct removal of tags
+  * Added check-fixup.sh to test tag data type fixing
 
 New in 0.7.15:
   * Working with libexif and exif ver. 0.6.19
@@ -10,7 +11,7 @@ New in 0.7.15:
     check-readwrite-identity.sh tests
   * Added --width option to allow more text to be compared
   * Added check-bid37022.sh to test for the fixed libexif heap
-    overflow
+    overflow bug (CVE-2009-3895)
 
 New in 0.7.14:
   * Working with libexif and exif ver. 0.6.18

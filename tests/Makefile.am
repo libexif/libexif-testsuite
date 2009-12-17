@@ -27,6 +27,7 @@ EXTRA_DIST = \
 	check-tag-description.sh \
 	check-add-tags.sh \
 	check-create-tags.sh \
+	check-fixup.sh \
 	check-remove-tags.sh
 
 if HAVE_EXIF_CLI
@@ -42,6 +43,7 @@ check_SCRIPTS = \
 	check-tag-description.sh \
 	check-add-tags.sh \
 	check-create-tags.sh \
+	check-fixup.sh \
 	check-remove-tags.sh
 
 # These check scripts may take a little longer - but are invaluable. :)
