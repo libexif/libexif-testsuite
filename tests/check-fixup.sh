@@ -20,13 +20,13 @@ echo Fix up data
 # Check the resulting EXIF file
 env LANG=C LANGUAGE=C "$EXIFEXE" -m -i "$dstimg" >"$tmpfile"
 "$DIFFEXE" "$tmpfile" - <<EOF
-0x0112	left - bottom
+0x0112	Left-bottom
 0x011a	72.00
 0x011b	72.00
-0x011c	planar format
+0x011c	Planar format
 0x0128	Inch
 0x0132	2009:12:16 23:30:32
-0x0213	centered
+0x0213	Centered
 0x829a	1/2 sec.
 0x9000	Exif Version 2.1
 0x9101	Y Cb Cr -
