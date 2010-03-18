@@ -7,5 +7,5 @@
 -0x927c Maker Note                              -      -      *      -      -   
 +0x927c Maker Note                              -      -      -      -      -   
  0x9286 User Comment                            -      -      *      -      -   
- 0x9290 SubsecTime                              -      -      -      -      -   
- 0x9291 SubSecTimeOriginal                      -      -      -      -      -   
+ 0x9290 Sub-second Time                         -      -      -      -      -   
+ 0x9291 Sub-second Time (Original)              -      -      -      -      -   
