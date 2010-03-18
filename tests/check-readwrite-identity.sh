@@ -74,9 +74,13 @@ do
 	# Compare the tag output of the original and copied files.
 	canonicalize "$tmpfile"
 	canonicalize "$tmpfile2"
-	if unsortedtags "${img}"; then
+	if unsortedtags "${img}" || missingtags "${img}"; then
 		# If input file is not to spec and its tags are not sorted,
-		# sort the before and after files so they will compare equal
+		# sort the before and after files so they will compare equal.
+		#
+		# If input file is not to spec and is missing mandatory tags,
+		# exif will add them but they may be displayed out of order,
+		# so sort them both so they will compare equal.
 		echo Sorting tags on out-of-spec image
 		sort -o "$tmpfile" "$tmpfile"
 		sort -o "$tmpfile2" "$tmpfile2"

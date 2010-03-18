@@ -40,6 +40,11 @@ do
 	total_img=$(expr $total_img + 1)
 	echo -n "#${total_img} "
 
+	if missingtags "${img}"; then
+		echo "Skipping image missing mandatory tags: ${img}"
+		continue
+	fi
+
 	# Capture the debug logs
 	echo -n "Reading image \`${img}'..."
 	# Run this in the C language locale so the messages are known

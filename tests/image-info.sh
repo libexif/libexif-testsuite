@@ -32,7 +32,22 @@ unsortedtags () {
 # not recognized by libexif (i.e. the input file is corrupt and not to spec).
 unknowntags () {
 	case "$1" in 
-		 *Panasonic_DMC-G1.jpg)
+		 *Panasonic_DMC-G1.jpg | \
+		 *digiKam.jpg)
+		 	return 0 # Input file has unknown tags
+			;;
+	esac
+	return 1 # normal image
+}
+
+# Function that returns true when the given file is missing tags that are
+# mandatory in the EXIF specification (i.e. the input file is corrupt
+# and not to spec).
+missingtags () {
+	case "$1" in 
+		 *Arcsoft_Webcam_Companion.jpg | \
+		 *Motorola_Milestone.jpg | \
+		 *digiKam.jpg)
 		 	return 0 # Input file has unknown tags
 			;;
 	esac
