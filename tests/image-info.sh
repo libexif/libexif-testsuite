@@ -21,7 +21,8 @@ noexiftags () {
 # not properly sorted (i.e. the input file is corrupt and not to spec).
 unsortedtags () {
 	case "$1" in 
-		 *Kodak_C310.jpg)
+		 *Kodak_C310.jpg | \
+		 *HTC_Touch_Pro2.jpg)
 		 	return 0 # Input file has unsorted tags
 			;;
 	esac
@@ -47,7 +48,8 @@ missingtags () {
 	case "$1" in 
 		 *Arcsoft_Webcam_Companion.jpg | \
 		 *Motorola_Milestone.jpg | \
-		 *digiKam.jpg)
+		 *digiKam.jpg | \
+		 *HTC_Touch_Pro2.jpg)
 		 	return 0 # Input file has unknown tags
 			;;
 	esac
