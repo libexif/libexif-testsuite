@@ -44,3 +44,4 @@ mkinstalldirs
 stamp-h1
 cvs2cl.usermap
 ChangeLog.cvs
+autotools
