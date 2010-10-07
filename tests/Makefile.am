@@ -28,7 +28,9 @@ EXTRA_DIST = \
 	check-add-tags.sh \
 	check-create-tags.sh \
 	check-fixup.sh \
-	check-remove-tags.sh
+	check-remove-tags.sh \
+	check-init-mandatory-tags.sh \
+	check-write-fail.sh
 
 if HAVE_EXIF_CLI
 
@@ -44,7 +46,9 @@ check_SCRIPTS = \
 	check-add-tags.sh \
 	check-create-tags.sh \
 	check-fixup.sh \
-	check-remove-tags.sh
+	check-remove-tags.sh \
+	check-init-mandatory-tags.sh \
+	check-write-fail.sh
 
 # These check scripts may take a little longer - but are invaluable. :)
 check_SCRIPTS += check-general-images.sh \
