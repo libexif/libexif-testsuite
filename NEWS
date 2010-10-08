@@ -7,6 +7,7 @@ New in 0.7.x:
   * Added check-init-mandatory-tags.sh to test that all mandatory EXIF values
     can be created from scratch
   * Added check-write-fail.sh to test that exif detects an unwritable file
+  * Added check-mnote-count.sh to sanity test the MakerNote detection
   * Changed tests to account for slightly different exif text output
 
 New in 0.7.15:

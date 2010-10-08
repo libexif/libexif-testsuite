@@ -30,7 +30,8 @@ EXTRA_DIST = \
 	check-fixup.sh \
 	check-remove-tags.sh \
 	check-init-mandatory-tags.sh \
-	check-write-fail.sh
+	check-write-fail.sh \
+	check-mnote-count.sh
 
 if HAVE_EXIF_CLI
 
@@ -48,7 +49,8 @@ check_SCRIPTS = \
 	check-fixup.sh \
 	check-remove-tags.sh \
 	check-init-mandatory-tags.sh \
-	check-write-fail.sh
+	check-write-fail.sh \
+	check-mnote-count.sh
 
 # These check scripts may take a little longer - but are invaluable. :)
 check_SCRIPTS += check-general-images.sh \
