@@ -11,24 +11,24 @@ dstimg="./create-tags.out.jpg"
 set -e
 
 echo Create an empty EXIF tag block
-"$EXIFEXE" --create-exif --no-fixup -o "$dstimg" "$SRCDIR/images/no-exif.jpg"
+$EXIFEXE --create-exif --no-fixup -o "$dstimg" "$SRCDIR/images/no-exif.jpg"
 
 # Count the number of tags
-numtags=`"$EXIFEXE" --no-fixup -m -i "$dstimg" | wc -l`
+numtags=`$EXIFEXE --no-fixup -m -i "$dstimg" | wc -l`
 
 echo Must be 0 tags: $numtags
-test "$numtags" = 0
+test $numtags = 0
 
 rm -f "$dstimg"
 
 echo Create a EXIF tag block with mandatory and default tags
-"$EXIFEXE" --create-exif -o "$dstimg" "$SRCDIR/images/no-exif.jpg"
+$EXIFEXE --create-exif -o "$dstimg" "$SRCDIR/images/no-exif.jpg"
 
 # Count the number of tags
-numtags=`"$EXIFEXE" --no-fixup -m -i "$dstimg" | wc -l`
+numtags=`$EXIFEXE --no-fixup -m -i "$dstimg" | wc -l`
 
 echo Must be 11 tags: $numtags
-test "$numtags" = 11
+test $numtags = 11
 
 rm -f "$dstimg"
 
