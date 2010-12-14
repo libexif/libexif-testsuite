@@ -21,8 +21,8 @@ echo Fix up data
 env LANG=C LANGUAGE=C "$EXIFEXE" -m -i "$dstimg" >"$tmpfile"
 "$DIFFEXE" "$tmpfile" - <<EOF
 0x0112	Left-bottom
-0x011a	72.00
-0x011b	72.00
+0x011a	72
+0x011b	72
 0x011c	Planar format
 0x0128	Inch
 0x0132	2009:12:16 23:30:32
