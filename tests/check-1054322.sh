@@ -1,5 +1,5 @@
 #!/bin/sh
-. check-vars.sh
+. ./check-vars.sh
 result_file="result-1054322-1.tmp"
 env LANG=C LANGUAGE=C "$EXIFEXE" --remove-thumbnail --output ./1054322-1.out.jpg "$SRCDIR"/1054322.jpg > ${result_file} 2>&1
 result="`cat ${result_file}`"

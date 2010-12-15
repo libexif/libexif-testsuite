@@ -4,7 +4,7 @@
 # incorrect, data types, which are converted into the correct data types
 # by libexif.
 
-. check-vars.sh
+. ./check-vars.sh
 
 srcimg="$SRCDIR/wrong-format.jpg"
 dstimg="./fixup.out.jpg"

@@ -2,7 +2,7 @@
 # Run all test images through exif and ensure that all the mandatory tags are
 # available
 
-. check-vars.sh
+. ./check-vars.sh
 
 tmpfile="./output.tmp"
 

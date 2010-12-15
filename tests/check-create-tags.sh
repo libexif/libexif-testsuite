@@ -3,7 +3,7 @@
 # Checks that the expected tags are created, and that the --no-fixup option
 # creates no tags, just an empty EXIF structure.
 
-. check-vars.sh
+. ./check-vars.sh
 
 dstimg="./create-tags.out.jpg"
 

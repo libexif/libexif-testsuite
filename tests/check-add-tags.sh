@@ -4,7 +4,7 @@
 # data types as possible are included. Data inputs with extra spaces,
 # plus and minus signs are tested.
 
-. check-vars.sh
+. ./check-vars.sh
 
 srcimg="add-tag-src.out.jpg"
 dstimg="add-tag.out.jpg"

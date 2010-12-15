@@ -3,7 +3,7 @@
 # Tags within each sub-IFD are tested. Boundary conditions such as removing
 # all tags within a sub-IFD, and all tags in file are also tested.
 
-. check-vars.sh
+. ./check-vars.sh
 
 originalimg="$SRCDIR/images/canon-powershot-g2-001.jpg"
 srcimg="remove-tag-src.out.jpg"

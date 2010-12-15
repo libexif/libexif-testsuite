@@ -2,7 +2,7 @@
 # Run all test images through exif and ensure that all the tags are known.
 # This is as much a test of the images as of exif itself.
 
-. check-vars.sh
+. ./check-vars.sh
 
 tmpfile="./output.tmp"
 

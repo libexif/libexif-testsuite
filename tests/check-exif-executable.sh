@@ -1,5 +1,5 @@
 #!/bin/sh
-. check-vars.sh
+. ./check-vars.sh
 if test -x "$EXIFEXE"; then
 	echo "exif executable \`$EXIFEXE\' is executable. Good."
 	ls -l "$EXIFEXE"

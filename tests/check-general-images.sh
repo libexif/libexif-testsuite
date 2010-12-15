@@ -2,7 +2,7 @@
 # Execute a number of common sense checks on "real" images
 # (not specially prepared images)
 
-. check-vars.sh
+. ./check-vars.sh
 
 tmpfile="./output.tmp"
 tmpimg="./general.out.jpg"

@@ -1,5 +1,5 @@
 #!/bin/sh
-. check-vars.sh
+. ./check-vars.sh
 if "$EXIFEXE" "$SRCDIR/images/canon-powershot-a400-001.jpg" > /dev/null 2>&1; then
 	echo "This should have failed."
 	exit 1

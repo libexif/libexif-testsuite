@@ -2,7 +2,7 @@
 # Read then write (unmodified) each image through exif.
 # Check that the written image contains the same data as the original.
 
-. check-vars.sh
+. ./check-vars.sh
 
 tmpfile="./output.tmp"
 tmpfile2="./output2.tmp"

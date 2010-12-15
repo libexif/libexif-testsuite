@@ -3,7 +3,7 @@
 # tags, especially those that test some potential boundary conditions
 # of the lookup routines.
 
-. check-vars.sh
+. ./check-vars.sh
 tmpfile="./output.tmp"
 
 # clear out the output file

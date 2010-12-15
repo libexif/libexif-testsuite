@@ -1,7 +1,7 @@
 #!/bin/sh
 # Count the number of MakerNotes that can be parsed
 
-. check-vars.sh
+. ./check-vars.sh
 
 # Run this in the C locale so the messages are known
 export LANG=C

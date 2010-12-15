@@ -1,5 +1,5 @@
 #!/bin/sh
-. check-vars.sh
+. ./check-vars.sh
 bug="994706"
 srcimg="$SRCDIR/images/canon-powershot-g2-001.jpg"
 dstimg="./${bug}.jpg.out.jpg"

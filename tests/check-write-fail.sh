@@ -1,7 +1,7 @@
 #!/bin/sh
 # Check that exif properly detects an unwritable file
 
-. check-vars.sh
+. ./check-vars.sh
 
 tmpfile="./output.tmp"
 

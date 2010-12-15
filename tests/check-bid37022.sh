@@ -5,7 +5,7 @@
 # always cause a crash, but a malloc library which checks heap consistency
 # should catch it (such as glibc does when linked with -lmcheck, or valgrind).
 # This bug is also known as CVE-2009-3895
-. check-vars.sh
+. ./check-vars.sh
 bug="bid37022"
 srcimg="$SRCDIR/${bug}.jpg"
 

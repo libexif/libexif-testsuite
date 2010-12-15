@@ -3,7 +3,7 @@
 
 # TODO: add the other mandatory values for all image types
 
-. check-vars.sh
+. ./check-vars.sh
 
 dstimg="init.out.jpg"
 srcimg="$SRCDIR/images/no-exif.jpg"
