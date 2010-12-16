@@ -142,10 +142,10 @@ append_image
 env LANG=C LANGUAGE=C "$EXIFEXE" -m -i "$srcimg" >"$tmpfile"
 "$DIFFEXE" "$tmpfile" - <<EOF
 0x010e	The image description
-0x011a	6.00
-0x013e	4.50, 6.33
+0x011a	6.0
+0x013e	4.5, 6.3
 0x0212	YCbCr4:2:0
-0x011b	72.00
+0x011b	72
 0x0128	Inch
 0x9204	-1.50 EV
 0x9286	The user comment
@@ -160,6 +160,7 @@ env LANG=C LANGUAGE=C "$EXIFEXE" -m -i "$srcimg" >"$tmpfile"
 0x9000	Exif Version 2.1
 0xa001	Uncalibrated
 EOF
+check_result
 
 rm -f "$srcimg" "$dstimg" "$tmpfile"
 
