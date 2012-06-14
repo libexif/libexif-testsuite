@@ -50,7 +50,7 @@ echo ''
 echo MakerNote variants recognized:
 sort "$tmpfile" | uniq
 maker_variants=`sort "$tmpfile" | uniq | wc -l`
-rm "$tmpfile"
+rm -f "$tmpfile"
 
 self="$(basename "$0")"
 echo "$self: $total_img images checked."

@@ -141,7 +141,7 @@ do
 
 done
 
-rm "$tmpimg"
+rm -f "$tmpimg"
 
 self="$(basename "$0")"
 echo "$self: Performed $total checks on $total_img images."

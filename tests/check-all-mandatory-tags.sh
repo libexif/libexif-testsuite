@@ -58,7 +58,7 @@ do
 
 done
 
-rm "$tmpfile"
+rm -f "$tmpfile"
 
 self="$(basename "$0")"
 echo "$self: Checked $total_img images."

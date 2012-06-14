@@ -64,7 +64,7 @@ echo Create PixelYDimension
 $EXIFEXE --create-exif --no-fixup --ifd=EXIF --tag=PixelYDimension --set-value='32' -o "$dstimg" "$srcimg" >/dev/null
 check_result
 
-rm "$dstimg"
+rm -f "$dstimg"
 
 exit 0
 

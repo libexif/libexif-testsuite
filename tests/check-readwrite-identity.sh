@@ -109,9 +109,9 @@ do
 
 done
 
-rm "$tmpfile"
-rm "$tmpfile2"
-rm "$tmpimg"
+rm -f "$tmpfile"
+rm -f "$tmpfile2"
+rm -f "$tmpimg"
 
 self="$(basename "$0")"
 echo "$self: Checked $total_img images."
