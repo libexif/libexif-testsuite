@@ -35,12 +35,12 @@ for ifd in GPS Interoperability 0 1 EXIF; do
 	TESTTAGS=`eval echo \\$TESTTAGS_${ifd}`
 	for tag in $TESTTAGS; do
 		echo Testing IFD $ifd tag $tag
-		env LANG=C LANGUAGE=C "$EXIFEXE" --tag=$tag --ifd=$ifd -s >>"$tmpfile"
+		env LANG=C LANGUAGE=C $EXIFEXE --tag=$tag --ifd=$ifd -s >>"$tmpfile"
 	done
 done
 
 # Test --machine-readable, using first mandatory tag
-env LANG=C LANGUAGE=C "$EXIFEXE" --tag=0x11a --ifd=0 -m -s >>"$tmpfile"
+env LANG=C LANGUAGE=C $EXIFEXE --tag=0x11a --ifd=0 -m -s >>"$tmpfile"
 
 "$DIFFEXE" "$tmpfile" - <<EOF
 Tag 'GPS Tag Version' (0x0000, 'GPSVersionID'): Indicates the version of <GPSInfoIFD>. The version is given as 2.0.0.0. This tag is mandatory when <GPSInfo> tag is present. (Note: The <GPSVersionID> tag is given in bytes, unlike the <ExifVersion> tag. When the version is 2.0.0.0, the tag value is 02000000.H).

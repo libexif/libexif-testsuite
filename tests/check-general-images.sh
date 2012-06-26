@@ -22,7 +22,7 @@ do
 	# Test images without EXIF tags
 	if noexiftags "$img" ; then
 		echo -n "Attempting list of nonexistent EXIF data from \`${img}'..."
-		"$EXIFEXE" "${img}" > "$tmpfile" 2>&1
+		$EXIFEXE "${img}" > "$tmpfile" 2>&1
 		s="$?"
 		if test "$s" -eq 1; then
 			echo " ok."
@@ -37,7 +37,7 @@ do
 	# Check that listing EXIF info works
 	echo -n "Listing EXIF info from \`${img}'..."
 	# Run this in the C locale so the messages are known
-	env LANG=C LANGUAGE=C "$EXIFEXE" "${img}" > "$tmpfile" 2>&1
+	env LANG=C LANGUAGE=C $EXIFEXE "${img}" > "$tmpfile" 2>&1
 	s="$?"
 	if test "$s" -eq 0; then
 		echo " ok."
@@ -57,7 +57,7 @@ do
 
 	# Check that listing the makernote works
 	echo -n "Listing MNote info from \`${img}'..."
-	"$EXIFEXE" --show-mnote "${img}" > "$tmpfile" 2>&1
+	$EXIFEXE --show-mnote "${img}" > "$tmpfile" 2>&1
 	s="$?"
 	if test "$s" -eq 0; then
 		echo " ok."
@@ -70,7 +70,7 @@ do
 
 	# Check that removing a tag works
 	echo -n "Removing tag from \`${img}'..."
-	"$EXIFEXE" --tag=DateTime --remove "${img}" -o "$tmpimg" > "$tmpfile" 2>&1
+	$EXIFEXE --tag=DateTime --remove "${img}" -o "$tmpimg" > "$tmpfile" 2>&1
 	s="$?"
 	if test "$s" -eq 0; then
 		echo " ok."
@@ -83,7 +83,7 @@ do
 
 	# Check that the tag is removed
 	echo -n "Listing tag from \`${tmpimg}'..."
-	"$EXIFEXE" --tag=DateTime "${tmpimg}" > "$tmpfile" 2>&1
+	$EXIFEXE --tag=DateTime "${tmpimg}" > "$tmpfile" 2>&1
 	s="$?"
 	if test "$s" -eq 1; then
 		echo " ok."
@@ -96,7 +96,7 @@ do
 
 	# Check that listing EXIF info still works
 	echo -n "Listing EXIF info from \`${tmpimg}'..."
-	"$EXIFEXE" "${tmpimg}" > "$tmpfile" 2>&1
+	$EXIFEXE "${tmpimg}" > "$tmpfile" 2>&1
 	s="$?"
 	if test "$s" -eq 0; then
 		echo " ok."
@@ -109,7 +109,7 @@ do
 
 	# Check that listing the makernote still works
 	echo -n "Listing MNote info from \`${tmpimg}'..."
-	"$EXIFEXE" --show-mnote "${tmpimg}" > "$tmpfile" 2>&1
+	$EXIFEXE --show-mnote "${tmpimg}" > "$tmpfile" 2>&1
 	s="$?"
 	if test "$s" -eq 0; then
 		echo " ok."
@@ -124,7 +124,7 @@ do
 	if [ "$check_thumbnail" ] ; then
 		echo -n "Extracting thumbnail from ${img}"
 		thumb="./$(basename "$img").check-general-images.thumb.out.jpg"
-		"$EXIFEXE" -e -o "$thumb" "$img" > "$tmpfile" 2>&1
+		$EXIFEXE -e -o "$thumb" "$img" > "$tmpfile" 2>&1
 		s="$?"
 		if test "$s" -eq 0; then
 			echo " ok."

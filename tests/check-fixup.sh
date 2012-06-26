@@ -15,10 +15,10 @@ set -e
 
 echo Fix up data
 # Use --remove of a nonexistent tag to force a rewrite of the file
-"$EXIFEXE" -o "$dstimg" --remove --tag=0xbeef "$srcimg"
+$EXIFEXE -o "$dstimg" --remove --tag=0xbeef "$srcimg"
 
 # Check the resulting EXIF file
-env LANG=C LANGUAGE=C "$EXIFEXE" -m -i "$dstimg" >"$tmpfile"
+env LANG=C LANGUAGE=C $EXIFEXE -m -i "$dstimg" >"$tmpfile"
 "$DIFFEXE" "$tmpfile" - <<EOF
 0x0112	Left-bottom
 0x011a	72

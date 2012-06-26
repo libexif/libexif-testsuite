@@ -10,6 +10,6 @@ bug="bid37022"
 srcimg="$SRCDIR/${bug}.jpg"
 
 echo "Reading EXIF image"
-env LANG=C LANGUAGE=C "$EXIFEXE" "$srcimg" >/dev/null
+env LANG=C LANGUAGE=C $EXIFEXE "$srcimg" >/dev/null
 
 # if the program doesn't crash it's a successful test

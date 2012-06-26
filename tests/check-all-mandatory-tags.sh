@@ -48,7 +48,7 @@ do
 	# Capture the debug logs
 	echo -n "Reading image \`${img}'..."
 	# Run this in the C language locale so the messages are known
-	env LANG=C LANGUAGE=C "$EXIFEXE" -d "${img}" > "$tmpfile" 2>&1
+	env LANG=C LANGUAGE=C $EXIFEXE -d "${img}" > "$tmpfile" 2>&1
 	check_result
 
 	# Ensure all tags were understood

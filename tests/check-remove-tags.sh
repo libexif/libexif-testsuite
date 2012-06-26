@@ -16,11 +16,11 @@ append_image () {
 }
 
 count_tags () {
-	"$EXIFEXE" --no-fixup -m -i "$@" | grep '^0x' | wc -l
+	$EXIFEXE --no-fixup -m -i "$@" | grep '^0x' | wc -l
 }
 
 count_maker_tags () {
-	env LANG=C LANGUAGE=C "$EXIFEXE" --no-fixup -m -i --show-mnote "$@" | grep "	" | wc -l
+	env LANG=C LANGUAGE=C $EXIFEXE --no-fixup -m -i --show-mnote "$@" | grep "	" | wc -l
 }
 
 # Abort on any command failure
@@ -41,7 +41,7 @@ test "$nummaker" -eq 78
 TESTTAGS_Interoperability="0x0001 0x0002 0x1001 0x1002"
 ifd=Interoperability
 for tag in $TESTTAGS_Interoperability; do
-	"$EXIFEXE" --no-fixup --tag=$tag --ifd=$ifd --remove -o "$dstimg" "$srcimg" >/dev/null
+	$EXIFEXE --no-fixup --tag=$tag --ifd=$ifd --remove -o "$dstimg" "$srcimg" >/dev/null
 	append_image
 done
 
@@ -57,7 +57,7 @@ test "$nummaker" -eq 78
 TESTTAGS_1="0x0128 0x011b 0x011a 0x0103"
 ifd=1
 for tag in $TESTTAGS_1; do
-	"$EXIFEXE" --no-fixup --tag=$tag --ifd=$ifd --remove -o "$dstimg" "$srcimg" >/dev/null
+	$EXIFEXE --no-fixup --tag=$tag --ifd=$ifd --remove -o "$dstimg" "$srcimg" >/dev/null
 	append_image
 done
 
@@ -74,7 +74,7 @@ test "$nummaker" -eq 78
 TESTTAGS_0="0x010f 0x0110 0x0112 0x011a	0x011b 0x0128 0x0132 0x0213"
 ifd=0
 for tag in $TESTTAGS_0; do
-	"$EXIFEXE" --no-fixup --tag=$tag --ifd=$ifd --remove -o "$dstimg" "$srcimg" >/dev/null
+	$EXIFEXE --no-fixup --tag=$tag --ifd=$ifd --remove -o "$dstimg" "$srcimg" >/dev/null
 	append_image
 done
 
@@ -91,7 +91,7 @@ test "$nummaker" -eq 0
 TESTTAGS_EXIF="0x829a 0x829d 0x9000 0x9003 0x9004 0x9101 0x9102 0x9201 0x9202 0x9204 0x9205 0x9207 0x9209 0x920a 0x927c 0x9286 0xa000 0xa001 0xa002 0xa003 0xa20e 0xa20f 0xa210 0xa217 0xa300 0xa401 0xa402 0xa403 0xa404 0xa406"
 ifd=EXIF
 for tag in $TESTTAGS_EXIF; do
-	"$EXIFEXE" --no-fixup --tag=$tag --ifd=$ifd --remove -o "$dstimg" "$srcimg" >/dev/null
+	$EXIFEXE --no-fixup --tag=$tag --ifd=$ifd --remove -o "$dstimg" "$srcimg" >/dev/null
 	append_image
 done
 
