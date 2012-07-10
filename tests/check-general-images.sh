@@ -19,6 +19,12 @@ do
 	total_img=$(expr $total_img + 1)
 	echo \#${total_img}
 
+	# Skip these images entirely for whatever reason
+	if skipimage "$img" ; then
+		echo "Skipping \`${img}'... ok."
+		continue
+	fi
+
 	# Test images without EXIF tags
 	if noexiftags "$img" ; then
 		echo -n "Attempting list of nonexistent EXIF data from \`${img}'..."
