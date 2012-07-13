@@ -24,7 +24,7 @@ noexiftags () {
 	#file "$1" | grep -v -q "EXIF standard"
 	case "$1" in 
 # TEMPORARILY DISABLE IMAGES ON THE NEXT LINE UNTIL I FIX THE TESTS
-		 *HTC_T-Mobile_G1.jpg | \
+		 *HTC_T-Mobile_G1.jpg | *Panasonic_DMC-LX5.jpg | \
 		 *canon-powershot-a400-001.jpg | \
 		 *-thumb* | *no-exif*)
 			return 0 # No EXIF tags in this image

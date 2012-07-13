@@ -23,7 +23,12 @@ EXTRA_DIST = \
 	check-1054322.sh 1054322.jpg \
 	check-1054323.sh 1054323.jpg \
 	check-1169170.sh \
+	check-3434540.sh 3434540.jpg \
+	check-3434545.sh 3434545.jpg \
 	check-bid37022.sh bid37022.jpg \
+	check-cve-2012-2812.sh cve-2012-2812.jpg \
+	check-cve-2012-2813.sh cve-2012-2813.jpg \
+	check-cve-2012-2814.sh cve-2012-2814.jpg \
 	check-tag-description.sh \
 	check-add-tags.sh \
 	check-create-tags.sh \
@@ -42,7 +47,12 @@ check_SCRIPTS = \
 	check-1054322.sh \
 	check-1054323.sh \
 	check-1169170.sh \
+	check-3434540.sh \
+	check-3434545.sh \
 	check-bid37022.sh \
+	check-cve-2012-2812.sh \
+	check-cve-2012-2813.sh \
+	check-cve-2012-2814.sh \
 	check-tag-description.sh \
 	check-add-tags.sh \
 	check-create-tags.sh \
