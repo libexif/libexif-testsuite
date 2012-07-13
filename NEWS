@@ -1,3 +1,6 @@
+New in 0.7.x:
+  * 
+
 New in 0.7.17:
   * Working with libexif and exif ver. 0.6.21
   * Tests now allow manually changing $EXIFEXE to call valgrind et. al.
