@@ -13,4 +13,4 @@ DIFFEXE=@DIFF@
 ALLFILES="$TOPSRCDIR/src/pel-images/*.jpg $SRCDIR/images/*.jpg"
 
 # Load functions that determine characteristics of the $ALLFILES test images
-. ./image-info.sh
+. "${SRCDIR}/image-info.sh"
