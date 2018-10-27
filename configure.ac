@@ -21,6 +21,7 @@ dnl compiler stuff
 dnl ---------------------------------------------------------------------------
 AC_PROG_CC
 AC_C_CONST
+AM_PROG_AR
 AM_PROG_LIBTOOL
 AM_CFLAGS="$CFLAGS"
 AM_LDFLAGS="$LDFLAGS"
