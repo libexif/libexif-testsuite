@@ -25,14 +25,13 @@ That is probably not proper legalese, but you get the idea.
 Getting libexif-testsuite:
 --------------------------
 
-If you happen to have a personal access method to the CVS of some
+If you happen to have a personal access method to the CVS repo of some
 module mentioned in build-config.txt, you may want to add a line
 "${anonymous_cvsroot} ${your_cvsroot} to build-config.cvsroot.map.
 
-Get libexif-testsuite via CVS and change into its directory:
+Get libexif-testsuite via Git and change into its directory:
 
-    cvs -z3 -d :pserver:anonymous@cvs.sourceforge.net:/cvsroot/libexif \
-	checkout -P libexif-testsuite
+    git clone https://github.com/libexif/libexif-testsuite.git
     cd libexif-testsuite
 
 Then run
