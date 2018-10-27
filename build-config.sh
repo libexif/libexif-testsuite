@@ -140,6 +140,15 @@ while read rdir method restofline <&5; do
 				sed "s,${sedrexp},${dir}        \1://\2\3/${module}${cmtag},g" >&3
 		fi
 		;;
+	GIT)
+		# Parse rest of line (just use it)
+		git_url="$restofline"
+		if test -f "$dir/.git/index"; then
+			(cd "$dir" && git pull)
+		else
+			git clone "$git_url" "$dir"
+		fi
+		;;
 	*)
 		echo "Unhandled method: '$method'. Aborting." >&2
 		exit 13

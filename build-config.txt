@@ -1,16 +1,21 @@
 # build-config.txt - What source code to place in what directory
 #
 # Line syntax, general:
-# Directory             Method	<Method specific stuff>
+# Directory             Method	<URL with method-specific stuff>
+#
+# Method can be CVS, SVN or GIT
 #
 # Line syntax, Method CVS:
 # Directory		Method	CVSROOT							Module			<CVS Tag>
 
-./src/pel-images	SVN	https://pel.svn.sourceforge.net/svnroot/pel/trunk/test/image-tests
+.			GIT	https://github.com/libexif/libexif-testsuite.git
+./src/libexif		GIT	https://github.com/libexif/libexif.git
+./src/exif		GIT	https://github.com/libexif/exif.git
 
-.			CVS	:pserver:anonymous@libexif.cvs.sourceforge.net:/cvsroot/libexif	libexif-testsuite
-./src/libexif		CVS	:pserver:anonymous@libexif.cvs.sourceforge.net:/cvsroot/libexif	libexif
-./src/exif		CVS	:pserver:anonymous@libexif.cvs.sourceforge.net:/cvsroot/libexif	exif
+# This repo has moved to https://github.com/pel/pel/tree/master/test/images
+# except that there are a lot fewer imgaes there. It's probably better to find
+# a new set of test images to use.
+./src/pel-images	SVN	https://svn.code.sf.net/p/pel/code/trunk/test/image-tests
 
 #./src/pel-images	CVS	:pserver:anonymous@pel.cvs.sourceforge.net:/cvsroot/pel	pel/test/image-tests
 
