@@ -10,7 +10,7 @@ EXIFEXE=`if test -x "$TOPBLDDIR/src/exif/exif/exif"; then echo "$TOPBLDDIR/src/e
 DIFFEXE=@DIFF@
 
 # space-separated list of all JPEG images to test
-ALLFILES="$TOPSRCDIR/src/pel-images/*.jpg $SRCDIR/images/*.jpg"
+ALLFILES="$TOPSRCDIR/src/pel-images/*.jpg $TOPSRCDIR/src/libexif/test/testdata/*.jpg $SRCDIR/images/*.jpg"
 
 # Load functions that determine characteristics of the $ALLFILES test images
 . "${SRCDIR}/image-info.sh"
