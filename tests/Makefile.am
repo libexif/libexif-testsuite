@@ -29,12 +29,8 @@ EXTRA_DIST = \
 	check-cve-2012-2812.sh cve-2012-2812.jpg \
 	check-cve-2012-2813.sh cve-2012-2813.jpg \
 	check-cve-2012-2814.sh cve-2012-2814.jpg \
-	check-tag-description.sh \
-	check-add-tags.sh \
-	check-create-tags.sh \
 	check-fixup.sh \
 	check-remove-tags.sh \
-	check-init-mandatory-tags.sh \
 	check-write-fail.sh \
 	check-mnote-count.sh
 
@@ -53,12 +49,8 @@ check_SCRIPTS = \
 	check-cve-2012-2812.sh \
 	check-cve-2012-2813.sh \
 	check-cve-2012-2814.sh \
-	check-tag-description.sh \
-	check-add-tags.sh \
-	check-create-tags.sh \
 	check-fixup.sh \
 	check-remove-tags.sh \
-	check-init-mandatory-tags.sh \
 	check-write-fail.sh \
 	check-mnote-count.sh
 
