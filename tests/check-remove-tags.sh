@@ -5,9 +5,9 @@
 
 . ./check-vars.sh
 
-originalimg="$SRCDIR/images/canon-powershot-g2-001.jpg"
-srcimg="remove-tag-src.out.jpg"
-dstimg="remove-tag.out.jpg"
+readonly originalimg="$SRCDIR/images/canon-powershot-g2-001.jpg"
+readonly srcimg="remove-tag-src.out.jpg"
+readonly dstimg="remove-tag.out.jpg"
 
 append_image () {
 	if [ -e "$dstimg" ] ; then
@@ -103,4 +103,35 @@ nummaker=`count_maker_tags "$srcimg"`
 echo and 0 MakerNote tags: $nummaker
 test "$nummaker" -eq 0
 
+echo Remove a nonexisting tag in an IFD
+$EXIFEXE --no-fixup --remove --tag=0xbeef --ifd=0 -o "$dstimg" "$originalimg" >/dev/null || echo OK
+
+echo Remove a nonexisting tag in a nonexisting IFD
+$EXIFEXE --no-fixup --remove --tag=0xbeef --ifd=GPS -o "$dstimg" "$originalimg" >/dev/null || echo OK
+
+echo Remove a nonexisting tag in an unspecified IFD
+$EXIFEXE --no-fixup --remove --tag=0xbeef -o "$dstimg" "$originalimg" >/dev/null
+numtags=`count_tags "$dstimg"`
+echo Must be 46 tags remaining: $numtags
+test "$numtags" -eq 46
+
+echo Remove a tag from two IFDs at once
+$EXIFEXE --no-fixup --remove --tag=XResolution -o "$dstimg" "$originalimg" >/dev/null
+numtags=`count_tags "$dstimg"`
+echo Must be 44 tags remaining: $numtags
+test "$numtags" -eq 44
+
+echo Remove an entire IFD at once
+$EXIFEXE --no-fixup --ifd=1 --remove -o "$dstimg" "$originalimg" >/dev/null
+numtags=`count_tags "$dstimg"`
+echo Must be 42 tags remaining: $numtags
+test "$numtags" -eq 42
+
+echo Remove all IFDs at once
+$EXIFEXE --no-fixup --remove -o "$dstimg" "$originalimg" >/dev/null
+numtags=`count_tags "$dstimg"`
+echo Must be 0 tags remaining: $numtags
+test "$numtags" -eq 0
+
+echo PASSED
 rm -f "$srcimg" "$dstimg"
