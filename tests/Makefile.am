@@ -12,6 +12,7 @@ SUBDIRS = images
 # check-vars.sh.in is automatically included
 EXTRA_DIST = \
 	image-info.sh \
+	check-output.sh \
 	check-exif-executable.sh \
 	check-general-images.sh \
 	check-readwrite-identity.sh \
@@ -50,6 +51,7 @@ check_SCRIPTS = \
 	check-cve-2012-2813.sh \
 	check-cve-2012-2814.sh \
 	check-fixup.sh \
+	check-output.sh \
 	check-remove-tags.sh \
 	check-write-fail.sh \
 	check-mnote-count.sh
