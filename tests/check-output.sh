@@ -17,13 +17,13 @@ test $? -eq 0 || { echo Incorrect return code; exit 1; }
 
 echo Check tags in normal format
 # Strip path from file name
-$EXIFEXE "$tmpimg" 2>&1 | sed -e "/EXIF tags/s@/.*/@@" > "$tmpfile"
+$EXIFEXE --width=200 "$tmpimg" 2>&1 | sed -e "/EXIF tags/s@/.*/@@" > "$tmpfile"
 test $? -eq 0 || { echo Incorrect return code; exit 1; }
 $DIFFEXE - "$tmpfile" <<EOF
 EXIF tags in 'check-output.jpg' ('Intel' byte order):
---------------------+----------------------------------------------------------
+--------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Tag                 |Value
---------------------+----------------------------------------------------------
+--------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Image Description   |Foo & Bar <Baz> extra long string that will require internal reallocation so is a more complete test of the internal XML escaping code
 Manufacturer        |Canon
 Model               |Canon PowerShot G2
@@ -71,7 +71,7 @@ Interoperability Ind|R98
 Interoperability Ver|0100
 RelatedImageWidth   |640
 RelatedImageLength  |480
---------------------+----------------------------------------------------------
+--------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 EXIF data contains a thumbnail (968 bytes).
 EOF
 test $? -eq 0 || exit 1
@@ -189,13 +189,13 @@ test $? -eq 0 || exit 1
 
 echo Check tags in normal format with IDs
 # Strip path from file name
-$EXIFEXE --ids "$tmpimg" 2>&1 | sed -e "/EXIF tags/s@/.*/@@" > "$tmpfile"
+$EXIFEXE --ids --width=200 "$tmpimg" 2>&1 | sed -e "/EXIF tags/s@/.*/@@" > "$tmpfile"
 test $? -eq 0 || { echo Incorrect return code; exit 1; }
 $DIFFEXE - "$tmpfile" <<EOF
 EXIF tags in 'check-output.jpg' ('Intel' byte order):
-------+------------------------------------------------------------------------
+------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Tag   |Value
-------+------------------------------------------------------------------------
+------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 0x010e|Foo & Bar <Baz> extra long string that will require internal reallocation so is a more complete test of the internal XML escaping code
 0x010f|Canon
 0x0110|Canon PowerShot G2
@@ -243,7 +243,7 @@ Tag   |Value
 0x0002|0100
 0x1001|640
 0x1002|480
-------+------------------------------------------------------------------------
+------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 EXIF data contains a thumbnail (968 bytes).
 EOF
 test $? -eq 0 || exit 1
@@ -654,11 +654,11 @@ $DIFFEXE - "$tmpfile" <<EOF
 EOF
 test $? -eq 0 || exit 1
 
-echo Check that MakerNote tags in XML format isn't allowed
+echo "Check that MakerNote tags in XML format isn't allowed"
 $EXIFEXE --show-mnote --xml-output "$tmpimg" > "$tmpfile" 2>&1
 test $? -eq 1 || { echo Incorrect return code; exit 1; }
 
-echo Check that MakerNote tags in XML format with IDs isn't allowed
+echo "Check that MakerNote tags in XML format with IDs isn't allowed"
 $EXIFEXE --ids --show-mnote --xml-output "$tmpimg" > "$tmpfile" 2>&1
 test $? -eq 1 || { echo Incorrect return code; exit 1; }
 
@@ -688,6 +688,7 @@ Compression	JPEG compression
 X-Resolution	180
 Y-Resolution	180
 Resolution Unit	Inch
+ThumbnailSize	968
 EOF
 test $? -eq 0 || exit 1
 
