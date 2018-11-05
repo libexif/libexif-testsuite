@@ -4,9 +4,12 @@
 
 . ./check-vars.sh
 
-tmpfile="./output.tmp"
-tmpfile2="./output2.tmp"
-tmpimg="./readwrite.out.jpg"
+# This script can be called with an argument from another test, so ensure that
+# the file names are unique per argument list.
+readonly arghash="`echo $* | cksum | tr -d ' '`"
+readonly tmpfile="readwrite-identity$arghash.tmp"
+readonly tmpfile2="readwrite-identity2$arghash.tmp"
+readonly tmpimg="readwrite-identity$arghash.jpg"
 
 # Display ok or FAILED depending on the result code
 check_result () {
@@ -109,9 +112,7 @@ do
 
 done
 
-rm -f "$tmpfile"
-rm -f "$tmpfile2"
-rm -f "$tmpimg"
+rm -f "$tmpfile" "$tmpfile2" "$tmpimg"
 
 self="$(basename "$0")"
 echo "$self: Checked $total_img images."

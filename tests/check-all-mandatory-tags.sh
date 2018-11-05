@@ -4,7 +4,11 @@
 
 . ./check-vars.sh
 
-tmpfile="./output.tmp"
+readonly tmpfile="mandatory-tags.tmp"
+
+# Run this in the C locale so the messages are known
+LANG=C; export LANG
+LANGUAGE=C; export LANGUAGE
 
 # Display ok or FAILED depending on the result code
 check_result () {
@@ -48,7 +52,7 @@ do
 	# Capture the debug logs
 	echo -n "Reading image \`${img}'..."
 	# Run this in the C language locale so the messages are known
-	env LANG=C LANGUAGE=C $EXIFEXE -d "${img}" > "$tmpfile" 2>&1
+	$EXIFEXE -d "${img}" > "$tmpfile" 2>&1
 	check_result
 
 	# Ensure all tags were understood

@@ -3,11 +3,12 @@
 
 . ./check-vars.sh
 
-# Run this in the C locale so the messages are known
-export LANG=C
-export LANGUAGE=C 
+readonly tmpfile="mnote-count.tmp"
 
-tmpfile="./log.tmp"
+# Run this in the C locale so the messages are known
+LANG=C; export LANG
+LANGUAGE=C; export LANGUAGE
+
 : >"$tmpfile"
 
 total=0

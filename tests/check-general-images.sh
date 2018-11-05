@@ -4,8 +4,12 @@
 
 . ./check-vars.sh
 
-tmpfile="./output.tmp"
-tmpimg="./general.out.jpg"
+readonly tmpfile="general-images.tmp"
+readonly tmpimg="general-images.out.jpg"
+
+# Run this in the C locale so the messages are known
+LANG=C; export LANG
+LANGUAGE=C; export LANGUAGE
 
 echo Testing "$EXIFEXE"
 
@@ -43,7 +47,7 @@ do
 	# Check that listing EXIF info works
 	echo -n "Listing EXIF info from \`${img}'..."
 	# Run this in the C locale so the messages are known
-	env LANG=C LANGUAGE=C $EXIFEXE "${img}" > "$tmpfile" 2>&1
+	$EXIFEXE "${img}" > "$tmpfile" 2>&1
 	s="$?"
 	if test "$s" -eq 0; then
 		echo " ok."
@@ -147,7 +151,7 @@ do
 
 done
 
-rm -f "$tmpimg"
+rm -f "$tmpfile" "$tmpimg"
 
 self="$(basename "$0")"
 echo "$self: Performed $total checks on $total_img images."

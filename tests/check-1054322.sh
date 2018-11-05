@@ -1,7 +1,14 @@
 #!/bin/sh
 . ./check-vars.sh
-result_file="result-1054322-1.tmp"
-env LANG=C LANGUAGE=C $EXIFEXE --remove-thumbnail --output ./1054322-1.out.jpg "$SRCDIR"/1054322.jpg > ${result_file} 2>&1
+readonly result_file="result-1054322.tmp"
+readonly tmpimg="1054322-1.out.jpg"
+
+# Run this in the C locale so the messages are known
+LANG=C; export LANG
+LANGUAGE=C; export LANGUAGE
+
+echo Remove thumbnail from 1054322 file
+$EXIFEXE --remove-thumbnail --output "$tmpimg" "$SRCDIR"/1054322.jpg > ${result_file} 2>&1
 result="`cat ${result_file}`"
 s="$?"
 echo "$result"
@@ -14,10 +21,10 @@ else
 	echo "Exit code $s"
 	exit 1
 fi
-rm -f "$result_file"
+rm -f "$result_file" "$tmpimg"
 
-result_file="result-1054322-2.tmp"
-env LANG=C LANGUAGE=C $EXIFEXE --remove-thumbnail --output ./1054323-2.out.jpg ./this-file-does-not-exist.jpg > ${result_file} 2>&1
+echo Remove thumbnail from nonexistent file
+$EXIFEXE --remove-thumbnail --output "$tmpimg" ./this-file-does-not-exist.jpg > ${result_file} 2>&1
 result="`cat ${result_file}`"
 s="$?"
 echo "$result"
@@ -30,6 +37,7 @@ else
 	echo "Exit code $s"
 	exit 1
 fi
-rm -f "$result_file"
 
+echo PASSED
+rm -f "$result_file" "$tmpimg"
 exit 0

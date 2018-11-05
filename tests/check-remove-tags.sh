@@ -37,7 +37,7 @@ nummaker=`count_maker_tags "$srcimg"`
 echo and 78 MakerNote tags: $nummaker
 test "$nummaker" -eq 78
 
-# Remove tags in the order in which they appear in the IFD
+echo Remove tags in the order in which they appear in the IFD
 TESTTAGS_Interoperability="0x0001 0x0002 0x1001 0x1002"
 ifd=Interoperability
 for tag in $TESTTAGS_Interoperability; do
@@ -53,7 +53,7 @@ nummaker=`count_maker_tags "$srcimg"`
 echo and 78 MakerNote tags: $nummaker
 test "$nummaker" -eq 78
 
-# Remove tags in the reverse order in which they appear in the IFD
+echo Remove tags in the reverse order in which they appear in the IFD
 TESTTAGS_1="0x0128 0x011b 0x011a 0x0103"
 ifd=1
 for tag in $TESTTAGS_1; do
@@ -69,8 +69,8 @@ nummaker=`count_maker_tags "$srcimg"`
 echo and 78 MakerNote tags: $nummaker
 test "$nummaker" -eq 78
 
-# Remove all tags in the 0 IFD (including the Make tag), leaving no tags
-# except the EXIF sub-IFD tags
+echo "Remove all tags in the 0 IFD (including the Make tag)"
+# This leaves no tags except the EXIF sub-IFD tags
 TESTTAGS_0="0x010f 0x0110 0x0112 0x011a	0x011b 0x0128 0x0132 0x0213"
 ifd=0
 for tag in $TESTTAGS_0; do
@@ -87,7 +87,7 @@ nummaker=`count_maker_tags "$srcimg"`
 echo and 0 MakerNote tags: $nummaker
 test "$nummaker" -eq 0
 
-# Remove all tags in the EXIF IFD (including MakerNote), leaving no tags at all
+echo "Remove all tags in the EXIF IFD (including MakerNote), leaving no tags at all"
 TESTTAGS_EXIF="0x829a 0x829d 0x9000 0x9003 0x9004 0x9101 0x9102 0x9201 0x9202 0x9204 0x9205 0x9207 0x9209 0x920a 0x927c 0x9286 0xa000 0xa001 0xa002 0xa003 0xa20e 0xa20f 0xa210 0xa217 0xa300 0xa401 0xa402 0xa403 0xa404 0xa406"
 ifd=EXIF
 for tag in $TESTTAGS_EXIF; do

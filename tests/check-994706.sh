@@ -1,17 +1,19 @@
 #!/bin/sh
 . ./check-vars.sh
-bug="994706"
-srcimg="$SRCDIR/images/canon-powershot-g2-001.jpg"
-dstimg="./${bug}.jpg.out.jpg"
+readonly bug="994706"
+readonly srcimg="$SRCDIR/images/canon-powershot-g2-001.jpg"
+readonly dstimg="${bug}.out.jpg"
 
-# Remove Maker Note
+# Run this in the C locale so the messages are known
+LANG=C; export LANG
+LANGUAGE=C; export LANGUAGE
+
 echo "Removing EXIF Maker Note"
 $EXIFEXE "--ifd=EXIF" "--tag=MakerNote" --remove --output "$dstimg" "$srcimg" > /dev/null 2>&1
 test "$?" -eq 0
 
-# List all tags
-env LANG=C LANGUAGE=C $EXIFEXE --list-tags --width=80 "$srcimg" | sed '1d' > "./check-${bug}.src.tmp"
-env LANG=C LANGUAGE=C $EXIFEXE --list-tags --width=80 "$dstimg" | sed '1d' > "./check-${bug}.dst.tmp"
+$EXIFEXE --list-tags --width=80 "$srcimg" | sed '1d' > "./check-${bug}.src.tmp"
+$EXIFEXE --list-tags --width=80 "$dstimg" | sed '1d' > "./check-${bug}.dst.tmp"
 
 # Find different tags in source and destination image
 "$DIFFEXE" -u "./check-${bug}.src.tmp" "./check-${bug}.dst.tmp" > "./check-${bug}.a.patch.tmp"

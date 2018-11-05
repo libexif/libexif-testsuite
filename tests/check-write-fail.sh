@@ -3,11 +3,11 @@
 
 . ./check-vars.sh
 
-tmpfile="./output.tmp"
+readonly tmpfile="write-fail.tmp"
 
 # Run this in the C locale so the messages are known
-export LANG=C
-export LANGUAGE=C
+LANG=C; export LANG
+LANGUAGE=C; export LANGUAGE
 
 failed="0"
 
@@ -16,5 +16,6 @@ chmod 444 "$tmpfile"
 $EXIFEXE --create-exif --extract-thumbnail -o "$tmpfile" "$SRCDIR/images/canon-powershot-g2-001.jpg"
 test $? -eq 1 || exit 1
 s="$?"
+
 rm -f "$tmpfile"
 exit "$s"

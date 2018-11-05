@@ -6,10 +6,15 @@
 # should catch it (such as glibc does when linked with -lmcheck, or valgrind).
 # This bug is also known as CVE-2009-3895
 . ./check-vars.sh
-bug="bid37022"
-srcimg="$SRCDIR/${bug}.jpg"
 
-echo "Reading EXIF image"
-env LANG=C LANGUAGE=C $EXIFEXE "$srcimg" >/dev/null
+readonly bug="bid37022"
+readonly srcimg="$SRCDIR/${bug}.jpg"
+
+# Run this in the C locale so the messages are known
+LANG=C; export LANG
+LANGUAGE=C; export LANGUAGE
+
+echo "Reading invalid EXIF image"
+$EXIFEXE "$srcimg" >/dev/null
 
 # if the program doesn't crash it's a successful test

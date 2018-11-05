@@ -6,9 +6,13 @@
 
 . ./check-vars.sh
 
-srcimg="$SRCDIR/wrong-format.jpg"
-dstimg="./fixup.out.jpg"
-tmpfile="output.tmp"
+readonly srcimg="$SRCDIR/wrong-format.jpg"
+readonly dstimg="fixup.out.jpg"
+readonly tmpfile="check-fixup.tmp"
+
+# Run this in the C locale so the messages are known
+LANG=C; export LANG
+LANGUAGE=C; export LANGUAGE
 
 # Abort on any command failure
 set -e
@@ -18,8 +22,8 @@ echo Fix up data
 $EXIFEXE -o "$dstimg" --remove --tag=0xbeef "$srcimg"
 
 # Check the resulting EXIF file
-env LANG=C LANGUAGE=C $EXIFEXE -m -i "$dstimg" >"$tmpfile"
-"$DIFFEXE" "$tmpfile" - <<EOF
+$EXIFEXE -m -i "$dstimg" >"$tmpfile"
+"$DIFFEXE" - "$tmpfile" <<EOF
 0x0112	Left-bottom
 0x011a	72
 0x011b	72
@@ -40,4 +44,5 @@ env LANG=C LANGUAGE=C $EXIFEXE -m -i "$dstimg" >"$tmpfile"
 0xa406	Night scene
 EOF
 
+echo PASSED
 rm -f "$dstimg" "$tmpfile"

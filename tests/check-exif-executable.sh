@@ -8,3 +8,5 @@ else
 	ls -l "$EXIFEXE"
 	exit 1
 fi
+
+echo PASSED
