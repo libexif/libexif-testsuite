@@ -44,7 +44,7 @@ Date and Time (Origi|2005:03:17 04:36:48
 Date and Time (Digit|2005:03:17 04:36:48
 Components Configura|Y Cb Cr -
 Compressed Bits per | 2
-Shutter Speed       |3.31 EV (1/9 sec.)
+Shutter Speed       |3.31 EV (1/10 sec.)
 Aperture            |4.34 EV (f/4.5)
 Exposure Bias       |0.00 EV
 Maximum Aperture Val|2.00 EV (f/2.0)
@@ -100,7 +100,7 @@ Date and Time (Original)	2005:03:17 04:36:48
 Date and Time (Digitized)	2005:03:17 04:36:48
 Components Configuration	Y Cb Cr -
 Compressed Bits per Pixel	 2
-Shutter Speed	3.31 EV (1/9 sec.)
+Shutter Speed	3.31 EV (1/10 sec.)
 Aperture	4.34 EV (f/4.5)
 Exposure Bias	0.00 EV
 Maximum Aperture Value	2.00 EV (f/2.0)
@@ -156,7 +156,7 @@ $DIFFEXE - "$tmpfile" <<EOF
 	<Date_and_Time__Digitized_>2005:03:17 04:36:48</Date_and_Time__Digitized_>
 	<Components_Configuration>Y Cb Cr -</Components_Configuration>
 	<Compressed_Bits_per_Pixel> 2</Compressed_Bits_per_Pixel>
-	<Shutter_Speed>3.31 EV (1/9 sec.)</Shutter_Speed>
+	<Shutter_Speed>3.31 EV (1/10 sec.)</Shutter_Speed>
 	<Aperture>4.34 EV (f/4.5)</Aperture>
 	<Exposure_Bias>0.00 EV</Exposure_Bias>
 	<Maximum_Aperture_Value>2.00 EV (f/2.0)</Maximum_Aperture_Value>
@@ -216,7 +216,7 @@ Tag   |Value
 0x9004|2005:03:17 04:36:48
 0x9101|Y Cb Cr -
 0x9102| 2
-0x9201|3.31 EV (1/9 sec.)
+0x9201|3.31 EV (1/10 sec.)
 0x9202|4.34 EV (f/4.5)
 0x9204|0.00 EV
 0x9205|2.00 EV (f/2.0)
@@ -272,7 +272,7 @@ $DIFFEXE - "$tmpfile" <<EOF
 0x9004	2005:03:17 04:36:48
 0x9101	Y Cb Cr -
 0x9102	 2
-0x9201	3.31 EV (1/9 sec.)
+0x9201	3.31 EV (1/10 sec.)
 0x9202	4.34 EV (f/4.5)
 0x9204	0.00 EV
 0x9205	2.00 EV (f/2.0)
@@ -308,7 +308,7 @@ $EXIFEXE --ids --xml-output "$tmpimg" > "$tmpfile" 2>&1
 test $? -eq 0 || { echo Incorrect return code; exit 1; }
 $DIFFEXE - "$tmpfile" <<EOF
 <exif>
-<x010e>Foo &amp; Bar &lt;Baz&gt; extra long string that will require internal reallocation so is a more complete test of the internal XML escaping code</x010e><x010f>Canon</x010f><x0110>Canon PowerShot G2</x0110><x0112>Top-left</x0112><x011a>180</x011a><x011b>180</x011b><x0128>Inch</x0128><x0132>2005:03:17 04:36:48</x0132><x0213>Centered</x0213><x0103>JPEG compression</x0103><x011a>180</x011a><x011b>180</x011b><x0128>Inch</x0128><x829a>1/10 sec.</x829a><x829d>f/4.5</x829d><x9000>Exif Version 2.2</x9000><x9003>2005:03:17 04:36:48</x9003><x9004>2005:03:17 04:36:48</x9004><x9101>Y Cb Cr -</x9101><x9102> 2</x9102><x9201>3.31 EV (1/9 sec.)</x9201><x9202>4.34 EV (f/4.5)</x9202><x9204>0.00 EV</x9204><x9205>2.00 EV (f/2.0)</x9205><x9207>Pattern</x9207><x9209>Flash did not fire, compulsory flash mode</x9209><x920a>7.0 mm</x920a><x927c>450 bytes undefined data</x927c><x9286></x9286><xa000>FlashPix Version 1.0</xa000><xa001>sRGB</xa001><xa002>640</xa002><xa003>480</xa003><xa20e>2285.714</xa20e><xa20f>2285.714</xa20f><xa210>Inch</xa210><xa217>One-chip color area sensor</xa217><xa300>DSC</xa300><xa401>Normal process</xa401><xa402>Manual exposure</xa402><xa403>Auto white balance</xa403><xa404>1.0000</xa404><xa406>Standard</xa406><x0001>R98</x0001><x0002>0100</x0002><x1001>640</x1001><x1002>480</x1002></exif>
+<x010e>Foo &amp; Bar &lt;Baz&gt; extra long string that will require internal reallocation so is a more complete test of the internal XML escaping code</x010e><x010f>Canon</x010f><x0110>Canon PowerShot G2</x0110><x0112>Top-left</x0112><x011a>180</x011a><x011b>180</x011b><x0128>Inch</x0128><x0132>2005:03:17 04:36:48</x0132><x0213>Centered</x0213><x0103>JPEG compression</x0103><x011a>180</x011a><x011b>180</x011b><x0128>Inch</x0128><x829a>1/10 sec.</x829a><x829d>f/4.5</x829d><x9000>Exif Version 2.2</x9000><x9003>2005:03:17 04:36:48</x9003><x9004>2005:03:17 04:36:48</x9004><x9101>Y Cb Cr -</x9101><x9102> 2</x9102><x9201>3.31 EV (1/10 sec.)</x9201><x9202>4.34 EV (f/4.5)</x9202><x9204>0.00 EV</x9204><x9205>2.00 EV (f/2.0)</x9205><x9207>Pattern</x9207><x9209>Flash did not fire, compulsory flash mode</x9209><x920a>7.0 mm</x920a><x927c>450 bytes undefined data</x927c><x9286></x9286><xa000>FlashPix Version 1.0</xa000><xa001>sRGB</xa001><xa002>640</xa002><xa003>480</xa003><xa20e>2285.714</xa20e><xa20f>2285.714</xa20f><xa210>Inch</xa210><xa217>One-chip color area sensor</xa217><xa300>DSC</xa300><xa401>Normal process</xa401><xa402>Manual exposure</xa402><xa403>Auto white balance</xa403><xa404>1.0000</xa404><xa406>Standard</xa406><x0001>R98</x0001><x0002>0100</x0002><x1001>640</x1001><x1002>480</x1002></exif>
 EOF
 test $? -eq 0 || exit 1
 
