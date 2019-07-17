@@ -365,7 +365,7 @@ Auto ISO            |1.000
 Shot ISO            |50
 Measured EV         |-10.91 EV
 Target Aperture     |4.51
-Target Exposure Time|1/9
+Target Exposure Time|1/10
 Exposure Compensatio|0.00 EV
 White Balance       |Auto
 Slow Shutter        |Off
@@ -382,7 +382,7 @@ Unknown Tag         |0x0001
 Focus Distance Upper|3595 mm
 Focus Distance Lower|0 mm
 F-Number            |4.51
-Exposure Time       |1/9
+Exposure Time       |1/10
 Unknown Tag         |0x0000
 Bulb Duration       |0x0000
 Unknown Tag         |0xffd0
@@ -450,7 +450,7 @@ Auto ISO	1.000
 Shot ISO	50
 Measured EV	-10.91 EV
 Target Aperture	4.51
-Target Exposure Time	1/9
+Target Exposure Time	1/10
 Exposure Compensation	0.00 EV
 White Balance	Auto
 Slow Shutter	Off
@@ -467,7 +467,7 @@ Unknown Tag	0x0001
 Focus Distance Upper	3595 mm
 Focus Distance Lower	0 mm
 F-Number	4.51
-Exposure Time	1/9
+Exposure Time	1/10
 Unknown Tag	0x0000
 Bulb Duration	0x0000
 Unknown Tag	0xffd0
@@ -536,7 +536,7 @@ MakerNote contains 78 values:
 0x0004|50
 0x0004|-10.91 EV
 0x0004|4.51
-0x0004|1/9
+0x0004|1/10
 0x0004|0.00 EV
 0x0004|Auto
 0x0004|Off
@@ -553,7 +553,7 @@ MakerNote contains 78 values:
 0x0004|3595 mm
 0x0004|0 mm
 0x0004|4.51
-0x0004|1/9
+0x0004|1/10
 0x0004|0x0000
 0x0004|0x0000
 0x0004|0xffd0
@@ -621,7 +621,7 @@ $DIFFEXE - "$tmpfile" <<EOF
 0x0004	50
 0x0004	-10.91 EV
 0x0004	4.51
-0x0004	1/9
+0x0004	1/10
 0x0004	0.00 EV
 0x0004	Auto
 0x0004	Off
@@ -638,7 +638,7 @@ $DIFFEXE - "$tmpfile" <<EOF
 0x0004	3595 mm
 0x0004	0 mm
 0x0004	4.51
-0x0004	1/9
+0x0004	1/10
 0x0004	0x0000
 0x0004	0x0000
 0x0004	0xffd0
