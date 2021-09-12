@@ -322,9 +322,9 @@ Self-timer          |Off
 Quality             |Normal
 Flash Mode          |Off
 Drive Mode          |Single
-Unknown Tag         |0x0000
+Unknown Tag 0x0001  |0x0000
 Focus Mode          |Single
-Unknown Tag         |0x0000
+Unknown Tag 0x0001  |0x0000
 Record Mode         |JPEG
 Image Size          |Small
 Easy Shooting Mode  |Manual
@@ -337,7 +337,7 @@ Metering Mode       |Evaluative
 Focus Range         |Auto
 AF Point            |Center
 Exposure Mode       |Manual
-Unknown Tag         |0xffff
+Unknown Tag 0x0001  |0xffff
 Lens Type           |0xffff
 Long Focal Length of|672
 Short Focal Length o|224
@@ -346,21 +346,21 @@ Maximal Aperture    |2.07
 Minimal Aperture    |8.00
 Flash Activity      |0x0000
 Flash Details       |
-Unknown Tag         |0x0000
-Unknown Tag         |0x0000
+Unknown Tag 0x0001  |0x0000
+Unknown Tag 0x0001  |0x0000
 Focus Mode          |Continuous
 AE Setting          |Normal AE
 Image Stabilization |0xffff
 Display Aperture    |0.00
 Zoom Source Width   |2272
 Zoom Target Width   |2272
-Unknown Tag         |0x0000
-Unknown Tag         |0x0001
+Unknown Tag 0x0001  |0x0000
+Unknown Tag 0x0001  |0x0001
 Focal Type          |Zoom
 Focal Length        |224
 Focal Plane X Size  |7.26 mm
 Focal Plane Y Size  |5.46 mm
-Unknown Tag         |0 0 0 0 
+Unknown Tag 0x0003  |0 0 0 0 
 Auto ISO            |1.000
 Shot ISO            |50
 Measured EV         |-10.91 EV
@@ -370,31 +370,31 @@ Exposure Compensatio|0.00 EV
 White Balance       |Auto
 Slow Shutter        |Off
 Sequence Number     |0
-Unknown Tag         |0x0000
-Unknown Tag         |0x0000
-Unknown Tag         |0x0000
+Unknown Tag 0x0004  |0x0000
+Unknown Tag 0x0004  |0x0000
+Unknown Tag 0x0004  |0x0000
 Flash Guide Number  |0.00
 AF Point            |Center
 Flash Exposure Compe|0.00 EV
 AE Bracketing       |Off
 AE Bracket Value    |0.00 EV
-Unknown Tag         |0x0001
+Unknown Tag 0x0004  |0x0001
 Focus Distance Upper|3595 mm
 Focus Distance Lower|0 mm
 F-Number            |4.51
 Exposure Time       |1/10
-Unknown Tag         |0x0000
+Unknown Tag 0x0004  |0x0000
 Bulb Duration       |0x0000
-Unknown Tag         |0xffd0
+Unknown Tag 0x0004  |0xffd0
 Camera Type         |Compact
-Unknown Tag         |0 0 0 0 0 0 
-Unknown Tag         |0 0 0 0 
+Unknown Tag 0x0000  |0 0 0 0 0 0 
+Unknown Tag 0x0000  |0 0 0 0 
 Image Type          |IMG:PowerShot G2 JPEG
 Firmware Version    |Firmware Version 1.10
 Image Number        |206-0616
 Owner Name          |John Doe Camera Owner
-Unknown Tag         |17825792 
-Unknown Tag         |42 3 32769 114 32769 39 0 0 65070 0 0 10 65504 65488 0 220
+Unknown Tag 0x0010  |17825792 
+Unknown Tag 0x000d  |42 3 32769 114 32769 39 0 0 65070 0 0 10 65504 65488 0 220
 EOF
 test $? -eq 0 || exit 1
 
@@ -407,9 +407,9 @@ Self-timer	Off
 Quality	Normal
 Flash Mode	Off
 Drive Mode	Single
-Unknown Tag	0x0000
+Unknown Tag 0x0001	0x0000
 Focus Mode	Single
-Unknown Tag	0x0000
+Unknown Tag 0x0001	0x0000
 Record Mode	JPEG
 Image Size	Small
 Easy Shooting Mode	Manual
@@ -422,7 +422,7 @@ Metering Mode	Evaluative
 Focus Range	Auto
 AF Point	Center
 Exposure Mode	Manual
-Unknown Tag	0xffff
+Unknown Tag 0x0001	0xffff
 Lens Type	0xffff
 Long Focal Length of Lens	672
 Short Focal Length of Lens	224
@@ -431,21 +431,21 @@ Maximal Aperture	2.07
 Minimal Aperture	8.00
 Flash Activity	0x0000
 Flash Details	
-Unknown Tag	0x0000
-Unknown Tag	0x0000
+Unknown Tag 0x0001	0x0000
+Unknown Tag 0x0001	0x0000
 Focus Mode	Continuous
 AE Setting	Normal AE
 Image Stabilization	0xffff
 Display Aperture	0.00
 Zoom Source Width	2272
 Zoom Target Width	2272
-Unknown Tag	0x0000
-Unknown Tag	0x0001
+Unknown Tag 0x0001	0x0000
+Unknown Tag 0x0001	0x0001
 Focal Type	Zoom
 Focal Length	224
 Focal Plane X Size	7.26 mm
 Focal Plane Y Size	5.46 mm
-Unknown Tag	0 0 0 0 
+Unknown Tag 0x0003	0 0 0 0 
 Auto ISO	1.000
 Shot ISO	50
 Measured EV	-10.91 EV
@@ -455,31 +455,31 @@ Exposure Compensation	0.00 EV
 White Balance	Auto
 Slow Shutter	Off
 Sequence Number	0
-Unknown Tag	0x0000
-Unknown Tag	0x0000
-Unknown Tag	0x0000
+Unknown Tag 0x0004	0x0000
+Unknown Tag 0x0004	0x0000
+Unknown Tag 0x0004	0x0000
 Flash Guide Number	0.00
 AF Point	Center
 Flash Exposure Compensation	0.00 EV
 AE Bracketing	Off
 AE Bracket Value	0.00 EV
-Unknown Tag	0x0001
+Unknown Tag 0x0004	0x0001
 Focus Distance Upper	3595 mm
 Focus Distance Lower	0 mm
 F-Number	4.51
 Exposure Time	1/10
-Unknown Tag	0x0000
+Unknown Tag 0x0004	0x0000
 Bulb Duration	0x0000
-Unknown Tag	0xffd0
+Unknown Tag 0x0004	0xffd0
 Camera Type	Compact
-Unknown Tag	0 0 0 0 0 0 
-Unknown Tag	0 0 0 0 
+Unknown Tag 0x0000	0 0 0 0 0 0 
+Unknown Tag 0x0000	0 0 0 0 
 Image Type	IMG:PowerShot G2 JPEG
 Firmware Version	Firmware Version 1.10
 Image Number	206-0616
 Owner Name	John Doe Camera Owner
-Unknown Tag	17825792 
-Unknown Tag	42 3 32769 114 32769 39 0 0 65070 0 0 10 65504 65488 0 220
+Unknown Tag 0x0010	17825792 
+Unknown Tag 0x000d	42 3 32769 114 32769 39 0 0 65070 0 0 10 65504 65488 0 220
 EOF
 test $? -eq 0 || exit 1
 
