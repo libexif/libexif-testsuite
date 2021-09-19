@@ -355,7 +355,7 @@ Display Aperture    |0.00
 Zoom Source Width   |2272
 Zoom Target Width   |2272
 Unknown Tag 0x0001  |0x0000
-Unknown Tag 0x0001  |0x0001
+Spot Metering Mode  |0x0001
 Focal Type          |Zoom
 Focal Length        |224
 Focal Plane X Size  |7.26 mm
@@ -370,20 +370,20 @@ Exposure Compensatio|0.00 EV
 White Balance       |Auto
 Slow Shutter        |Off
 Sequence Number     |0
+Optical Zoom Code   |0x0000
 Unknown Tag 0x0004  |0x0000
-Unknown Tag 0x0004  |0x0000
-Unknown Tag 0x0004  |0x0000
+Camera Temperature  |0x0000
 Flash Guide Number  |0.00
 AF Point            |Center
 Flash Exposure Compe|0.00 EV
 AE Bracketing       |Off
 AE Bracket Value    |0.00 EV
-Unknown Tag 0x0004  |0x0001
+Control Mode        |0x0001
 Focus Distance Upper|3595 mm
 Focus Distance Lower|0 mm
 F-Number            |4.51
 Exposure Time       |1/10
-Unknown Tag 0x0004  |0x0000
+Measured EV 2       |0x0000
 Bulb Duration       |0x0000
 Unknown Tag 0x0004  |0xffd0
 Camera Type         |Compact
@@ -393,8 +393,8 @@ Image Type          |IMG:PowerShot G2 JPEG
 Firmware Version    |Firmware Version 1.10
 Image Number        |206-0616
 Owner Name          |John Doe Camera Owner
-Unknown Tag 0x0010  |17825792 
-Unknown Tag 0x000d  |42 3 32769 114 32769 39 0 0 65070 0 0 10 65504 65488 0 220
+Model ID            |17825792 
+Camera Info         |42 3 32769 114 32769 39 0 0 65070 0 0 10 65504 65488 0 220
 EOF
 test $? -eq 0 || exit 1
 
@@ -440,7 +440,7 @@ Display Aperture	0.00
 Zoom Source Width	2272
 Zoom Target Width	2272
 Unknown Tag 0x0001	0x0000
-Unknown Tag 0x0001	0x0001
+Spot Metering Mode	0x0001
 Focal Type	Zoom
 Focal Length	224
 Focal Plane X Size	7.26 mm
@@ -455,20 +455,20 @@ Exposure Compensation	0.00 EV
 White Balance	Auto
 Slow Shutter	Off
 Sequence Number	0
+Optical Zoom Code	0x0000
 Unknown Tag 0x0004	0x0000
-Unknown Tag 0x0004	0x0000
-Unknown Tag 0x0004	0x0000
+Camera Temperature	0x0000
 Flash Guide Number	0.00
 AF Point	Center
 Flash Exposure Compensation	0.00 EV
 AE Bracketing	Off
 AE Bracket Value	0.00 EV
-Unknown Tag 0x0004	0x0001
+Control Mode	0x0001
 Focus Distance Upper	3595 mm
 Focus Distance Lower	0 mm
 F-Number	4.51
 Exposure Time	1/10
-Unknown Tag 0x0004	0x0000
+Measured EV 2	0x0000
 Bulb Duration	0x0000
 Unknown Tag 0x0004	0xffd0
 Camera Type	Compact
@@ -478,8 +478,8 @@ Image Type	IMG:PowerShot G2 JPEG
 Firmware Version	Firmware Version 1.10
 Image Number	206-0616
 Owner Name	John Doe Camera Owner
-Unknown Tag 0x0010	17825792 
-Unknown Tag 0x000d	42 3 32769 114 32769 39 0 0 65070 0 0 10 65504 65488 0 220
+Model ID	17825792 
+Camera Info	42 3 32769 114 32769 39 0 0 65070 0 0 10 65504 65488 0 220
 EOF
 test $? -eq 0 || exit 1
 
